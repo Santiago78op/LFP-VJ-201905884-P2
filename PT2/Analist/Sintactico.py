@@ -35,6 +35,7 @@ class Parser(object):
         '''
         L_INST : L_INST INTS
                | INTS
+               | empty
         '''
         if len(p) == 3:
             p[0] = p[1]
@@ -44,27 +45,55 @@ class Parser(object):
 
     def p_INTS(self, p):
         '''
-        INTS : METHOD_VOID ID LPAREN RPAREN LKEY RKEY 
-             | METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY
-             | METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES RKEY
+        INTS : METHODS
+             | FUNTIONS
              | SENTENCES
+             
         '''
         if len(p) == 2:
-            p[0] = {'Varaibles': p[1]}
-        elif len(p) == 7:
-            p[0] = {"metodo": p[1], "id": p[2]}
-        elif len(p) == 8:
-            p[0] = {"metodo": p[1], "id": p[2], "parametros": p[4]}
-        elif len(p) == 9:
-            p[0] = {"metodo": p[1], "id": p[2], "parametros": p[4], "sentencias":p[7]}
-        
- 
-            
+            p[0] = p[1]
     
-    def p_SENTENCES(self, p):
+    def p_FUNTIONS(self, p):
         '''
-        SENTENCES : SENTENCES SENTENCE
-                  | SENTENCE
+        FUNTIONS : FUNTIONS FUNTION
+                | FUNTION 
+        '''
+        if len(p) == 3:
+            p[0] = p[1]
+            p[0].append(p[2])
+        else:
+            p[0] = [p[1]]
+            
+    def p_FUNTION(self, p):
+        '''
+        FUNTION : TYPE_INT COUPLER
+                | TYPE_DOUBLE COUPLER
+                | TYPE_STRING COUPLER
+                | TYPE_CHAR COUPLER
+                | TYPE_BOOL COUPLER
+        '''
+        if len(p) == 3:
+            conts = {'Tipo Dato': p[1]}
+            p[2].update(conts)
+            p[0] = { "funcion": p[2]}
+
+    def p_COUPLER(self,p):
+        '''
+        COUPLER : ID LPAREN RPAREN LKEY empty RKEY 
+                | ID LPAREN RPAREN LKEY SENTENCES_FUNTION RKEY
+                | ID LPAREN L_PARAMS RPAREN LKEY empty RKEY
+                | ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_FUNTION RKEY
+        '''
+        if len(p) == 7:
+            p[0] = {"id": p[1], "contenido": p[5]}
+        elif len(p) == 8:
+            p[0] = {"id": p[1],
+                    "parametros": p[3], "contenido": p[6]}
+
+    def p_METHODS(self, p):
+        '''
+        METHODS : METHODS METHOD
+                | METHOD 
         '''
         if len(p) == 3:
             p[0] = p[1]
@@ -72,15 +101,64 @@ class Parser(object):
         else:
             p[0] = [p[1]]
 
-    def p_SENTENCE(self,p):
+    def p_METHOD(self, p):
         '''
-        SENTENCE : DECLARATIONS
-                  | ASSIGNMENTS
+        METHOD : METHOD_VOID ID LPAREN RPAREN LKEY empty RKEY 
+               | METHOD_VOID ID LPAREN RPAREN LKEY SENTENCES_METHOD RKEY
+               | METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY empty RKEY
+               | METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_METHOD RKEY
         '''
-        p[0] = p[1]
+        if len(p) == 8:
+            p[0] = {"metodo": p[1], "id": p[2], "contenido": p[6]}
+        elif len(p) == 9:
+            p[0] = {"metodo": p[1], "id": p[2],
+                    "parametros": p[4], "contenido": p[7]}
+
+    def p_SENTENCES_METHOD(self, p):
+        '''
+        SENTENCES_METHOD : SENTENCES_METHOD SENTENCE_METHOD
+                         | SENTENCE_METHOD
+        '''
+        if len(p) == 3:
+            p[0] = p[1]
+            p[0].append(p[2])
+        else:
+            p[0] = [p[1]]
+
+    def p_SENTENCE_METHOD(self, p):
+        '''
+        SENTENCE_METHOD : DECLARATIONS
+                        | ASSIGNMENTS
+                        | METHOD_RETURN DOT_AN_DCOMMA
+        '''
+        if len(p) == 2:
+            p[0] = p[1]
+        if len(p) == 3:
+            p[0] = {'return':p[1]}
         
-        
-    def p_DECLARATIONS(self,p):
+    def p_SENTENCES_FUNTION(self, p):
+        '''
+        SENTENCES_FUNTION : SENTENCES_FUNTION SENTENCE_FUNTION
+                          | SENTENCE_FUNTION
+        '''
+        if len(p) == 3:
+            p[0] = p[1]
+            p[0].append(p[2])
+        else:
+            p[0] = [p[1]]
+
+    def p_SENTENCE_FUNTION(self, p):
+        '''
+        SENTENCE_FUNTION : DECLARATIONS
+                         | ASSIGNMENTS
+                         | METHOD_RETURN TYPE_DATO DOT_AN_DCOMMA
+        '''
+        if len(p) == 2:
+            p[0] = p[1]
+        if len(p) == 4:
+            p[0] = {'return':p[1],'Dato Tipo':p[2]}
+
+    def p_DECLARATIONS(self, p):
         '''
         DECLARATIONS : DECLARATIONS DECLARATION
                      | DECLARATION
@@ -90,8 +168,8 @@ class Parser(object):
             p[0].append(p[2])
         else:
             p[0] = [p[1]]
-    
-    def p_DECLARATION(self,p):
+
+    def p_DECLARATION(self, p):
         '''
         DECLARATION : TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
                     | TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
@@ -100,8 +178,8 @@ class Parser(object):
                     | TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
         '''
         p[0] = {'Tipo Dato': p[1], 'ID': p[2],
-                'Dato': {'Dato Tipo': p.slice[4].type, 'valor':p[4]}}
-    
+                'Dato': {'Dato Tipo': p.slice[4].type, 'valor': p[4]}}
+
     def p_ASSIGNMENTS(self, p):
         '''
         ASSIGNMENTS : ASSIGNMENTS ASSIGNMENT
@@ -112,7 +190,7 @@ class Parser(object):
             p[0].append(p[2])
         else:
             p[0] = [p[1]]
-        
+
     def p_ASSIGNMENT(self, p):
         '''
         ASSIGNMENT : ID IQUAL INT DOT_AN_DCOMMA
@@ -123,7 +201,8 @@ class Parser(object):
         '''
         p[0] = {'ID': p[1],
                 'Dato': {'Dato Tipo': p.slice[3].type, 'valor': p[3]}}
-        
+
+
     def p_L_PARAMS(self, p):
         '''
         L_PARAMS : L_PARAMS COMMA PARAM
@@ -139,11 +218,30 @@ class Parser(object):
     def p_PARAM(self, p):
         '''
         PARAM : TYPE_INT ID
-              | TYPE_STRING ID
+              | TYPE_DOUBLE ID
+              | TYPE_STRING ID 
+              | TYPE_CHAR ID
+              | TYPE_BOOL ID 
         '''
         if len(p) == 3:
             p[0] = {"tipo dato": p[1], "id": p[2]}
-    
+            
+    def p_TYPE_DATO(self, p):
+        '''
+        TYPE_DATO : INT 
+                  | FLOAT 
+                  | STRING
+                  | CHAR 
+                  | DATA_BOOL 
+        '''
+        p[0] = {'Dato Tipo':p[1]}
+
+    def p_empty(self,p):
+        'empty :'
+        p[0] = {'empty':'Sin Codigo'}
+        pass
+        
+
     # def p_EXPRESSIONS(self,p):
     #     '''
     #     EXPRESSIONS : EXPRESSIONS COMMA E
@@ -162,6 +260,7 @@ class Parser(object):
     #     '''
     #     p[0] = {"linea": p.lexer.lineno, "columna": self.getColumn(
     #         p.lexer), "operacion": p[2], "izquierda": p[1], "derecha": p[3]}
+    
     
     # Error rule for syntax errors
     def p_error(self, p):

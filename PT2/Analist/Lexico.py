@@ -50,7 +50,7 @@ class Lexico(object):
         'ID',
 
         # Operators (+,-,*,/,%,|,&,~,^,<<,>>, ||, &&, !, <, <=, >, >=, ==, !=)
-        'PLUS',  'AND', 'OR', 'NOT', 'MINUS', 'TIMES', 'DIVIDE', 'REST', 'GREATER', 'LESS', 'IQUAL_GREATER', 'IQUAL_LESS', 'IQUALS', 'DIFFERENT', 'COLON',
+        'PLUS',  'AND', 'OR', 'NOT', 'MINUS', 'TIMES', 'DIVIDE', 'REST', 'GREATER', 'LESS', 'IQUAL_GREATER', 'IQUAL_LESS', 'IQUALS', 'DIFFERENT',
 
         # Assignment (=, *=, /=, %=, +=, -=, <<=, >>=, &=, ^=, |=)
         'IQUAL',
@@ -90,7 +90,6 @@ class Lexico(object):
     t_RKEY = r'\}'
     t_DOT_AN_DCOMMA = r';'
     t_COMMA = r','
-    t_COLON = r':'
 
     # Identifiers
     t_TYPE_INT = r'int'
@@ -246,7 +245,6 @@ class Lexico(object):
             "}": "Llave cerrada",
             ";": "Punto y coma",
             ",": "Operador coma",
-            ":": "Operador Dos Puntos",
             "TYPE_INT": "Tipo de dato int",
             "TYPE_DOUBLE": "Tipo de dato double",
             "TYPE_STRING": "Tipo de dato string",
@@ -292,7 +290,6 @@ class Lexico(object):
             "}": "{",
             ";": ";",
             ",": ",",
-            ":": ":",
             "TYPE_INT": "int",
             "TYPE_DOUBLE": "double",
             "TYPE_STRING": "string",

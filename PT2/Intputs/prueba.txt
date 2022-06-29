@@ -1,5 +1,7 @@
-
+ void miFuncion(int num){
     int a = 7;
-    string hola = "hola";
-    b = 8;
-    c = 'o';
+ }
+
+void miFuncion2(string saludo){
+    return;
+}

@@ -51,13 +51,16 @@
 // método
 void miFuncion ( PARAMETROS, )* {
     sentencia*
-
+    return;
 }
 
-
+// función
 int miFuncionDos ( PARAMETROS, )* {
     sentencia*
+    return hola;
 }
+
+               
 ```
 
 ## Gramatica

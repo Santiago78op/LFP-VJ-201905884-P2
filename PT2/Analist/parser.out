@@ -4,7 +4,6 @@ Unused terminals:
 
     AND
     BREAK
-    COLON
     COMENTLINE
     COMENTMULTYLINE
     CONDITIONAL_ELSE
@@ -19,7 +18,6 @@ Unused terminals:
     ITERATIVE_DO
     ITERATIVE_WHILE
     LESS
-    METHOD_RETURN
     MINUS
     NOT
     OR
@@ -33,1019 +31,132 @@ Rule 0     S' -> INITIAL
 Rule 1     INITIAL -> L_INST
 Rule 2     L_INST -> L_INST INTS
 Rule 3     L_INST -> INTS
-Rule 4     INTS -> METHOD_VOID ID LPAREN RPAREN LKEY RKEY
-Rule 5     INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY
-Rule 6     INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES RKEY
+Rule 4     L_INST -> empty
+Rule 5     INTS -> METHODS
+Rule 6     INTS -> FUNTIONS
 Rule 7     INTS -> SENTENCES
-Rule 8     SENTENCES -> SENTENCES SENTENCE
-Rule 9     SENTENCES -> SENTENCE
-Rule 10    SENTENCE -> DECLARATIONS
-Rule 11    SENTENCE -> ASSIGNMENTS
-Rule 12    DECLARATIONS -> DECLARATIONS DECLARATION
-Rule 13    DECLARATIONS -> DECLARATION
-Rule 14    DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
-Rule 15    DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
-Rule 16    DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
-Rule 17    DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
-Rule 18    DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
-Rule 19    ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT
-Rule 20    ASSIGNMENTS -> ASSIGNMENT
-Rule 21    ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA
-Rule 22    ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA
-Rule 23    ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA
-Rule 24    ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA
-Rule 25    ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA
-Rule 26    L_PARAMS -> L_PARAMS COMMA PARAM
-Rule 27    L_PARAMS -> PARAM
-Rule 28    PARAM -> TYPE_INT ID
-Rule 29    PARAM -> TYPE_STRING ID
+Rule 8     FUNTIONS -> FUNTIONS FUNTION
+Rule 9     FUNTIONS -> FUNTION
+Rule 10    FUNTION -> TYPE_INT COUPLER
+Rule 11    FUNTION -> TYPE_DOUBLE COUPLER
+Rule 12    FUNTION -> TYPE_STRING COUPLER
+Rule 13    FUNTION -> TYPE_CHAR COUPLER
+Rule 14    FUNTION -> TYPE_BOOL COUPLER
+Rule 15    COUPLER -> ID LPAREN RPAREN LKEY empty RKEY
+Rule 16    COUPLER -> ID LPAREN RPAREN LKEY SENTENCES_FUNTION RKEY
+Rule 17    COUPLER -> ID LPAREN L_PARAMS RPAREN LKEY empty RKEY
+Rule 18    COUPLER -> ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_FUNTION RKEY
+Rule 19    METHODS -> METHODS METHOD
+Rule 20    METHODS -> METHOD
+Rule 21    METHOD -> METHOD_VOID ID LPAREN RPAREN LKEY empty RKEY
+Rule 22    METHOD -> METHOD_VOID ID LPAREN RPAREN LKEY SENTENCES_METHOD RKEY
+Rule 23    METHOD -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY empty RKEY
+Rule 24    METHOD -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_METHOD RKEY
+Rule 25    SENTENCES_METHOD -> SENTENCES_METHOD SENTENCE_METHOD
+Rule 26    SENTENCES_METHOD -> SENTENCE_METHOD
+Rule 27    SENTENCE_METHOD -> DECLARATIONS
+Rule 28    SENTENCE_METHOD -> ASSIGNMENTS
+Rule 29    SENTENCE_METHOD -> METHOD_RETURN DOT_AN_DCOMMA
+Rule 30    SENTENCES_FUNTION -> SENTENCES_FUNTION SENTENCE_FUNTION
+Rule 31    SENTENCES_FUNTION -> SENTENCE_FUNTION
+Rule 32    SENTENCE_FUNTION -> DECLARATIONS
+Rule 33    SENTENCE_FUNTION -> ASSIGNMENTS
+Rule 34    SENTENCE_FUNTION -> METHOD_RETURN TYPE_DATO DOT_AN_DCOMMA
+Rule 35    DECLARATIONS -> DECLARATIONS DECLARATION
+Rule 36    DECLARATIONS -> DECLARATION
+Rule 37    DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
+Rule 38    DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
+Rule 39    DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
+Rule 40    DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
+Rule 41    DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+Rule 42    ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT
+Rule 43    ASSIGNMENTS -> ASSIGNMENT
+Rule 44    ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA
+Rule 45    ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA
+Rule 46    ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA
+Rule 47    ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA
+Rule 48    ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+Rule 49    L_PARAMS -> L_PARAMS COMMA PARAM
+Rule 50    L_PARAMS -> PARAM
+Rule 51    PARAM -> TYPE_INT ID
+Rule 52    PARAM -> TYPE_DOUBLE ID
+Rule 53    PARAM -> TYPE_STRING ID
+Rule 54    PARAM -> TYPE_CHAR ID
+Rule 55    PARAM -> TYPE_BOOL ID
+Rule 56    TYPE_DATO -> INT
+Rule 57    TYPE_DATO -> FLOAT
+Rule 58    TYPE_DATO -> STRING
+Rule 59    TYPE_DATO -> CHAR
+Rule 60    TYPE_DATO -> DATA_BOOL
+Rule 61    empty -> <empty>
 
 Terminals, with rules where they appear
 
 AND                  : 
 BREAK                : 
-CHAR                 : 17 24
-COLON                : 
+CHAR                 : 40 47 59
 COMENTLINE           : 
 COMENTMULTYLINE      : 
-COMMA                : 26
+COMMA                : 49
 CONDITIONAL_ELSE     : 
 CONDITIONAL_IF       : 
 CONTINUE             : 
-DATA_BOOL            : 18 25
+DATA_BOOL            : 41 48 60
 DIFFERENT            : 
 DIVIDE               : 
-DOT_AN_DCOMMA        : 14 15 16 17 18 21 22 23 24 25
-FLOAT                : 15 22
+DOT_AN_DCOMMA        : 29 34 37 38 39 40 41 44 45 46 47 48
+FLOAT                : 38 45 57
 GREATER              : 
-ID                   : 4 5 6 14 15 16 17 18 21 22 23 24 25 28 29
-INT                  : 14 21
-IQUAL                : 14 15 16 17 18 21 22 23 24 25
+ID                   : 15 16 17 18 21 22 23 24 37 38 39 40 41 44 45 46 47 48 51 52 53 54 55
+INT                  : 37 44 56
+IQUAL                : 37 38 39 40 41 44 45 46 47 48
 IQUALS               : 
 IQUAL_GREATER        : 
 IQUAL_LESS           : 
 ITERATIVE_DO         : 
 ITERATIVE_WHILE      : 
 LESS                 : 
-LKEY                 : 4 5 6
-LPAREN               : 4 5 6
-METHOD_RETURN        : 
-METHOD_VOID          : 4 5 6
+LKEY                 : 15 16 17 18 21 22 23 24
+LPAREN               : 15 16 17 18 21 22 23 24
+METHOD_RETURN        : 29 34
+METHOD_VOID          : 21 22 23 24
 MINUS                : 
 NOT                  : 
 OR                   : 
 PLUS                 : 
 REST                 : 
-RKEY                 : 4 5 6
-RPAREN               : 4 5 6
-STRING               : 16 23
+RKEY                 : 15 16 17 18 21 22 23 24
+RPAREN               : 15 16 17 18 21 22 23 24
+STRING               : 39 46 58
 TIMES                : 
-TYPE_BOOL            : 18
-TYPE_CHAR            : 17
-TYPE_DOUBLE          : 15
-TYPE_INT             : 14 28
-TYPE_STRING          : 16 29
+TYPE_BOOL            : 14 41 55
+TYPE_CHAR            : 13 40 54
+TYPE_DOUBLE          : 11 38 52
+TYPE_INT             : 10 37 51
+TYPE_STRING          : 12 39 53
 error                : 
 
 Nonterminals, with rules where they appear
 
-ASSIGNMENT           : 19 20
-ASSIGNMENTS          : 11 19
-DECLARATION          : 12 13
-DECLARATIONS         : 10 12
+ASSIGNMENT           : 42 43
+ASSIGNMENTS          : 28 33 42
+COUPLER              : 10 11 12 13 14
+DECLARATION          : 35 36
+DECLARATIONS         : 27 32 35
+FUNTION              : 8 9
+FUNTIONS             : 6 8
 INITIAL              : 0
 INTS                 : 2 3
 L_INST               : 1 2
-L_PARAMS             : 5 6 26
-PARAM                : 26 27
-SENTENCE             : 8 9
-SENTENCES            : 6 7 8
+L_PARAMS             : 17 18 23 24 49
+METHOD               : 19 20
+METHODS              : 5 19
+PARAM                : 49 50
+SENTENCES            : 7
+SENTENCES_FUNTION    : 16 18 30
+SENTENCES_METHOD     : 22 24 25
+SENTENCE_FUNTION     : 30 31
+SENTENCE_METHOD      : 25 26
+TYPE_DATO            : 34
+empty                : 4 15 17 21 23
 
-Parsing method: LALR
-
-state 0
-
-    (0) S' -> . INITIAL
-    (1) INITIAL -> . L_INST
-    (2) L_INST -> . L_INST INTS
-    (3) L_INST -> . INTS
-    (4) INTS -> . METHOD_VOID ID LPAREN RPAREN LKEY RKEY
-    (5) INTS -> . METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY
-    (6) INTS -> . METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES RKEY
-    (7) INTS -> . SENTENCES
-    (8) SENTENCES -> . SENTENCES SENTENCE
-    (9) SENTENCES -> . SENTENCE
-    (10) SENTENCE -> . DECLARATIONS
-    (11) SENTENCE -> . ASSIGNMENTS
-    (12) DECLARATIONS -> . DECLARATIONS DECLARATION
-    (13) DECLARATIONS -> . DECLARATION
-    (19) ASSIGNMENTS -> . ASSIGNMENTS ASSIGNMENT
-    (20) ASSIGNMENTS -> . ASSIGNMENT
-    (14) DECLARATION -> . TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
-    (15) DECLARATION -> . TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
-    (16) DECLARATION -> . TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
-    (17) DECLARATION -> . TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
-    (18) DECLARATION -> . TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
-    (21) ASSIGNMENT -> . ID IQUAL INT DOT_AN_DCOMMA
-    (22) ASSIGNMENT -> . ID IQUAL FLOAT DOT_AN_DCOMMA
-    (23) ASSIGNMENT -> . ID IQUAL STRING DOT_AN_DCOMMA
-    (24) ASSIGNMENT -> . ID IQUAL CHAR DOT_AN_DCOMMA
-    (25) ASSIGNMENT -> . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
-
-    METHOD_VOID     shift and go to state 4
-    TYPE_INT        shift and go to state 12
-    TYPE_DOUBLE     shift and go to state 13
-    TYPE_STRING     shift and go to state 14
-    TYPE_CHAR       shift and go to state 15
-    TYPE_BOOL       shift and go to state 16
-    ID              shift and go to state 5
-
-    INITIAL                        shift and go to state 1
-    L_INST                         shift and go to state 2
-    INTS                           shift and go to state 3
-    SENTENCES                      shift and go to state 6
-    SENTENCE                       shift and go to state 7
-    DECLARATIONS                   shift and go to state 8
-    ASSIGNMENTS                    shift and go to state 9
-    DECLARATION                    shift and go to state 10
-    ASSIGNMENT                     shift and go to state 11
-
-state 1
-
-    (0) S' -> INITIAL .
-
-
-
-state 2
-
-    (1) INITIAL -> L_INST .
-    (2) L_INST -> L_INST . INTS
-    (4) INTS -> . METHOD_VOID ID LPAREN RPAREN LKEY RKEY
-    (5) INTS -> . METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY
-    (6) INTS -> . METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES RKEY
-    (7) INTS -> . SENTENCES
-    (8) SENTENCES -> . SENTENCES SENTENCE
-    (9) SENTENCES -> . SENTENCE
-    (10) SENTENCE -> . DECLARATIONS
-    (11) SENTENCE -> . ASSIGNMENTS
-    (12) DECLARATIONS -> . DECLARATIONS DECLARATION
-    (13) DECLARATIONS -> . DECLARATION
-    (19) ASSIGNMENTS -> . ASSIGNMENTS ASSIGNMENT
-    (20) ASSIGNMENTS -> . ASSIGNMENT
-    (14) DECLARATION -> . TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
-    (15) DECLARATION -> . TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
-    (16) DECLARATION -> . TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
-    (17) DECLARATION -> . TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
-    (18) DECLARATION -> . TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
-    (21) ASSIGNMENT -> . ID IQUAL INT DOT_AN_DCOMMA
-    (22) ASSIGNMENT -> . ID IQUAL FLOAT DOT_AN_DCOMMA
-    (23) ASSIGNMENT -> . ID IQUAL STRING DOT_AN_DCOMMA
-    (24) ASSIGNMENT -> . ID IQUAL CHAR DOT_AN_DCOMMA
-    (25) ASSIGNMENT -> . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
-
-    $end            reduce using rule 1 (INITIAL -> L_INST .)
-    METHOD_VOID     shift and go to state 4
-    TYPE_INT        shift and go to state 12
-    TYPE_DOUBLE     shift and go to state 13
-    TYPE_STRING     shift and go to state 14
-    TYPE_CHAR       shift and go to state 15
-    TYPE_BOOL       shift and go to state 16
-    ID              shift and go to state 5
-
-    INTS                           shift and go to state 17
-    SENTENCES                      shift and go to state 6
-    SENTENCE                       shift and go to state 7
-    DECLARATIONS                   shift and go to state 8
-    ASSIGNMENTS                    shift and go to state 9
-    DECLARATION                    shift and go to state 10
-    ASSIGNMENT                     shift and go to state 11
-
-state 3
-
-    (3) L_INST -> INTS .
-
-    METHOD_VOID     reduce using rule 3 (L_INST -> INTS .)
-    TYPE_INT        reduce using rule 3 (L_INST -> INTS .)
-    TYPE_DOUBLE     reduce using rule 3 (L_INST -> INTS .)
-    TYPE_STRING     reduce using rule 3 (L_INST -> INTS .)
-    TYPE_CHAR       reduce using rule 3 (L_INST -> INTS .)
-    TYPE_BOOL       reduce using rule 3 (L_INST -> INTS .)
-    ID              reduce using rule 3 (L_INST -> INTS .)
-    $end            reduce using rule 3 (L_INST -> INTS .)
-
-
-state 4
-
-    (4) INTS -> METHOD_VOID . ID LPAREN RPAREN LKEY RKEY
-    (5) INTS -> METHOD_VOID . ID LPAREN L_PARAMS RPAREN LKEY RKEY
-    (6) INTS -> METHOD_VOID . ID LPAREN L_PARAMS RPAREN LKEY SENTENCES RKEY
-
-    ID              shift and go to state 18
-
-
-state 5
-
-    (21) ASSIGNMENT -> ID . IQUAL INT DOT_AN_DCOMMA
-    (22) ASSIGNMENT -> ID . IQUAL FLOAT DOT_AN_DCOMMA
-    (23) ASSIGNMENT -> ID . IQUAL STRING DOT_AN_DCOMMA
-    (24) ASSIGNMENT -> ID . IQUAL CHAR DOT_AN_DCOMMA
-    (25) ASSIGNMENT -> ID . IQUAL DATA_BOOL DOT_AN_DCOMMA
-
-    IQUAL           shift and go to state 19
-
-
-state 6
-
-    (7) INTS -> SENTENCES .
-    (8) SENTENCES -> SENTENCES . SENTENCE
-    (10) SENTENCE -> . DECLARATIONS
-    (11) SENTENCE -> . ASSIGNMENTS
-    (12) DECLARATIONS -> . DECLARATIONS DECLARATION
-    (13) DECLARATIONS -> . DECLARATION
-    (19) ASSIGNMENTS -> . ASSIGNMENTS ASSIGNMENT
-    (20) ASSIGNMENTS -> . ASSIGNMENT
-    (14) DECLARATION -> . TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
-    (15) DECLARATION -> . TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
-    (16) DECLARATION -> . TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
-    (17) DECLARATION -> . TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
-    (18) DECLARATION -> . TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
-    (21) ASSIGNMENT -> . ID IQUAL INT DOT_AN_DCOMMA
-    (22) ASSIGNMENT -> . ID IQUAL FLOAT DOT_AN_DCOMMA
-    (23) ASSIGNMENT -> . ID IQUAL STRING DOT_AN_DCOMMA
-    (24) ASSIGNMENT -> . ID IQUAL CHAR DOT_AN_DCOMMA
-    (25) ASSIGNMENT -> . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
-
-  ! shift/reduce conflict for TYPE_INT resolved as shift
-  ! shift/reduce conflict for TYPE_DOUBLE resolved as shift
-  ! shift/reduce conflict for TYPE_STRING resolved as shift
-  ! shift/reduce conflict for TYPE_CHAR resolved as shift
-  ! shift/reduce conflict for TYPE_BOOL resolved as shift
-  ! shift/reduce conflict for ID resolved as shift
-    METHOD_VOID     reduce using rule 7 (INTS -> SENTENCES .)
-    $end            reduce using rule 7 (INTS -> SENTENCES .)
-    TYPE_INT        shift and go to state 12
-    TYPE_DOUBLE     shift and go to state 13
-    TYPE_STRING     shift and go to state 14
-    TYPE_CHAR       shift and go to state 15
-    TYPE_BOOL       shift and go to state 16
-    ID              shift and go to state 5
-
-  ! TYPE_INT        [ reduce using rule 7 (INTS -> SENTENCES .) ]
-  ! TYPE_DOUBLE     [ reduce using rule 7 (INTS -> SENTENCES .) ]
-  ! TYPE_STRING     [ reduce using rule 7 (INTS -> SENTENCES .) ]
-  ! TYPE_CHAR       [ reduce using rule 7 (INTS -> SENTENCES .) ]
-  ! TYPE_BOOL       [ reduce using rule 7 (INTS -> SENTENCES .) ]
-  ! ID              [ reduce using rule 7 (INTS -> SENTENCES .) ]
-
-    SENTENCE                       shift and go to state 20
-    DECLARATIONS                   shift and go to state 8
-    ASSIGNMENTS                    shift and go to state 9
-    DECLARATION                    shift and go to state 10
-    ASSIGNMENT                     shift and go to state 11
-
-state 7
-
-    (9) SENTENCES -> SENTENCE .
-
-    TYPE_INT        reduce using rule 9 (SENTENCES -> SENTENCE .)
-    TYPE_DOUBLE     reduce using rule 9 (SENTENCES -> SENTENCE .)
-    TYPE_STRING     reduce using rule 9 (SENTENCES -> SENTENCE .)
-    TYPE_CHAR       reduce using rule 9 (SENTENCES -> SENTENCE .)
-    TYPE_BOOL       reduce using rule 9 (SENTENCES -> SENTENCE .)
-    ID              reduce using rule 9 (SENTENCES -> SENTENCE .)
-    METHOD_VOID     reduce using rule 9 (SENTENCES -> SENTENCE .)
-    $end            reduce using rule 9 (SENTENCES -> SENTENCE .)
-    RKEY            reduce using rule 9 (SENTENCES -> SENTENCE .)
-
-
-state 8
-
-    (10) SENTENCE -> DECLARATIONS .
-    (12) DECLARATIONS -> DECLARATIONS . DECLARATION
-    (14) DECLARATION -> . TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
-    (15) DECLARATION -> . TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
-    (16) DECLARATION -> . TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
-    (17) DECLARATION -> . TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
-    (18) DECLARATION -> . TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
-
-  ! shift/reduce conflict for TYPE_INT resolved as shift
-  ! shift/reduce conflict for TYPE_DOUBLE resolved as shift
-  ! shift/reduce conflict for TYPE_STRING resolved as shift
-  ! shift/reduce conflict for TYPE_CHAR resolved as shift
-  ! shift/reduce conflict for TYPE_BOOL resolved as shift
-    ID              reduce using rule 10 (SENTENCE -> DECLARATIONS .)
-    METHOD_VOID     reduce using rule 10 (SENTENCE -> DECLARATIONS .)
-    $end            reduce using rule 10 (SENTENCE -> DECLARATIONS .)
-    RKEY            reduce using rule 10 (SENTENCE -> DECLARATIONS .)
-    TYPE_INT        shift and go to state 12
-    TYPE_DOUBLE     shift and go to state 13
-    TYPE_STRING     shift and go to state 14
-    TYPE_CHAR       shift and go to state 15
-    TYPE_BOOL       shift and go to state 16
-
-  ! TYPE_INT        [ reduce using rule 10 (SENTENCE -> DECLARATIONS .) ]
-  ! TYPE_DOUBLE     [ reduce using rule 10 (SENTENCE -> DECLARATIONS .) ]
-  ! TYPE_STRING     [ reduce using rule 10 (SENTENCE -> DECLARATIONS .) ]
-  ! TYPE_CHAR       [ reduce using rule 10 (SENTENCE -> DECLARATIONS .) ]
-  ! TYPE_BOOL       [ reduce using rule 10 (SENTENCE -> DECLARATIONS .) ]
-
-    DECLARATION                    shift and go to state 21
-
-state 9
-
-    (11) SENTENCE -> ASSIGNMENTS .
-    (19) ASSIGNMENTS -> ASSIGNMENTS . ASSIGNMENT
-    (21) ASSIGNMENT -> . ID IQUAL INT DOT_AN_DCOMMA
-    (22) ASSIGNMENT -> . ID IQUAL FLOAT DOT_AN_DCOMMA
-    (23) ASSIGNMENT -> . ID IQUAL STRING DOT_AN_DCOMMA
-    (24) ASSIGNMENT -> . ID IQUAL CHAR DOT_AN_DCOMMA
-    (25) ASSIGNMENT -> . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
-
-  ! shift/reduce conflict for ID resolved as shift
-    TYPE_INT        reduce using rule 11 (SENTENCE -> ASSIGNMENTS .)
-    TYPE_DOUBLE     reduce using rule 11 (SENTENCE -> ASSIGNMENTS .)
-    TYPE_STRING     reduce using rule 11 (SENTENCE -> ASSIGNMENTS .)
-    TYPE_CHAR       reduce using rule 11 (SENTENCE -> ASSIGNMENTS .)
-    TYPE_BOOL       reduce using rule 11 (SENTENCE -> ASSIGNMENTS .)
-    METHOD_VOID     reduce using rule 11 (SENTENCE -> ASSIGNMENTS .)
-    $end            reduce using rule 11 (SENTENCE -> ASSIGNMENTS .)
-    RKEY            reduce using rule 11 (SENTENCE -> ASSIGNMENTS .)
-    ID              shift and go to state 5
-
-  ! ID              [ reduce using rule 11 (SENTENCE -> ASSIGNMENTS .) ]
-
-    ASSIGNMENT                     shift and go to state 22
-
-state 10
-
-    (13) DECLARATIONS -> DECLARATION .
-
-    TYPE_INT        reduce using rule 13 (DECLARATIONS -> DECLARATION .)
-    TYPE_DOUBLE     reduce using rule 13 (DECLARATIONS -> DECLARATION .)
-    TYPE_STRING     reduce using rule 13 (DECLARATIONS -> DECLARATION .)
-    TYPE_CHAR       reduce using rule 13 (DECLARATIONS -> DECLARATION .)
-    TYPE_BOOL       reduce using rule 13 (DECLARATIONS -> DECLARATION .)
-    ID              reduce using rule 13 (DECLARATIONS -> DECLARATION .)
-    METHOD_VOID     reduce using rule 13 (DECLARATIONS -> DECLARATION .)
-    $end            reduce using rule 13 (DECLARATIONS -> DECLARATION .)
-    RKEY            reduce using rule 13 (DECLARATIONS -> DECLARATION .)
-
-
-state 11
-
-    (20) ASSIGNMENTS -> ASSIGNMENT .
-
-    ID              reduce using rule 20 (ASSIGNMENTS -> ASSIGNMENT .)
-    TYPE_INT        reduce using rule 20 (ASSIGNMENTS -> ASSIGNMENT .)
-    TYPE_DOUBLE     reduce using rule 20 (ASSIGNMENTS -> ASSIGNMENT .)
-    TYPE_STRING     reduce using rule 20 (ASSIGNMENTS -> ASSIGNMENT .)
-    TYPE_CHAR       reduce using rule 20 (ASSIGNMENTS -> ASSIGNMENT .)
-    TYPE_BOOL       reduce using rule 20 (ASSIGNMENTS -> ASSIGNMENT .)
-    METHOD_VOID     reduce using rule 20 (ASSIGNMENTS -> ASSIGNMENT .)
-    $end            reduce using rule 20 (ASSIGNMENTS -> ASSIGNMENT .)
-    RKEY            reduce using rule 20 (ASSIGNMENTS -> ASSIGNMENT .)
-
-
-state 12
-
-    (14) DECLARATION -> TYPE_INT . ID IQUAL INT DOT_AN_DCOMMA
-
-    ID              shift and go to state 23
-
-
-state 13
-
-    (15) DECLARATION -> TYPE_DOUBLE . ID IQUAL FLOAT DOT_AN_DCOMMA
-
-    ID              shift and go to state 24
-
-
-state 14
-
-    (16) DECLARATION -> TYPE_STRING . ID IQUAL STRING DOT_AN_DCOMMA
-
-    ID              shift and go to state 25
-
-
-state 15
-
-    (17) DECLARATION -> TYPE_CHAR . ID IQUAL CHAR DOT_AN_DCOMMA
-
-    ID              shift and go to state 26
-
-
-state 16
-
-    (18) DECLARATION -> TYPE_BOOL . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
-
-    ID              shift and go to state 27
-
-
-state 17
-
-    (2) L_INST -> L_INST INTS .
-
-    METHOD_VOID     reduce using rule 2 (L_INST -> L_INST INTS .)
-    TYPE_INT        reduce using rule 2 (L_INST -> L_INST INTS .)
-    TYPE_DOUBLE     reduce using rule 2 (L_INST -> L_INST INTS .)
-    TYPE_STRING     reduce using rule 2 (L_INST -> L_INST INTS .)
-    TYPE_CHAR       reduce using rule 2 (L_INST -> L_INST INTS .)
-    TYPE_BOOL       reduce using rule 2 (L_INST -> L_INST INTS .)
-    ID              reduce using rule 2 (L_INST -> L_INST INTS .)
-    $end            reduce using rule 2 (L_INST -> L_INST INTS .)
-
-
-state 18
-
-    (4) INTS -> METHOD_VOID ID . LPAREN RPAREN LKEY RKEY
-    (5) INTS -> METHOD_VOID ID . LPAREN L_PARAMS RPAREN LKEY RKEY
-    (6) INTS -> METHOD_VOID ID . LPAREN L_PARAMS RPAREN LKEY SENTENCES RKEY
-
-    LPAREN          shift and go to state 28
-
-
-state 19
-
-    (21) ASSIGNMENT -> ID IQUAL . INT DOT_AN_DCOMMA
-    (22) ASSIGNMENT -> ID IQUAL . FLOAT DOT_AN_DCOMMA
-    (23) ASSIGNMENT -> ID IQUAL . STRING DOT_AN_DCOMMA
-    (24) ASSIGNMENT -> ID IQUAL . CHAR DOT_AN_DCOMMA
-    (25) ASSIGNMENT -> ID IQUAL . DATA_BOOL DOT_AN_DCOMMA
-
-    INT             shift and go to state 29
-    FLOAT           shift and go to state 30
-    STRING          shift and go to state 31
-    CHAR            shift and go to state 32
-    DATA_BOOL       shift and go to state 33
-
-
-state 20
-
-    (8) SENTENCES -> SENTENCES SENTENCE .
-
-    TYPE_INT        reduce using rule 8 (SENTENCES -> SENTENCES SENTENCE .)
-    TYPE_DOUBLE     reduce using rule 8 (SENTENCES -> SENTENCES SENTENCE .)
-    TYPE_STRING     reduce using rule 8 (SENTENCES -> SENTENCES SENTENCE .)
-    TYPE_CHAR       reduce using rule 8 (SENTENCES -> SENTENCES SENTENCE .)
-    TYPE_BOOL       reduce using rule 8 (SENTENCES -> SENTENCES SENTENCE .)
-    ID              reduce using rule 8 (SENTENCES -> SENTENCES SENTENCE .)
-    METHOD_VOID     reduce using rule 8 (SENTENCES -> SENTENCES SENTENCE .)
-    $end            reduce using rule 8 (SENTENCES -> SENTENCES SENTENCE .)
-    RKEY            reduce using rule 8 (SENTENCES -> SENTENCES SENTENCE .)
-
-
-state 21
-
-    (12) DECLARATIONS -> DECLARATIONS DECLARATION .
-
-    TYPE_INT        reduce using rule 12 (DECLARATIONS -> DECLARATIONS DECLARATION .)
-    TYPE_DOUBLE     reduce using rule 12 (DECLARATIONS -> DECLARATIONS DECLARATION .)
-    TYPE_STRING     reduce using rule 12 (DECLARATIONS -> DECLARATIONS DECLARATION .)
-    TYPE_CHAR       reduce using rule 12 (DECLARATIONS -> DECLARATIONS DECLARATION .)
-    TYPE_BOOL       reduce using rule 12 (DECLARATIONS -> DECLARATIONS DECLARATION .)
-    ID              reduce using rule 12 (DECLARATIONS -> DECLARATIONS DECLARATION .)
-    METHOD_VOID     reduce using rule 12 (DECLARATIONS -> DECLARATIONS DECLARATION .)
-    $end            reduce using rule 12 (DECLARATIONS -> DECLARATIONS DECLARATION .)
-    RKEY            reduce using rule 12 (DECLARATIONS -> DECLARATIONS DECLARATION .)
-
-
-state 22
-
-    (19) ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .
-
-    ID              reduce using rule 19 (ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .)
-    TYPE_INT        reduce using rule 19 (ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .)
-    TYPE_DOUBLE     reduce using rule 19 (ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .)
-    TYPE_STRING     reduce using rule 19 (ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .)
-    TYPE_CHAR       reduce using rule 19 (ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .)
-    TYPE_BOOL       reduce using rule 19 (ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .)
-    METHOD_VOID     reduce using rule 19 (ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .)
-    $end            reduce using rule 19 (ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .)
-    RKEY            reduce using rule 19 (ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .)
-
-
-state 23
-
-    (14) DECLARATION -> TYPE_INT ID . IQUAL INT DOT_AN_DCOMMA
-
-    IQUAL           shift and go to state 34
-
-
-state 24
-
-    (15) DECLARATION -> TYPE_DOUBLE ID . IQUAL FLOAT DOT_AN_DCOMMA
-
-    IQUAL           shift and go to state 35
-
-
-state 25
-
-    (16) DECLARATION -> TYPE_STRING ID . IQUAL STRING DOT_AN_DCOMMA
-
-    IQUAL           shift and go to state 36
-
-
-state 26
-
-    (17) DECLARATION -> TYPE_CHAR ID . IQUAL CHAR DOT_AN_DCOMMA
-
-    IQUAL           shift and go to state 37
-
-
-state 27
-
-    (18) DECLARATION -> TYPE_BOOL ID . IQUAL DATA_BOOL DOT_AN_DCOMMA
-
-    IQUAL           shift and go to state 38
-
-
-state 28
-
-    (4) INTS -> METHOD_VOID ID LPAREN . RPAREN LKEY RKEY
-    (5) INTS -> METHOD_VOID ID LPAREN . L_PARAMS RPAREN LKEY RKEY
-    (6) INTS -> METHOD_VOID ID LPAREN . L_PARAMS RPAREN LKEY SENTENCES RKEY
-    (26) L_PARAMS -> . L_PARAMS COMMA PARAM
-    (27) L_PARAMS -> . PARAM
-    (28) PARAM -> . TYPE_INT ID
-    (29) PARAM -> . TYPE_STRING ID
-
-    RPAREN          shift and go to state 39
-    TYPE_INT        shift and go to state 42
-    TYPE_STRING     shift and go to state 43
-
-    L_PARAMS                       shift and go to state 40
-    PARAM                          shift and go to state 41
-
-state 29
-
-    (21) ASSIGNMENT -> ID IQUAL INT . DOT_AN_DCOMMA
-
-    DOT_AN_DCOMMA   shift and go to state 44
-
-
-state 30
-
-    (22) ASSIGNMENT -> ID IQUAL FLOAT . DOT_AN_DCOMMA
-
-    DOT_AN_DCOMMA   shift and go to state 45
-
-
-state 31
-
-    (23) ASSIGNMENT -> ID IQUAL STRING . DOT_AN_DCOMMA
-
-    DOT_AN_DCOMMA   shift and go to state 46
-
-
-state 32
-
-    (24) ASSIGNMENT -> ID IQUAL CHAR . DOT_AN_DCOMMA
-
-    DOT_AN_DCOMMA   shift and go to state 47
-
-
-state 33
-
-    (25) ASSIGNMENT -> ID IQUAL DATA_BOOL . DOT_AN_DCOMMA
-
-    DOT_AN_DCOMMA   shift and go to state 48
-
-
-state 34
-
-    (14) DECLARATION -> TYPE_INT ID IQUAL . INT DOT_AN_DCOMMA
-
-    INT             shift and go to state 49
-
-
-state 35
-
-    (15) DECLARATION -> TYPE_DOUBLE ID IQUAL . FLOAT DOT_AN_DCOMMA
-
-    FLOAT           shift and go to state 50
-
-
-state 36
-
-    (16) DECLARATION -> TYPE_STRING ID IQUAL . STRING DOT_AN_DCOMMA
-
-    STRING          shift and go to state 51
-
-
-state 37
-
-    (17) DECLARATION -> TYPE_CHAR ID IQUAL . CHAR DOT_AN_DCOMMA
-
-    CHAR            shift and go to state 52
-
-
-state 38
-
-    (18) DECLARATION -> TYPE_BOOL ID IQUAL . DATA_BOOL DOT_AN_DCOMMA
-
-    DATA_BOOL       shift and go to state 53
-
-
-state 39
-
-    (4) INTS -> METHOD_VOID ID LPAREN RPAREN . LKEY RKEY
-
-    LKEY            shift and go to state 54
-
-
-state 40
-
-    (5) INTS -> METHOD_VOID ID LPAREN L_PARAMS . RPAREN LKEY RKEY
-    (6) INTS -> METHOD_VOID ID LPAREN L_PARAMS . RPAREN LKEY SENTENCES RKEY
-    (26) L_PARAMS -> L_PARAMS . COMMA PARAM
-
-    RPAREN          shift and go to state 55
-    COMMA           shift and go to state 56
-
-
-state 41
-
-    (27) L_PARAMS -> PARAM .
-
-    RPAREN          reduce using rule 27 (L_PARAMS -> PARAM .)
-    COMMA           reduce using rule 27 (L_PARAMS -> PARAM .)
-
-
-state 42
-
-    (28) PARAM -> TYPE_INT . ID
-
-    ID              shift and go to state 57
-
-
-state 43
-
-    (29) PARAM -> TYPE_STRING . ID
-
-    ID              shift and go to state 58
-
-
-state 44
-
-    (21) ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .
-
-    ID              reduce using rule 21 (ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .)
-    TYPE_INT        reduce using rule 21 (ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .)
-    TYPE_DOUBLE     reduce using rule 21 (ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .)
-    TYPE_STRING     reduce using rule 21 (ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .)
-    TYPE_CHAR       reduce using rule 21 (ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .)
-    TYPE_BOOL       reduce using rule 21 (ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .)
-    METHOD_VOID     reduce using rule 21 (ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .)
-    $end            reduce using rule 21 (ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .)
-    RKEY            reduce using rule 21 (ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .)
-
-
-state 45
-
-    (22) ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .
-
-    ID              reduce using rule 22 (ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    TYPE_INT        reduce using rule 22 (ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    TYPE_DOUBLE     reduce using rule 22 (ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    TYPE_STRING     reduce using rule 22 (ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    TYPE_CHAR       reduce using rule 22 (ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    TYPE_BOOL       reduce using rule 22 (ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    METHOD_VOID     reduce using rule 22 (ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    $end            reduce using rule 22 (ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    RKEY            reduce using rule 22 (ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .)
-
-
-state 46
-
-    (23) ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .
-
-    ID              reduce using rule 23 (ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .)
-    TYPE_INT        reduce using rule 23 (ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .)
-    TYPE_DOUBLE     reduce using rule 23 (ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .)
-    TYPE_STRING     reduce using rule 23 (ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .)
-    TYPE_CHAR       reduce using rule 23 (ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .)
-    TYPE_BOOL       reduce using rule 23 (ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .)
-    METHOD_VOID     reduce using rule 23 (ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .)
-    $end            reduce using rule 23 (ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .)
-    RKEY            reduce using rule 23 (ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .)
-
-
-state 47
-
-    (24) ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .
-
-    ID              reduce using rule 24 (ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .)
-    TYPE_INT        reduce using rule 24 (ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .)
-    TYPE_DOUBLE     reduce using rule 24 (ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .)
-    TYPE_STRING     reduce using rule 24 (ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .)
-    TYPE_CHAR       reduce using rule 24 (ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .)
-    TYPE_BOOL       reduce using rule 24 (ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .)
-    METHOD_VOID     reduce using rule 24 (ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .)
-    $end            reduce using rule 24 (ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .)
-    RKEY            reduce using rule 24 (ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .)
-
-
-state 48
-
-    (25) ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .
-
-    ID              reduce using rule 25 (ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    TYPE_INT        reduce using rule 25 (ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    TYPE_DOUBLE     reduce using rule 25 (ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    TYPE_STRING     reduce using rule 25 (ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    TYPE_CHAR       reduce using rule 25 (ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    TYPE_BOOL       reduce using rule 25 (ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    METHOD_VOID     reduce using rule 25 (ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    $end            reduce using rule 25 (ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    RKEY            reduce using rule 25 (ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-
-
-state 49
-
-    (14) DECLARATION -> TYPE_INT ID IQUAL INT . DOT_AN_DCOMMA
-
-    DOT_AN_DCOMMA   shift and go to state 59
-
-
-state 50
-
-    (15) DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT . DOT_AN_DCOMMA
-
-    DOT_AN_DCOMMA   shift and go to state 60
-
-
-state 51
-
-    (16) DECLARATION -> TYPE_STRING ID IQUAL STRING . DOT_AN_DCOMMA
-
-    DOT_AN_DCOMMA   shift and go to state 61
-
-
-state 52
-
-    (17) DECLARATION -> TYPE_CHAR ID IQUAL CHAR . DOT_AN_DCOMMA
-
-    DOT_AN_DCOMMA   shift and go to state 62
-
-
-state 53
-
-    (18) DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL . DOT_AN_DCOMMA
-
-    DOT_AN_DCOMMA   shift and go to state 63
-
-
-state 54
-
-    (4) INTS -> METHOD_VOID ID LPAREN RPAREN LKEY . RKEY
-
-    RKEY            shift and go to state 64
-
-
-state 55
-
-    (5) INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN . LKEY RKEY
-    (6) INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN . LKEY SENTENCES RKEY
-
-    LKEY            shift and go to state 65
-
-
-state 56
-
-    (26) L_PARAMS -> L_PARAMS COMMA . PARAM
-    (28) PARAM -> . TYPE_INT ID
-    (29) PARAM -> . TYPE_STRING ID
-
-    TYPE_INT        shift and go to state 42
-    TYPE_STRING     shift and go to state 43
-
-    PARAM                          shift and go to state 66
-
-state 57
-
-    (28) PARAM -> TYPE_INT ID .
-
-    RPAREN          reduce using rule 28 (PARAM -> TYPE_INT ID .)
-    COMMA           reduce using rule 28 (PARAM -> TYPE_INT ID .)
-
-
-state 58
-
-    (29) PARAM -> TYPE_STRING ID .
-
-    RPAREN          reduce using rule 29 (PARAM -> TYPE_STRING ID .)
-    COMMA           reduce using rule 29 (PARAM -> TYPE_STRING ID .)
-
-
-state 59
-
-    (14) DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .
-
-    TYPE_INT        reduce using rule 14 (DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .)
-    TYPE_DOUBLE     reduce using rule 14 (DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .)
-    TYPE_STRING     reduce using rule 14 (DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .)
-    TYPE_CHAR       reduce using rule 14 (DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .)
-    TYPE_BOOL       reduce using rule 14 (DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .)
-    ID              reduce using rule 14 (DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .)
-    METHOD_VOID     reduce using rule 14 (DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .)
-    $end            reduce using rule 14 (DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .)
-    RKEY            reduce using rule 14 (DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .)
-
-
-state 60
-
-    (15) DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .
-
-    TYPE_INT        reduce using rule 15 (DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    TYPE_DOUBLE     reduce using rule 15 (DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    TYPE_STRING     reduce using rule 15 (DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    TYPE_CHAR       reduce using rule 15 (DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    TYPE_BOOL       reduce using rule 15 (DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    ID              reduce using rule 15 (DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    METHOD_VOID     reduce using rule 15 (DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    $end            reduce using rule 15 (DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    RKEY            reduce using rule 15 (DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .)
-
-
-state 61
-
-    (16) DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .
-
-    TYPE_INT        reduce using rule 16 (DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .)
-    TYPE_DOUBLE     reduce using rule 16 (DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .)
-    TYPE_STRING     reduce using rule 16 (DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .)
-    TYPE_CHAR       reduce using rule 16 (DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .)
-    TYPE_BOOL       reduce using rule 16 (DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .)
-    ID              reduce using rule 16 (DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .)
-    METHOD_VOID     reduce using rule 16 (DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .)
-    $end            reduce using rule 16 (DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .)
-    RKEY            reduce using rule 16 (DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .)
-
-
-state 62
-
-    (17) DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .
-
-    TYPE_INT        reduce using rule 17 (DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .)
-    TYPE_DOUBLE     reduce using rule 17 (DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .)
-    TYPE_STRING     reduce using rule 17 (DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .)
-    TYPE_CHAR       reduce using rule 17 (DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .)
-    TYPE_BOOL       reduce using rule 17 (DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .)
-    ID              reduce using rule 17 (DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .)
-    METHOD_VOID     reduce using rule 17 (DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .)
-    $end            reduce using rule 17 (DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .)
-    RKEY            reduce using rule 17 (DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .)
-
-
-state 63
-
-    (18) DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .
-
-    TYPE_INT        reduce using rule 18 (DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    TYPE_DOUBLE     reduce using rule 18 (DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    TYPE_STRING     reduce using rule 18 (DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    TYPE_CHAR       reduce using rule 18 (DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    TYPE_BOOL       reduce using rule 18 (DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    ID              reduce using rule 18 (DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    METHOD_VOID     reduce using rule 18 (DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    $end            reduce using rule 18 (DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    RKEY            reduce using rule 18 (DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-
-
-state 64
-
-    (4) INTS -> METHOD_VOID ID LPAREN RPAREN LKEY RKEY .
-
-    METHOD_VOID     reduce using rule 4 (INTS -> METHOD_VOID ID LPAREN RPAREN LKEY RKEY .)
-    TYPE_INT        reduce using rule 4 (INTS -> METHOD_VOID ID LPAREN RPAREN LKEY RKEY .)
-    TYPE_DOUBLE     reduce using rule 4 (INTS -> METHOD_VOID ID LPAREN RPAREN LKEY RKEY .)
-    TYPE_STRING     reduce using rule 4 (INTS -> METHOD_VOID ID LPAREN RPAREN LKEY RKEY .)
-    TYPE_CHAR       reduce using rule 4 (INTS -> METHOD_VOID ID LPAREN RPAREN LKEY RKEY .)
-    TYPE_BOOL       reduce using rule 4 (INTS -> METHOD_VOID ID LPAREN RPAREN LKEY RKEY .)
-    ID              reduce using rule 4 (INTS -> METHOD_VOID ID LPAREN RPAREN LKEY RKEY .)
-    $end            reduce using rule 4 (INTS -> METHOD_VOID ID LPAREN RPAREN LKEY RKEY .)
-
-
-state 65
-
-    (5) INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY . RKEY
-    (6) INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY . SENTENCES RKEY
-    (8) SENTENCES -> . SENTENCES SENTENCE
-    (9) SENTENCES -> . SENTENCE
-    (10) SENTENCE -> . DECLARATIONS
-    (11) SENTENCE -> . ASSIGNMENTS
-    (12) DECLARATIONS -> . DECLARATIONS DECLARATION
-    (13) DECLARATIONS -> . DECLARATION
-    (19) ASSIGNMENTS -> . ASSIGNMENTS ASSIGNMENT
-    (20) ASSIGNMENTS -> . ASSIGNMENT
-    (14) DECLARATION -> . TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
-    (15) DECLARATION -> . TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
-    (16) DECLARATION -> . TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
-    (17) DECLARATION -> . TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
-    (18) DECLARATION -> . TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
-    (21) ASSIGNMENT -> . ID IQUAL INT DOT_AN_DCOMMA
-    (22) ASSIGNMENT -> . ID IQUAL FLOAT DOT_AN_DCOMMA
-    (23) ASSIGNMENT -> . ID IQUAL STRING DOT_AN_DCOMMA
-    (24) ASSIGNMENT -> . ID IQUAL CHAR DOT_AN_DCOMMA
-    (25) ASSIGNMENT -> . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
-
-    RKEY            shift and go to state 67
-    TYPE_INT        shift and go to state 12
-    TYPE_DOUBLE     shift and go to state 13
-    TYPE_STRING     shift and go to state 14
-    TYPE_CHAR       shift and go to state 15
-    TYPE_BOOL       shift and go to state 16
-    ID              shift and go to state 5
-
-    SENTENCES                      shift and go to state 68
-    SENTENCE                       shift and go to state 7
-    DECLARATIONS                   shift and go to state 8
-    ASSIGNMENTS                    shift and go to state 9
-    DECLARATION                    shift and go to state 10
-    ASSIGNMENT                     shift and go to state 11
-
-state 66
-
-    (26) L_PARAMS -> L_PARAMS COMMA PARAM .
-
-    RPAREN          reduce using rule 26 (L_PARAMS -> L_PARAMS COMMA PARAM .)
-    COMMA           reduce using rule 26 (L_PARAMS -> L_PARAMS COMMA PARAM .)
-
-
-state 67
-
-    (5) INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY .
-
-    METHOD_VOID     reduce using rule 5 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY .)
-    TYPE_INT        reduce using rule 5 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY .)
-    TYPE_DOUBLE     reduce using rule 5 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY .)
-    TYPE_STRING     reduce using rule 5 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY .)
-    TYPE_CHAR       reduce using rule 5 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY .)
-    TYPE_BOOL       reduce using rule 5 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY .)
-    ID              reduce using rule 5 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY .)
-    $end            reduce using rule 5 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY .)
-
-
-state 68
-
-    (6) INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES . RKEY
-    (8) SENTENCES -> SENTENCES . SENTENCE
-    (10) SENTENCE -> . DECLARATIONS
-    (11) SENTENCE -> . ASSIGNMENTS
-    (12) DECLARATIONS -> . DECLARATIONS DECLARATION
-    (13) DECLARATIONS -> . DECLARATION
-    (19) ASSIGNMENTS -> . ASSIGNMENTS ASSIGNMENT
-    (20) ASSIGNMENTS -> . ASSIGNMENT
-    (14) DECLARATION -> . TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
-    (15) DECLARATION -> . TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
-    (16) DECLARATION -> . TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
-    (17) DECLARATION -> . TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
-    (18) DECLARATION -> . TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
-    (21) ASSIGNMENT -> . ID IQUAL INT DOT_AN_DCOMMA
-    (22) ASSIGNMENT -> . ID IQUAL FLOAT DOT_AN_DCOMMA
-    (23) ASSIGNMENT -> . ID IQUAL STRING DOT_AN_DCOMMA
-    (24) ASSIGNMENT -> . ID IQUAL CHAR DOT_AN_DCOMMA
-    (25) ASSIGNMENT -> . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
-
-    RKEY            shift and go to state 69
-    TYPE_INT        shift and go to state 12
-    TYPE_DOUBLE     shift and go to state 13
-    TYPE_STRING     shift and go to state 14
-    TYPE_CHAR       shift and go to state 15
-    TYPE_BOOL       shift and go to state 16
-    ID              shift and go to state 5
-
-    SENTENCE                       shift and go to state 20
-    DECLARATIONS                   shift and go to state 8
-    ASSIGNMENTS                    shift and go to state 9
-    DECLARATION                    shift and go to state 10
-    ASSIGNMENT                     shift and go to state 11
-
-state 69
-
-    (6) INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES RKEY .
-
-    METHOD_VOID     reduce using rule 6 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES RKEY .)
-    TYPE_INT        reduce using rule 6 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES RKEY .)
-    TYPE_DOUBLE     reduce using rule 6 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES RKEY .)
-    TYPE_STRING     reduce using rule 6 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES RKEY .)
-    TYPE_CHAR       reduce using rule 6 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES RKEY .)
-    TYPE_BOOL       reduce using rule 6 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES RKEY .)
-    ID              reduce using rule 6 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES RKEY .)
-    $end            reduce using rule 6 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES RKEY .)
-
-WARNING: 
-WARNING: Conflicts:
-WARNING: 
-WARNING: shift/reduce conflict for TYPE_INT in state 6 resolved as shift
-WARNING: shift/reduce conflict for TYPE_DOUBLE in state 6 resolved as shift
-WARNING: shift/reduce conflict for TYPE_STRING in state 6 resolved as shift
-WARNING: shift/reduce conflict for TYPE_CHAR in state 6 resolved as shift
-WARNING: shift/reduce conflict for TYPE_BOOL in state 6 resolved as shift
-WARNING: shift/reduce conflict for ID in state 6 resolved as shift
-WARNING: shift/reduce conflict for TYPE_INT in state 8 resolved as shift
-WARNING: shift/reduce conflict for TYPE_DOUBLE in state 8 resolved as shift
-WARNING: shift/reduce conflict for TYPE_STRING in state 8 resolved as shift
-WARNING: shift/reduce conflict for TYPE_CHAR in state 8 resolved as shift
-WARNING: shift/reduce conflict for TYPE_BOOL in state 8 resolved as shift
-WARNING: shift/reduce conflict for ID in state 9 resolved as shift
