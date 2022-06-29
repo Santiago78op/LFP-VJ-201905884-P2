@@ -1,0 +1,8 @@
+void mifuncion(int num){
+    a = 5
+    b = 6
+    saludo = 'hola'
+}
+
+a = 5
+b = 9

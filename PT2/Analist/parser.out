@@ -1,0 +1,299 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    AND
+    BREAK
+    CHAR
+    COLON
+    COMENTLINE
+    COMENTMULTYLINE
+    CONDITIONAL_ELSE
+    CONDITIONAL_IF
+    CONTINUE
+    DATA_BOOL
+    DIFFERENT
+    DIVIDE
+    DOT_AN_DCOMMA
+    FLOAT
+    GREATER
+    INT
+    IQUAL
+    IQUALS
+    IQUAL_GREATER
+    IQUAL_LESS
+    ITERATIVE_DO
+    ITERATIVE_WHILE
+    LESS
+    METHOD_RETURN
+    MINUS
+    NOT
+    OR
+    PLUS
+    REST
+    STRING
+    TIMES
+    TYPE_BOOL
+    TYPE_CHAR
+    TYPE_DOUBLE
+
+Grammar
+
+Rule 0     S' -> INITIAL
+Rule 1     INITIAL -> L_INST
+Rule 2     L_INST -> L_INST INTS
+Rule 3     L_INST -> INTS
+Rule 4     INTS -> METHOD_VOID ID LPAREN RPAREN LKEY RKEY
+Rule 5     INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY
+Rule 6     L_PARAMS -> L_PARAMS COMMA PARAM
+Rule 7     L_PARAMS -> PARAM
+Rule 8     PARAM -> TYPE_INT ID
+Rule 9     PARAM -> TYPE_STRING ID
+
+Terminals, with rules where they appear
+
+AND                  : 
+BREAK                : 
+CHAR                 : 
+COLON                : 
+COMENTLINE           : 
+COMENTMULTYLINE      : 
+COMMA                : 6
+CONDITIONAL_ELSE     : 
+CONDITIONAL_IF       : 
+CONTINUE             : 
+DATA_BOOL            : 
+DIFFERENT            : 
+DIVIDE               : 
+DOT_AN_DCOMMA        : 
+FLOAT                : 
+GREATER              : 
+ID                   : 4 5 8 9
+INT                  : 
+IQUAL                : 
+IQUALS               : 
+IQUAL_GREATER        : 
+IQUAL_LESS           : 
+ITERATIVE_DO         : 
+ITERATIVE_WHILE      : 
+LESS                 : 
+LKEY                 : 4 5
+LPAREN               : 4 5
+METHOD_RETURN        : 
+METHOD_VOID          : 4 5
+MINUS                : 
+NOT                  : 
+OR                   : 
+PLUS                 : 
+REST                 : 
+RKEY                 : 4 5
+RPAREN               : 4 5
+STRING               : 
+TIMES                : 
+TYPE_BOOL            : 
+TYPE_CHAR            : 
+TYPE_DOUBLE          : 
+TYPE_INT             : 8
+TYPE_STRING          : 9
+error                : 
+
+Nonterminals, with rules where they appear
+
+INITIAL              : 0
+INTS                 : 2 3
+L_INST               : 1 2
+L_PARAMS             : 5 6
+PARAM                : 6 7
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . INITIAL
+    (1) INITIAL -> . L_INST
+    (2) L_INST -> . L_INST INTS
+    (3) L_INST -> . INTS
+    (4) INTS -> . METHOD_VOID ID LPAREN RPAREN LKEY RKEY
+    (5) INTS -> . METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY
+
+    METHOD_VOID     shift and go to state 4
+
+    INITIAL                        shift and go to state 1
+    L_INST                         shift and go to state 2
+    INTS                           shift and go to state 3
+
+state 1
+
+    (0) S' -> INITIAL .
+
+
+
+state 2
+
+    (1) INITIAL -> L_INST .
+    (2) L_INST -> L_INST . INTS
+    (4) INTS -> . METHOD_VOID ID LPAREN RPAREN LKEY RKEY
+    (5) INTS -> . METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY
+
+    $end            reduce using rule 1 (INITIAL -> L_INST .)
+    METHOD_VOID     shift and go to state 4
+
+    INTS                           shift and go to state 5
+
+state 3
+
+    (3) L_INST -> INTS .
+
+    METHOD_VOID     reduce using rule 3 (L_INST -> INTS .)
+    $end            reduce using rule 3 (L_INST -> INTS .)
+
+
+state 4
+
+    (4) INTS -> METHOD_VOID . ID LPAREN RPAREN LKEY RKEY
+    (5) INTS -> METHOD_VOID . ID LPAREN L_PARAMS RPAREN LKEY RKEY
+
+    ID              shift and go to state 6
+
+
+state 5
+
+    (2) L_INST -> L_INST INTS .
+
+    METHOD_VOID     reduce using rule 2 (L_INST -> L_INST INTS .)
+    $end            reduce using rule 2 (L_INST -> L_INST INTS .)
+
+
+state 6
+
+    (4) INTS -> METHOD_VOID ID . LPAREN RPAREN LKEY RKEY
+    (5) INTS -> METHOD_VOID ID . LPAREN L_PARAMS RPAREN LKEY RKEY
+
+    LPAREN          shift and go to state 7
+
+
+state 7
+
+    (4) INTS -> METHOD_VOID ID LPAREN . RPAREN LKEY RKEY
+    (5) INTS -> METHOD_VOID ID LPAREN . L_PARAMS RPAREN LKEY RKEY
+    (6) L_PARAMS -> . L_PARAMS COMMA PARAM
+    (7) L_PARAMS -> . PARAM
+    (8) PARAM -> . TYPE_INT ID
+    (9) PARAM -> . TYPE_STRING ID
+
+    RPAREN          shift and go to state 8
+    TYPE_INT        shift and go to state 11
+    TYPE_STRING     shift and go to state 12
+
+    L_PARAMS                       shift and go to state 9
+    PARAM                          shift and go to state 10
+
+state 8
+
+    (4) INTS -> METHOD_VOID ID LPAREN RPAREN . LKEY RKEY
+
+    LKEY            shift and go to state 13
+
+
+state 9
+
+    (5) INTS -> METHOD_VOID ID LPAREN L_PARAMS . RPAREN LKEY RKEY
+    (6) L_PARAMS -> L_PARAMS . COMMA PARAM
+
+    RPAREN          shift and go to state 14
+    COMMA           shift and go to state 15
+
+
+state 10
+
+    (7) L_PARAMS -> PARAM .
+
+    RPAREN          reduce using rule 7 (L_PARAMS -> PARAM .)
+    COMMA           reduce using rule 7 (L_PARAMS -> PARAM .)
+
+
+state 11
+
+    (8) PARAM -> TYPE_INT . ID
+
+    ID              shift and go to state 16
+
+
+state 12
+
+    (9) PARAM -> TYPE_STRING . ID
+
+    ID              shift and go to state 17
+
+
+state 13
+
+    (4) INTS -> METHOD_VOID ID LPAREN RPAREN LKEY . RKEY
+
+    RKEY            shift and go to state 18
+
+
+state 14
+
+    (5) INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN . LKEY RKEY
+
+    LKEY            shift and go to state 19
+
+
+state 15
+
+    (6) L_PARAMS -> L_PARAMS COMMA . PARAM
+    (8) PARAM -> . TYPE_INT ID
+    (9) PARAM -> . TYPE_STRING ID
+
+    TYPE_INT        shift and go to state 11
+    TYPE_STRING     shift and go to state 12
+
+    PARAM                          shift and go to state 20
+
+state 16
+
+    (8) PARAM -> TYPE_INT ID .
+
+    RPAREN          reduce using rule 8 (PARAM -> TYPE_INT ID .)
+    COMMA           reduce using rule 8 (PARAM -> TYPE_INT ID .)
+
+
+state 17
+
+    (9) PARAM -> TYPE_STRING ID .
+
+    RPAREN          reduce using rule 9 (PARAM -> TYPE_STRING ID .)
+    COMMA           reduce using rule 9 (PARAM -> TYPE_STRING ID .)
+
+
+state 18
+
+    (4) INTS -> METHOD_VOID ID LPAREN RPAREN LKEY RKEY .
+
+    METHOD_VOID     reduce using rule 4 (INTS -> METHOD_VOID ID LPAREN RPAREN LKEY RKEY .)
+    $end            reduce using rule 4 (INTS -> METHOD_VOID ID LPAREN RPAREN LKEY RKEY .)
+
+
+state 19
+
+    (5) INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY . RKEY
+
+    RKEY            shift and go to state 21
+
+
+state 20
+
+    (6) L_PARAMS -> L_PARAMS COMMA PARAM .
+
+    RPAREN          reduce using rule 6 (L_PARAMS -> L_PARAMS COMMA PARAM .)
+    COMMA           reduce using rule 6 (L_PARAMS -> L_PARAMS COMMA PARAM .)
+
+
+state 21
+
+    (5) INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY .
+
+    METHOD_VOID     reduce using rule 5 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY .)
+    $end            reduce using rule 5 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY .)
+
