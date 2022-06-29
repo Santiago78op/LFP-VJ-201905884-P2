@@ -1,6 +1,7 @@
 import os
 from colorama import Fore
 from Analist.Lexico import *
+from Analist.Sintactico import *
 from HTML.Reportes import HTML
 
 
@@ -47,11 +48,12 @@ Selecciona una opción:\n
                         
                         # Build the lexer and try it out
                         lex = Lexico()
+                        parser = Parser()
                         lex.build()  # Build the lexer
                         lex.test(archivo)  # Test it Lexer
                         # Build the parser and try it out
-                        lex.build_S()  # Build the parser
-                        lex.test_S(archivo)  # Test it parser       
+                        parser.build()  # Build the parser
+                        parser.test(archivo,lex.lexer)  # Test it parser
                         self.elementos = lex.dict_elementos
                         
                         

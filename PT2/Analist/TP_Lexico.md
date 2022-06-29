@@ -90,11 +90,12 @@ T = {}
             //empty
     
     // Funcion sin parametros
-    INTS -> Void id lparen rparen lkey rkey 
-          | Void id lparen L_PARAMETROS rparen lkey rkey
-          | token_ num igual typo_dato
-          | token_if lparen DATOS rparen
-    
+    INTS -> void id lparen rparen lkey rkey 
+          | void id lparen L_PARAMETROS rparen lkey rkey
+          | void id lparen L_PARAMETROS rparen lkey 
+          SENTENCES rkey
+
+    SENTENCES -> 
 
     L_PARAMETROS -> L_PARAMETROS dot_and_comma TYPE_DATO id
                   | TYPE_DATO id

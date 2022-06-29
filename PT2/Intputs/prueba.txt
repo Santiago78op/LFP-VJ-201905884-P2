@@ -1,8 +1,5 @@
-void mifuncion(int num){
-    a = 5
-    b = 6
-    saludo = 'hola'
-}
 
-a = 5
-b = 9
+    int a = 7;
+    string hola = "hola";
+    b = 8;
+    c = 'o';
