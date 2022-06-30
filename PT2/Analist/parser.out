@@ -2,27 +2,16 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
 Unused terminals:
 
-    AND
     BREAK
     COLON
     COMENTLINE
     COMENTMULTYLINE
     CONDITIONAL_ELSE
-    CONDITIONAL_IF
     CONTINUE
-    DIFFERENT
     DIVIDE
-    GREATER
-    IQUALS
-    IQUAL_GREATER
-    IQUAL_LESS
     ITERATIVE_DO
     ITERATIVE_WHILE
-    LESS
-    METHOD_RETURN
     MINUS
-    NOT
-    OR
     PLUS
     REST
     TIMES
@@ -33,93 +22,162 @@ Rule 0     S' -> INITIAL
 Rule 1     INITIAL -> L_INST
 Rule 2     L_INST -> L_INST INTS
 Rule 3     L_INST -> INTS
-Rule 4     INTS -> METHOD_VOID ID LPAREN RPAREN LKEY RKEY
-Rule 5     INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY
-Rule 6     INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES RKEY
+Rule 4     L_INST -> empty
+Rule 5     INTS -> METHODS
+Rule 6     INTS -> FUNTIONS
 Rule 7     INTS -> SENTENCES
-Rule 8     SENTENCES -> SENTENCES SENTENCE
-Rule 9     SENTENCES -> SENTENCE
-Rule 10    SENTENCE -> DECLARATIONS
-Rule 11    SENTENCE -> ASSIGNMENTS
-Rule 12    DECLARATIONS -> DECLARATIONS DECLARATION
-Rule 13    DECLARATIONS -> DECLARATION
-Rule 14    DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
-Rule 15    DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
-Rule 16    DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
-Rule 17    DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
-Rule 18    DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
-Rule 19    ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT
-Rule 20    ASSIGNMENTS -> ASSIGNMENT
-Rule 21    ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA
-Rule 22    ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA
-Rule 23    ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA
-Rule 24    ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA
-Rule 25    ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA
-Rule 26    L_PARAMS -> L_PARAMS COMMA PARAM
-Rule 27    L_PARAMS -> PARAM
-Rule 28    PARAM -> TYPE_INT ID
-Rule 29    PARAM -> TYPE_STRING ID
+Rule 8     METHODS -> METHODS METHOD
+Rule 9     METHODS -> METHOD
+Rule 10    METHOD -> METHOD_VOID ID LPAREN RPAREN LKEY empty RKEY
+Rule 11    METHOD -> METHOD_VOID ID LPAREN RPAREN LKEY SENTENCES_METHOD RKEY
+Rule 12    METHOD -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY empty RKEY
+Rule 13    METHOD -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_METHOD RKEY
+Rule 14    SENTENCES_METHOD -> SENTENCES_METHOD SENTENCE_METHOD
+Rule 15    SENTENCES_METHOD -> SENTENCE_METHOD
+Rule 16    SENTENCE_METHOD -> DECLARATIONS
+Rule 17    SENTENCE_METHOD -> ASSIGNMENTS
+Rule 18    SENTENCE_METHOD -> SENTENCES_IF
+Rule 19    SENTENCE_METHOD -> METHOD_RETURN DOT_AN_DCOMMA
+Rule 20    FUNTIONS -> FUNTIONS FUNTION
+Rule 21    FUNTIONS -> FUNTION
+Rule 22    FUNTION -> TYPE_INT COUPLER
+Rule 23    FUNTION -> TYPE_DOUBLE COUPLER
+Rule 24    FUNTION -> TYPE_STRING COUPLER
+Rule 25    FUNTION -> TYPE_CHAR COUPLER
+Rule 26    FUNTION -> TYPE_BOOL COUPLER
+Rule 27    COUPLER -> ID LPAREN RPAREN LKEY empty RKEY
+Rule 28    COUPLER -> ID LPAREN RPAREN LKEY SENTENCES_FUNTION RKEY
+Rule 29    COUPLER -> ID LPAREN L_PARAMS RPAREN LKEY empty RKEY
+Rule 30    COUPLER -> ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_FUNTION RKEY
+Rule 31    SENTENCES_FUNTION -> SENTENCES_FUNTION SENTENCE_FUNTION
+Rule 32    SENTENCES_FUNTION -> SENTENCE_FUNTION
+Rule 33    SENTENCE_FUNTION -> DECLARATIONS
+Rule 34    SENTENCE_FUNTION -> ASSIGNMENTS
+Rule 35    SENTENCE_FUNTION -> METHOD_RETURN TYPE_DATO DOT_AN_DCOMMA
+Rule 36    SENTENCE_FUNTION -> METHOD_RETURN ID DOT_AN_DCOMMA
+Rule 37    SENTENCES_IF -> SENTENCES_IF SENTENCE_IF
+Rule 38    SENTENCES_IF -> SENTENCE_IF
+Rule 39    SENTENCE_IF -> CONDITIONAL_IF LPAREN OPTIONS RPAREN LKEY SENTENCES RKEY
+Rule 40    OPTIONS -> OPTIONS OPTION
+Rule 41    OPTIONS -> OPTION
+Rule 42    OPTION -> OPTION IQUALS OPTION
+Rule 43    OPTION -> OPTION DIFFERENT OPTION
+Rule 44    OPTION -> OPTION IQUAL_GREATER OPTION
+Rule 45    OPTION -> OPTION IQUAL_LESS OPTION
+Rule 46    OPTION -> OPTION AND OPTION
+Rule 47    OPTION -> OPTION OR OPTION
+Rule 48    OPTION -> OPTION NOT OPTION
+Rule 49    OPTION -> OPTION GREATER OPTION
+Rule 50    OPTION -> OPTION LESS OPTION
+Rule 51    OPTION -> ID
+Rule 52    OPTION -> TYPE_DATO
+Rule 53    SENTENCES -> SENTENCES SENTENCE
+Rule 54    SENTENCES -> SENTENCE
+Rule 55    SENTENCE -> DECLARATIONS
+Rule 56    SENTENCE -> ASSIGNMENTS
+Rule 57    DECLARATIONS -> DECLARATIONS DECLARATION
+Rule 58    DECLARATIONS -> DECLARATION
+Rule 59    DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
+Rule 60    DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
+Rule 61    DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
+Rule 62    DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
+Rule 63    DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+Rule 64    ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT
+Rule 65    ASSIGNMENTS -> ASSIGNMENT
+Rule 66    ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA
+Rule 67    ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA
+Rule 68    ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA
+Rule 69    ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA
+Rule 70    ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+Rule 71    L_PARAMS -> L_PARAMS COMMA PARAM
+Rule 72    L_PARAMS -> PARAM
+Rule 73    PARAM -> TYPE_INT ID
+Rule 74    PARAM -> TYPE_DOUBLE ID
+Rule 75    PARAM -> TYPE_STRING ID
+Rule 76    PARAM -> TYPE_CHAR ID
+Rule 77    PARAM -> TYPE_BOOL ID
+Rule 78    TYPE_DATO -> INT
+Rule 79    TYPE_DATO -> FLOAT
+Rule 80    TYPE_DATO -> STRING
+Rule 81    TYPE_DATO -> CHAR
+Rule 82    TYPE_DATO -> DATA_BOOL
+Rule 83    empty -> <empty>
 
 Terminals, with rules where they appear
 
-AND                  : 
+AND                  : 46
 BREAK                : 
-CHAR                 : 17 24
+CHAR                 : 62 69 81
 COLON                : 
 COMENTLINE           : 
 COMENTMULTYLINE      : 
-COMMA                : 26
+COMMA                : 71
 CONDITIONAL_ELSE     : 
-CONDITIONAL_IF       : 
+CONDITIONAL_IF       : 39
 CONTINUE             : 
-DATA_BOOL            : 18 25
-DIFFERENT            : 
+DATA_BOOL            : 63 70 82
+DIFFERENT            : 43
 DIVIDE               : 
-DOT_AN_DCOMMA        : 14 15 16 17 18 21 22 23 24 25
-FLOAT                : 15 22
-GREATER              : 
-ID                   : 4 5 6 14 15 16 17 18 21 22 23 24 25 28 29
-INT                  : 14 21
-IQUAL                : 14 15 16 17 18 21 22 23 24 25
-IQUALS               : 
-IQUAL_GREATER        : 
-IQUAL_LESS           : 
+DOT_AN_DCOMMA        : 19 35 36 59 60 61 62 63 66 67 68 69 70
+FLOAT                : 60 67 79
+GREATER              : 49
+ID                   : 10 11 12 13 27 28 29 30 36 51 59 60 61 62 63 66 67 68 69 70 73 74 75 76 77
+INT                  : 59 66 78
+IQUAL                : 59 60 61 62 63 66 67 68 69 70
+IQUALS               : 42
+IQUAL_GREATER        : 44
+IQUAL_LESS           : 45
 ITERATIVE_DO         : 
 ITERATIVE_WHILE      : 
-LESS                 : 
-LKEY                 : 4 5 6
-LPAREN               : 4 5 6
-METHOD_RETURN        : 
-METHOD_VOID          : 4 5 6
+LESS                 : 50
+LKEY                 : 10 11 12 13 27 28 29 30 39
+LPAREN               : 10 11 12 13 27 28 29 30 39
+METHOD_RETURN        : 19 35 36
+METHOD_VOID          : 10 11 12 13
 MINUS                : 
-NOT                  : 
-OR                   : 
+NOT                  : 48
+OR                   : 47
 PLUS                 : 
 REST                 : 
-RKEY                 : 4 5 6
-RPAREN               : 4 5 6
-STRING               : 16 23
+RKEY                 : 10 11 12 13 27 28 29 30 39
+RPAREN               : 10 11 12 13 27 28 29 30 39
+STRING               : 61 68 80
 TIMES                : 
-TYPE_BOOL            : 18
-TYPE_CHAR            : 17
-TYPE_DOUBLE          : 15
-TYPE_INT             : 14 28
-TYPE_STRING          : 16 29
+TYPE_BOOL            : 26 63 77
+TYPE_CHAR            : 25 62 76
+TYPE_DOUBLE          : 23 60 74
+TYPE_INT             : 22 59 73
+TYPE_STRING          : 24 61 75
 error                : 
 
 Nonterminals, with rules where they appear
 
-ASSIGNMENT           : 19 20
-ASSIGNMENTS          : 11 19
-DECLARATION          : 12 13
-DECLARATIONS         : 10 12
+ASSIGNMENT           : 64 65
+ASSIGNMENTS          : 17 34 56 64
+COUPLER              : 22 23 24 25 26
+DECLARATION          : 57 58
+DECLARATIONS         : 16 33 55 57
+FUNTION              : 20 21
+FUNTIONS             : 6 20
 INITIAL              : 0
 INTS                 : 2 3
 L_INST               : 1 2
-L_PARAMS             : 5 6 26
-PARAM                : 26 27
-SENTENCE             : 8 9
-SENTENCES            : 6 7 8
+L_PARAMS             : 12 13 29 30 71
+METHOD               : 8 9
+METHODS              : 5 8
+OPTION               : 40 41 42 42 43 43 44 44 45 45 46 46 47 47 48 48 49 49 50 50
+OPTIONS              : 39 40
+PARAM                : 71 72
+SENTENCE             : 53 54
+SENTENCES            : 7 39 53
+SENTENCES_FUNTION    : 28 30 31
+SENTENCES_IF         : 18 37
+SENTENCES_METHOD     : 11 13 14
+SENTENCE_FUNTION     : 31 32
+SENTENCE_IF          : 37 38
+SENTENCE_METHOD      : 14 15
+TYPE_DATO            : 35 52
+empty                : 4 10 12 27 29
 
 Parsing method: LALR
 
@@ -129,46 +187,81 @@ state 0
     (1) INITIAL -> . L_INST
     (2) L_INST -> . L_INST INTS
     (3) L_INST -> . INTS
-    (4) INTS -> . METHOD_VOID ID LPAREN RPAREN LKEY RKEY
-    (5) INTS -> . METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY
-    (6) INTS -> . METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES RKEY
+    (4) L_INST -> . empty
+    (5) INTS -> . METHODS
+    (6) INTS -> . FUNTIONS
     (7) INTS -> . SENTENCES
-    (8) SENTENCES -> . SENTENCES SENTENCE
-    (9) SENTENCES -> . SENTENCE
-    (10) SENTENCE -> . DECLARATIONS
-    (11) SENTENCE -> . ASSIGNMENTS
-    (12) DECLARATIONS -> . DECLARATIONS DECLARATION
-    (13) DECLARATIONS -> . DECLARATION
-    (19) ASSIGNMENTS -> . ASSIGNMENTS ASSIGNMENT
-    (20) ASSIGNMENTS -> . ASSIGNMENT
-    (14) DECLARATION -> . TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
-    (15) DECLARATION -> . TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
-    (16) DECLARATION -> . TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
-    (17) DECLARATION -> . TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
-    (18) DECLARATION -> . TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
-    (21) ASSIGNMENT -> . ID IQUAL INT DOT_AN_DCOMMA
-    (22) ASSIGNMENT -> . ID IQUAL FLOAT DOT_AN_DCOMMA
-    (23) ASSIGNMENT -> . ID IQUAL STRING DOT_AN_DCOMMA
-    (24) ASSIGNMENT -> . ID IQUAL CHAR DOT_AN_DCOMMA
-    (25) ASSIGNMENT -> . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+    (83) empty -> .
+    (8) METHODS -> . METHODS METHOD
+    (9) METHODS -> . METHOD
+    (20) FUNTIONS -> . FUNTIONS FUNTION
+    (21) FUNTIONS -> . FUNTION
+    (53) SENTENCES -> . SENTENCES SENTENCE
+    (54) SENTENCES -> . SENTENCE
+    (10) METHOD -> . METHOD_VOID ID LPAREN RPAREN LKEY empty RKEY
+    (11) METHOD -> . METHOD_VOID ID LPAREN RPAREN LKEY SENTENCES_METHOD RKEY
+    (12) METHOD -> . METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY empty RKEY
+    (13) METHOD -> . METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_METHOD RKEY
+    (22) FUNTION -> . TYPE_INT COUPLER
+    (23) FUNTION -> . TYPE_DOUBLE COUPLER
+    (24) FUNTION -> . TYPE_STRING COUPLER
+    (25) FUNTION -> . TYPE_CHAR COUPLER
+    (26) FUNTION -> . TYPE_BOOL COUPLER
+    (55) SENTENCE -> . DECLARATIONS
+    (56) SENTENCE -> . ASSIGNMENTS
+    (57) DECLARATIONS -> . DECLARATIONS DECLARATION
+    (58) DECLARATIONS -> . DECLARATION
+    (64) ASSIGNMENTS -> . ASSIGNMENTS ASSIGNMENT
+    (65) ASSIGNMENTS -> . ASSIGNMENT
+    (59) DECLARATION -> . TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
+    (60) DECLARATION -> . TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
+    (61) DECLARATION -> . TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
+    (62) DECLARATION -> . TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
+    (63) DECLARATION -> . TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+    (66) ASSIGNMENT -> . ID IQUAL INT DOT_AN_DCOMMA
+    (67) ASSIGNMENT -> . ID IQUAL FLOAT DOT_AN_DCOMMA
+    (68) ASSIGNMENT -> . ID IQUAL STRING DOT_AN_DCOMMA
+    (69) ASSIGNMENT -> . ID IQUAL CHAR DOT_AN_DCOMMA
+    (70) ASSIGNMENT -> . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
 
-    METHOD_VOID     shift and go to state 4
-    TYPE_INT        shift and go to state 12
-    TYPE_DOUBLE     shift and go to state 13
-    TYPE_STRING     shift and go to state 14
-    TYPE_CHAR       shift and go to state 15
-    TYPE_BOOL       shift and go to state 16
-    ID              shift and go to state 5
+  ! shift/reduce conflict for METHOD_VOID resolved as shift
+  ! shift/reduce conflict for TYPE_INT resolved as shift
+  ! shift/reduce conflict for TYPE_DOUBLE resolved as shift
+  ! shift/reduce conflict for TYPE_STRING resolved as shift
+  ! shift/reduce conflict for TYPE_CHAR resolved as shift
+  ! shift/reduce conflict for TYPE_BOOL resolved as shift
+  ! shift/reduce conflict for ID resolved as shift
+    $end            reduce using rule 83 (empty -> .)
+    METHOD_VOID     shift and go to state 11
+    TYPE_INT        shift and go to state 13
+    TYPE_DOUBLE     shift and go to state 14
+    TYPE_STRING     shift and go to state 15
+    TYPE_CHAR       shift and go to state 16
+    TYPE_BOOL       shift and go to state 17
+    ID              shift and go to state 12
+
+  ! METHOD_VOID     [ reduce using rule 83 (empty -> .) ]
+  ! TYPE_INT        [ reduce using rule 83 (empty -> .) ]
+  ! TYPE_DOUBLE     [ reduce using rule 83 (empty -> .) ]
+  ! TYPE_STRING     [ reduce using rule 83 (empty -> .) ]
+  ! TYPE_CHAR       [ reduce using rule 83 (empty -> .) ]
+  ! TYPE_BOOL       [ reduce using rule 83 (empty -> .) ]
+  ! ID              [ reduce using rule 83 (empty -> .) ]
 
     INITIAL                        shift and go to state 1
     L_INST                         shift and go to state 2
     INTS                           shift and go to state 3
-    SENTENCES                      shift and go to state 6
-    SENTENCE                       shift and go to state 7
-    DECLARATIONS                   shift and go to state 8
-    ASSIGNMENTS                    shift and go to state 9
-    DECLARATION                    shift and go to state 10
-    ASSIGNMENT                     shift and go to state 11
+    empty                          shift and go to state 4
+    METHODS                        shift and go to state 5
+    FUNTIONS                       shift and go to state 6
+    SENTENCES                      shift and go to state 7
+    METHOD                         shift and go to state 8
+    FUNTION                        shift and go to state 9
+    SENTENCE                       shift and go to state 10
+    DECLARATIONS                   shift and go to state 18
+    ASSIGNMENTS                    shift and go to state 19
+    DECLARATION                    shift and go to state 20
+    ASSIGNMENT                     shift and go to state 21
 
 state 1
 
@@ -180,45 +273,61 @@ state 2
 
     (1) INITIAL -> L_INST .
     (2) L_INST -> L_INST . INTS
-    (4) INTS -> . METHOD_VOID ID LPAREN RPAREN LKEY RKEY
-    (5) INTS -> . METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY
-    (6) INTS -> . METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES RKEY
+    (5) INTS -> . METHODS
+    (6) INTS -> . FUNTIONS
     (7) INTS -> . SENTENCES
-    (8) SENTENCES -> . SENTENCES SENTENCE
-    (9) SENTENCES -> . SENTENCE
-    (10) SENTENCE -> . DECLARATIONS
-    (11) SENTENCE -> . ASSIGNMENTS
-    (12) DECLARATIONS -> . DECLARATIONS DECLARATION
-    (13) DECLARATIONS -> . DECLARATION
-    (19) ASSIGNMENTS -> . ASSIGNMENTS ASSIGNMENT
-    (20) ASSIGNMENTS -> . ASSIGNMENT
-    (14) DECLARATION -> . TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
-    (15) DECLARATION -> . TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
-    (16) DECLARATION -> . TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
-    (17) DECLARATION -> . TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
-    (18) DECLARATION -> . TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
-    (21) ASSIGNMENT -> . ID IQUAL INT DOT_AN_DCOMMA
-    (22) ASSIGNMENT -> . ID IQUAL FLOAT DOT_AN_DCOMMA
-    (23) ASSIGNMENT -> . ID IQUAL STRING DOT_AN_DCOMMA
-    (24) ASSIGNMENT -> . ID IQUAL CHAR DOT_AN_DCOMMA
-    (25) ASSIGNMENT -> . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+    (8) METHODS -> . METHODS METHOD
+    (9) METHODS -> . METHOD
+    (20) FUNTIONS -> . FUNTIONS FUNTION
+    (21) FUNTIONS -> . FUNTION
+    (53) SENTENCES -> . SENTENCES SENTENCE
+    (54) SENTENCES -> . SENTENCE
+    (10) METHOD -> . METHOD_VOID ID LPAREN RPAREN LKEY empty RKEY
+    (11) METHOD -> . METHOD_VOID ID LPAREN RPAREN LKEY SENTENCES_METHOD RKEY
+    (12) METHOD -> . METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY empty RKEY
+    (13) METHOD -> . METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_METHOD RKEY
+    (22) FUNTION -> . TYPE_INT COUPLER
+    (23) FUNTION -> . TYPE_DOUBLE COUPLER
+    (24) FUNTION -> . TYPE_STRING COUPLER
+    (25) FUNTION -> . TYPE_CHAR COUPLER
+    (26) FUNTION -> . TYPE_BOOL COUPLER
+    (55) SENTENCE -> . DECLARATIONS
+    (56) SENTENCE -> . ASSIGNMENTS
+    (57) DECLARATIONS -> . DECLARATIONS DECLARATION
+    (58) DECLARATIONS -> . DECLARATION
+    (64) ASSIGNMENTS -> . ASSIGNMENTS ASSIGNMENT
+    (65) ASSIGNMENTS -> . ASSIGNMENT
+    (59) DECLARATION -> . TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
+    (60) DECLARATION -> . TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
+    (61) DECLARATION -> . TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
+    (62) DECLARATION -> . TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
+    (63) DECLARATION -> . TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+    (66) ASSIGNMENT -> . ID IQUAL INT DOT_AN_DCOMMA
+    (67) ASSIGNMENT -> . ID IQUAL FLOAT DOT_AN_DCOMMA
+    (68) ASSIGNMENT -> . ID IQUAL STRING DOT_AN_DCOMMA
+    (69) ASSIGNMENT -> . ID IQUAL CHAR DOT_AN_DCOMMA
+    (70) ASSIGNMENT -> . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
 
     $end            reduce using rule 1 (INITIAL -> L_INST .)
-    METHOD_VOID     shift and go to state 4
-    TYPE_INT        shift and go to state 12
-    TYPE_DOUBLE     shift and go to state 13
-    TYPE_STRING     shift and go to state 14
-    TYPE_CHAR       shift and go to state 15
-    TYPE_BOOL       shift and go to state 16
-    ID              shift and go to state 5
+    METHOD_VOID     shift and go to state 11
+    TYPE_INT        shift and go to state 13
+    TYPE_DOUBLE     shift and go to state 14
+    TYPE_STRING     shift and go to state 15
+    TYPE_CHAR       shift and go to state 16
+    TYPE_BOOL       shift and go to state 17
+    ID              shift and go to state 12
 
-    INTS                           shift and go to state 17
-    SENTENCES                      shift and go to state 6
-    SENTENCE                       shift and go to state 7
-    DECLARATIONS                   shift and go to state 8
-    ASSIGNMENTS                    shift and go to state 9
-    DECLARATION                    shift and go to state 10
-    ASSIGNMENT                     shift and go to state 11
+    INTS                           shift and go to state 22
+    METHODS                        shift and go to state 5
+    FUNTIONS                       shift and go to state 6
+    SENTENCES                      shift and go to state 7
+    METHOD                         shift and go to state 8
+    FUNTION                        shift and go to state 9
+    SENTENCE                       shift and go to state 10
+    DECLARATIONS                   shift and go to state 18
+    ASSIGNMENTS                    shift and go to state 19
+    DECLARATION                    shift and go to state 20
+    ASSIGNMENT                     shift and go to state 21
 
 state 3
 
@@ -236,44 +345,93 @@ state 3
 
 state 4
 
-    (4) INTS -> METHOD_VOID . ID LPAREN RPAREN LKEY RKEY
-    (5) INTS -> METHOD_VOID . ID LPAREN L_PARAMS RPAREN LKEY RKEY
-    (6) INTS -> METHOD_VOID . ID LPAREN L_PARAMS RPAREN LKEY SENTENCES RKEY
+    (4) L_INST -> empty .
 
-    ID              shift and go to state 18
+    METHOD_VOID     reduce using rule 4 (L_INST -> empty .)
+    TYPE_INT        reduce using rule 4 (L_INST -> empty .)
+    TYPE_DOUBLE     reduce using rule 4 (L_INST -> empty .)
+    TYPE_STRING     reduce using rule 4 (L_INST -> empty .)
+    TYPE_CHAR       reduce using rule 4 (L_INST -> empty .)
+    TYPE_BOOL       reduce using rule 4 (L_INST -> empty .)
+    ID              reduce using rule 4 (L_INST -> empty .)
+    $end            reduce using rule 4 (L_INST -> empty .)
 
 
 state 5
 
-    (21) ASSIGNMENT -> ID . IQUAL INT DOT_AN_DCOMMA
-    (22) ASSIGNMENT -> ID . IQUAL FLOAT DOT_AN_DCOMMA
-    (23) ASSIGNMENT -> ID . IQUAL STRING DOT_AN_DCOMMA
-    (24) ASSIGNMENT -> ID . IQUAL CHAR DOT_AN_DCOMMA
-    (25) ASSIGNMENT -> ID . IQUAL DATA_BOOL DOT_AN_DCOMMA
+    (5) INTS -> METHODS .
+    (8) METHODS -> METHODS . METHOD
+    (10) METHOD -> . METHOD_VOID ID LPAREN RPAREN LKEY empty RKEY
+    (11) METHOD -> . METHOD_VOID ID LPAREN RPAREN LKEY SENTENCES_METHOD RKEY
+    (12) METHOD -> . METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY empty RKEY
+    (13) METHOD -> . METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_METHOD RKEY
 
-    IQUAL           shift and go to state 19
+  ! shift/reduce conflict for METHOD_VOID resolved as shift
+    TYPE_INT        reduce using rule 5 (INTS -> METHODS .)
+    TYPE_DOUBLE     reduce using rule 5 (INTS -> METHODS .)
+    TYPE_STRING     reduce using rule 5 (INTS -> METHODS .)
+    TYPE_CHAR       reduce using rule 5 (INTS -> METHODS .)
+    TYPE_BOOL       reduce using rule 5 (INTS -> METHODS .)
+    ID              reduce using rule 5 (INTS -> METHODS .)
+    $end            reduce using rule 5 (INTS -> METHODS .)
+    METHOD_VOID     shift and go to state 11
 
+  ! METHOD_VOID     [ reduce using rule 5 (INTS -> METHODS .) ]
+
+    METHOD                         shift and go to state 23
 
 state 6
 
+    (6) INTS -> FUNTIONS .
+    (20) FUNTIONS -> FUNTIONS . FUNTION
+    (22) FUNTION -> . TYPE_INT COUPLER
+    (23) FUNTION -> . TYPE_DOUBLE COUPLER
+    (24) FUNTION -> . TYPE_STRING COUPLER
+    (25) FUNTION -> . TYPE_CHAR COUPLER
+    (26) FUNTION -> . TYPE_BOOL COUPLER
+
+  ! shift/reduce conflict for TYPE_INT resolved as shift
+  ! shift/reduce conflict for TYPE_DOUBLE resolved as shift
+  ! shift/reduce conflict for TYPE_STRING resolved as shift
+  ! shift/reduce conflict for TYPE_CHAR resolved as shift
+  ! shift/reduce conflict for TYPE_BOOL resolved as shift
+    METHOD_VOID     reduce using rule 6 (INTS -> FUNTIONS .)
+    ID              reduce using rule 6 (INTS -> FUNTIONS .)
+    $end            reduce using rule 6 (INTS -> FUNTIONS .)
+    TYPE_INT        shift and go to state 25
+    TYPE_DOUBLE     shift and go to state 26
+    TYPE_STRING     shift and go to state 27
+    TYPE_CHAR       shift and go to state 28
+    TYPE_BOOL       shift and go to state 29
+
+  ! TYPE_INT        [ reduce using rule 6 (INTS -> FUNTIONS .) ]
+  ! TYPE_DOUBLE     [ reduce using rule 6 (INTS -> FUNTIONS .) ]
+  ! TYPE_STRING     [ reduce using rule 6 (INTS -> FUNTIONS .) ]
+  ! TYPE_CHAR       [ reduce using rule 6 (INTS -> FUNTIONS .) ]
+  ! TYPE_BOOL       [ reduce using rule 6 (INTS -> FUNTIONS .) ]
+
+    FUNTION                        shift and go to state 24
+
+state 7
+
     (7) INTS -> SENTENCES .
-    (8) SENTENCES -> SENTENCES . SENTENCE
-    (10) SENTENCE -> . DECLARATIONS
-    (11) SENTENCE -> . ASSIGNMENTS
-    (12) DECLARATIONS -> . DECLARATIONS DECLARATION
-    (13) DECLARATIONS -> . DECLARATION
-    (19) ASSIGNMENTS -> . ASSIGNMENTS ASSIGNMENT
-    (20) ASSIGNMENTS -> . ASSIGNMENT
-    (14) DECLARATION -> . TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
-    (15) DECLARATION -> . TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
-    (16) DECLARATION -> . TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
-    (17) DECLARATION -> . TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
-    (18) DECLARATION -> . TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
-    (21) ASSIGNMENT -> . ID IQUAL INT DOT_AN_DCOMMA
-    (22) ASSIGNMENT -> . ID IQUAL FLOAT DOT_AN_DCOMMA
-    (23) ASSIGNMENT -> . ID IQUAL STRING DOT_AN_DCOMMA
-    (24) ASSIGNMENT -> . ID IQUAL CHAR DOT_AN_DCOMMA
-    (25) ASSIGNMENT -> . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+    (53) SENTENCES -> SENTENCES . SENTENCE
+    (55) SENTENCE -> . DECLARATIONS
+    (56) SENTENCE -> . ASSIGNMENTS
+    (57) DECLARATIONS -> . DECLARATIONS DECLARATION
+    (58) DECLARATIONS -> . DECLARATION
+    (64) ASSIGNMENTS -> . ASSIGNMENTS ASSIGNMENT
+    (65) ASSIGNMENTS -> . ASSIGNMENT
+    (59) DECLARATION -> . TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
+    (60) DECLARATION -> . TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
+    (61) DECLARATION -> . TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
+    (62) DECLARATION -> . TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
+    (63) DECLARATION -> . TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+    (66) ASSIGNMENT -> . ID IQUAL INT DOT_AN_DCOMMA
+    (67) ASSIGNMENT -> . ID IQUAL FLOAT DOT_AN_DCOMMA
+    (68) ASSIGNMENT -> . ID IQUAL STRING DOT_AN_DCOMMA
+    (69) ASSIGNMENT -> . ID IQUAL CHAR DOT_AN_DCOMMA
+    (70) ASSIGNMENT -> . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
 
   ! shift/reduce conflict for TYPE_INT resolved as shift
   ! shift/reduce conflict for TYPE_DOUBLE resolved as shift
@@ -283,12 +441,12 @@ state 6
   ! shift/reduce conflict for ID resolved as shift
     METHOD_VOID     reduce using rule 7 (INTS -> SENTENCES .)
     $end            reduce using rule 7 (INTS -> SENTENCES .)
-    TYPE_INT        shift and go to state 12
-    TYPE_DOUBLE     shift and go to state 13
-    TYPE_STRING     shift and go to state 14
-    TYPE_CHAR       shift and go to state 15
-    TYPE_BOOL       shift and go to state 16
-    ID              shift and go to state 5
+    TYPE_INT        shift and go to state 31
+    TYPE_DOUBLE     shift and go to state 32
+    TYPE_STRING     shift and go to state 33
+    TYPE_CHAR       shift and go to state 34
+    TYPE_BOOL       shift and go to state 35
+    ID              shift and go to state 12
 
   ! TYPE_INT        [ reduce using rule 7 (INTS -> SENTENCES .) ]
   ! TYPE_DOUBLE     [ reduce using rule 7 (INTS -> SENTENCES .) ]
@@ -297,151 +455,234 @@ state 6
   ! TYPE_BOOL       [ reduce using rule 7 (INTS -> SENTENCES .) ]
   ! ID              [ reduce using rule 7 (INTS -> SENTENCES .) ]
 
-    SENTENCE                       shift and go to state 20
-    DECLARATIONS                   shift and go to state 8
-    ASSIGNMENTS                    shift and go to state 9
-    DECLARATION                    shift and go to state 10
-    ASSIGNMENT                     shift and go to state 11
-
-state 7
-
-    (9) SENTENCES -> SENTENCE .
-
-    TYPE_INT        reduce using rule 9 (SENTENCES -> SENTENCE .)
-    TYPE_DOUBLE     reduce using rule 9 (SENTENCES -> SENTENCE .)
-    TYPE_STRING     reduce using rule 9 (SENTENCES -> SENTENCE .)
-    TYPE_CHAR       reduce using rule 9 (SENTENCES -> SENTENCE .)
-    TYPE_BOOL       reduce using rule 9 (SENTENCES -> SENTENCE .)
-    ID              reduce using rule 9 (SENTENCES -> SENTENCE .)
-    METHOD_VOID     reduce using rule 9 (SENTENCES -> SENTENCE .)
-    $end            reduce using rule 9 (SENTENCES -> SENTENCE .)
-    RKEY            reduce using rule 9 (SENTENCES -> SENTENCE .)
-
+    SENTENCE                       shift and go to state 30
+    DECLARATIONS                   shift and go to state 18
+    ASSIGNMENTS                    shift and go to state 19
+    DECLARATION                    shift and go to state 20
+    ASSIGNMENT                     shift and go to state 21
 
 state 8
 
-    (10) SENTENCE -> DECLARATIONS .
-    (12) DECLARATIONS -> DECLARATIONS . DECLARATION
-    (14) DECLARATION -> . TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
-    (15) DECLARATION -> . TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
-    (16) DECLARATION -> . TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
-    (17) DECLARATION -> . TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
-    (18) DECLARATION -> . TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+    (9) METHODS -> METHOD .
+
+    METHOD_VOID     reduce using rule 9 (METHODS -> METHOD .)
+    TYPE_INT        reduce using rule 9 (METHODS -> METHOD .)
+    TYPE_DOUBLE     reduce using rule 9 (METHODS -> METHOD .)
+    TYPE_STRING     reduce using rule 9 (METHODS -> METHOD .)
+    TYPE_CHAR       reduce using rule 9 (METHODS -> METHOD .)
+    TYPE_BOOL       reduce using rule 9 (METHODS -> METHOD .)
+    ID              reduce using rule 9 (METHODS -> METHOD .)
+    $end            reduce using rule 9 (METHODS -> METHOD .)
+
+
+state 9
+
+    (21) FUNTIONS -> FUNTION .
+
+    TYPE_INT        reduce using rule 21 (FUNTIONS -> FUNTION .)
+    TYPE_DOUBLE     reduce using rule 21 (FUNTIONS -> FUNTION .)
+    TYPE_STRING     reduce using rule 21 (FUNTIONS -> FUNTION .)
+    TYPE_CHAR       reduce using rule 21 (FUNTIONS -> FUNTION .)
+    TYPE_BOOL       reduce using rule 21 (FUNTIONS -> FUNTION .)
+    METHOD_VOID     reduce using rule 21 (FUNTIONS -> FUNTION .)
+    ID              reduce using rule 21 (FUNTIONS -> FUNTION .)
+    $end            reduce using rule 21 (FUNTIONS -> FUNTION .)
+
+
+state 10
+
+    (54) SENTENCES -> SENTENCE .
+
+    TYPE_INT        reduce using rule 54 (SENTENCES -> SENTENCE .)
+    TYPE_DOUBLE     reduce using rule 54 (SENTENCES -> SENTENCE .)
+    TYPE_STRING     reduce using rule 54 (SENTENCES -> SENTENCE .)
+    TYPE_CHAR       reduce using rule 54 (SENTENCES -> SENTENCE .)
+    TYPE_BOOL       reduce using rule 54 (SENTENCES -> SENTENCE .)
+    ID              reduce using rule 54 (SENTENCES -> SENTENCE .)
+    METHOD_VOID     reduce using rule 54 (SENTENCES -> SENTENCE .)
+    $end            reduce using rule 54 (SENTENCES -> SENTENCE .)
+    RKEY            reduce using rule 54 (SENTENCES -> SENTENCE .)
+
+
+state 11
+
+    (10) METHOD -> METHOD_VOID . ID LPAREN RPAREN LKEY empty RKEY
+    (11) METHOD -> METHOD_VOID . ID LPAREN RPAREN LKEY SENTENCES_METHOD RKEY
+    (12) METHOD -> METHOD_VOID . ID LPAREN L_PARAMS RPAREN LKEY empty RKEY
+    (13) METHOD -> METHOD_VOID . ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_METHOD RKEY
+
+    ID              shift and go to state 36
+
+
+state 12
+
+    (66) ASSIGNMENT -> ID . IQUAL INT DOT_AN_DCOMMA
+    (67) ASSIGNMENT -> ID . IQUAL FLOAT DOT_AN_DCOMMA
+    (68) ASSIGNMENT -> ID . IQUAL STRING DOT_AN_DCOMMA
+    (69) ASSIGNMENT -> ID . IQUAL CHAR DOT_AN_DCOMMA
+    (70) ASSIGNMENT -> ID . IQUAL DATA_BOOL DOT_AN_DCOMMA
+
+    IQUAL           shift and go to state 37
+
+
+state 13
+
+    (22) FUNTION -> TYPE_INT . COUPLER
+    (59) DECLARATION -> TYPE_INT . ID IQUAL INT DOT_AN_DCOMMA
+    (27) COUPLER -> . ID LPAREN RPAREN LKEY empty RKEY
+    (28) COUPLER -> . ID LPAREN RPAREN LKEY SENTENCES_FUNTION RKEY
+    (29) COUPLER -> . ID LPAREN L_PARAMS RPAREN LKEY empty RKEY
+    (30) COUPLER -> . ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_FUNTION RKEY
+
+    ID              shift and go to state 39
+
+    COUPLER                        shift and go to state 38
+
+state 14
+
+    (23) FUNTION -> TYPE_DOUBLE . COUPLER
+    (60) DECLARATION -> TYPE_DOUBLE . ID IQUAL FLOAT DOT_AN_DCOMMA
+    (27) COUPLER -> . ID LPAREN RPAREN LKEY empty RKEY
+    (28) COUPLER -> . ID LPAREN RPAREN LKEY SENTENCES_FUNTION RKEY
+    (29) COUPLER -> . ID LPAREN L_PARAMS RPAREN LKEY empty RKEY
+    (30) COUPLER -> . ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_FUNTION RKEY
+
+    ID              shift and go to state 41
+
+    COUPLER                        shift and go to state 40
+
+state 15
+
+    (24) FUNTION -> TYPE_STRING . COUPLER
+    (61) DECLARATION -> TYPE_STRING . ID IQUAL STRING DOT_AN_DCOMMA
+    (27) COUPLER -> . ID LPAREN RPAREN LKEY empty RKEY
+    (28) COUPLER -> . ID LPAREN RPAREN LKEY SENTENCES_FUNTION RKEY
+    (29) COUPLER -> . ID LPAREN L_PARAMS RPAREN LKEY empty RKEY
+    (30) COUPLER -> . ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_FUNTION RKEY
+
+    ID              shift and go to state 43
+
+    COUPLER                        shift and go to state 42
+
+state 16
+
+    (25) FUNTION -> TYPE_CHAR . COUPLER
+    (62) DECLARATION -> TYPE_CHAR . ID IQUAL CHAR DOT_AN_DCOMMA
+    (27) COUPLER -> . ID LPAREN RPAREN LKEY empty RKEY
+    (28) COUPLER -> . ID LPAREN RPAREN LKEY SENTENCES_FUNTION RKEY
+    (29) COUPLER -> . ID LPAREN L_PARAMS RPAREN LKEY empty RKEY
+    (30) COUPLER -> . ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_FUNTION RKEY
+
+    ID              shift and go to state 45
+
+    COUPLER                        shift and go to state 44
+
+state 17
+
+    (26) FUNTION -> TYPE_BOOL . COUPLER
+    (63) DECLARATION -> TYPE_BOOL . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+    (27) COUPLER -> . ID LPAREN RPAREN LKEY empty RKEY
+    (28) COUPLER -> . ID LPAREN RPAREN LKEY SENTENCES_FUNTION RKEY
+    (29) COUPLER -> . ID LPAREN L_PARAMS RPAREN LKEY empty RKEY
+    (30) COUPLER -> . ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_FUNTION RKEY
+
+    ID              shift and go to state 47
+
+    COUPLER                        shift and go to state 46
+
+state 18
+
+    (55) SENTENCE -> DECLARATIONS .
+    (57) DECLARATIONS -> DECLARATIONS . DECLARATION
+    (59) DECLARATION -> . TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
+    (60) DECLARATION -> . TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
+    (61) DECLARATION -> . TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
+    (62) DECLARATION -> . TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
+    (63) DECLARATION -> . TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
 
   ! shift/reduce conflict for TYPE_INT resolved as shift
   ! shift/reduce conflict for TYPE_DOUBLE resolved as shift
   ! shift/reduce conflict for TYPE_STRING resolved as shift
   ! shift/reduce conflict for TYPE_CHAR resolved as shift
   ! shift/reduce conflict for TYPE_BOOL resolved as shift
-    ID              reduce using rule 10 (SENTENCE -> DECLARATIONS .)
-    METHOD_VOID     reduce using rule 10 (SENTENCE -> DECLARATIONS .)
-    $end            reduce using rule 10 (SENTENCE -> DECLARATIONS .)
-    RKEY            reduce using rule 10 (SENTENCE -> DECLARATIONS .)
-    TYPE_INT        shift and go to state 12
-    TYPE_DOUBLE     shift and go to state 13
-    TYPE_STRING     shift and go to state 14
-    TYPE_CHAR       shift and go to state 15
-    TYPE_BOOL       shift and go to state 16
+    ID              reduce using rule 55 (SENTENCE -> DECLARATIONS .)
+    METHOD_VOID     reduce using rule 55 (SENTENCE -> DECLARATIONS .)
+    $end            reduce using rule 55 (SENTENCE -> DECLARATIONS .)
+    RKEY            reduce using rule 55 (SENTENCE -> DECLARATIONS .)
+    TYPE_INT        shift and go to state 31
+    TYPE_DOUBLE     shift and go to state 32
+    TYPE_STRING     shift and go to state 33
+    TYPE_CHAR       shift and go to state 34
+    TYPE_BOOL       shift and go to state 35
 
-  ! TYPE_INT        [ reduce using rule 10 (SENTENCE -> DECLARATIONS .) ]
-  ! TYPE_DOUBLE     [ reduce using rule 10 (SENTENCE -> DECLARATIONS .) ]
-  ! TYPE_STRING     [ reduce using rule 10 (SENTENCE -> DECLARATIONS .) ]
-  ! TYPE_CHAR       [ reduce using rule 10 (SENTENCE -> DECLARATIONS .) ]
-  ! TYPE_BOOL       [ reduce using rule 10 (SENTENCE -> DECLARATIONS .) ]
+  ! TYPE_INT        [ reduce using rule 55 (SENTENCE -> DECLARATIONS .) ]
+  ! TYPE_DOUBLE     [ reduce using rule 55 (SENTENCE -> DECLARATIONS .) ]
+  ! TYPE_STRING     [ reduce using rule 55 (SENTENCE -> DECLARATIONS .) ]
+  ! TYPE_CHAR       [ reduce using rule 55 (SENTENCE -> DECLARATIONS .) ]
+  ! TYPE_BOOL       [ reduce using rule 55 (SENTENCE -> DECLARATIONS .) ]
 
-    DECLARATION                    shift and go to state 21
+    DECLARATION                    shift and go to state 48
 
-state 9
+state 19
 
-    (11) SENTENCE -> ASSIGNMENTS .
-    (19) ASSIGNMENTS -> ASSIGNMENTS . ASSIGNMENT
-    (21) ASSIGNMENT -> . ID IQUAL INT DOT_AN_DCOMMA
-    (22) ASSIGNMENT -> . ID IQUAL FLOAT DOT_AN_DCOMMA
-    (23) ASSIGNMENT -> . ID IQUAL STRING DOT_AN_DCOMMA
-    (24) ASSIGNMENT -> . ID IQUAL CHAR DOT_AN_DCOMMA
-    (25) ASSIGNMENT -> . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+    (56) SENTENCE -> ASSIGNMENTS .
+    (64) ASSIGNMENTS -> ASSIGNMENTS . ASSIGNMENT
+    (66) ASSIGNMENT -> . ID IQUAL INT DOT_AN_DCOMMA
+    (67) ASSIGNMENT -> . ID IQUAL FLOAT DOT_AN_DCOMMA
+    (68) ASSIGNMENT -> . ID IQUAL STRING DOT_AN_DCOMMA
+    (69) ASSIGNMENT -> . ID IQUAL CHAR DOT_AN_DCOMMA
+    (70) ASSIGNMENT -> . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
 
   ! shift/reduce conflict for ID resolved as shift
-    TYPE_INT        reduce using rule 11 (SENTENCE -> ASSIGNMENTS .)
-    TYPE_DOUBLE     reduce using rule 11 (SENTENCE -> ASSIGNMENTS .)
-    TYPE_STRING     reduce using rule 11 (SENTENCE -> ASSIGNMENTS .)
-    TYPE_CHAR       reduce using rule 11 (SENTENCE -> ASSIGNMENTS .)
-    TYPE_BOOL       reduce using rule 11 (SENTENCE -> ASSIGNMENTS .)
-    METHOD_VOID     reduce using rule 11 (SENTENCE -> ASSIGNMENTS .)
-    $end            reduce using rule 11 (SENTENCE -> ASSIGNMENTS .)
-    RKEY            reduce using rule 11 (SENTENCE -> ASSIGNMENTS .)
-    ID              shift and go to state 5
+    TYPE_INT        reduce using rule 56 (SENTENCE -> ASSIGNMENTS .)
+    TYPE_DOUBLE     reduce using rule 56 (SENTENCE -> ASSIGNMENTS .)
+    TYPE_STRING     reduce using rule 56 (SENTENCE -> ASSIGNMENTS .)
+    TYPE_CHAR       reduce using rule 56 (SENTENCE -> ASSIGNMENTS .)
+    TYPE_BOOL       reduce using rule 56 (SENTENCE -> ASSIGNMENTS .)
+    METHOD_VOID     reduce using rule 56 (SENTENCE -> ASSIGNMENTS .)
+    $end            reduce using rule 56 (SENTENCE -> ASSIGNMENTS .)
+    RKEY            reduce using rule 56 (SENTENCE -> ASSIGNMENTS .)
+    ID              shift and go to state 12
 
-  ! ID              [ reduce using rule 11 (SENTENCE -> ASSIGNMENTS .) ]
+  ! ID              [ reduce using rule 56 (SENTENCE -> ASSIGNMENTS .) ]
 
-    ASSIGNMENT                     shift and go to state 22
+    ASSIGNMENT                     shift and go to state 49
 
-state 10
+state 20
 
-    (13) DECLARATIONS -> DECLARATION .
+    (58) DECLARATIONS -> DECLARATION .
 
-    TYPE_INT        reduce using rule 13 (DECLARATIONS -> DECLARATION .)
-    TYPE_DOUBLE     reduce using rule 13 (DECLARATIONS -> DECLARATION .)
-    TYPE_STRING     reduce using rule 13 (DECLARATIONS -> DECLARATION .)
-    TYPE_CHAR       reduce using rule 13 (DECLARATIONS -> DECLARATION .)
-    TYPE_BOOL       reduce using rule 13 (DECLARATIONS -> DECLARATION .)
-    ID              reduce using rule 13 (DECLARATIONS -> DECLARATION .)
-    METHOD_VOID     reduce using rule 13 (DECLARATIONS -> DECLARATION .)
-    $end            reduce using rule 13 (DECLARATIONS -> DECLARATION .)
-    RKEY            reduce using rule 13 (DECLARATIONS -> DECLARATION .)
-
-
-state 11
-
-    (20) ASSIGNMENTS -> ASSIGNMENT .
-
-    ID              reduce using rule 20 (ASSIGNMENTS -> ASSIGNMENT .)
-    TYPE_INT        reduce using rule 20 (ASSIGNMENTS -> ASSIGNMENT .)
-    TYPE_DOUBLE     reduce using rule 20 (ASSIGNMENTS -> ASSIGNMENT .)
-    TYPE_STRING     reduce using rule 20 (ASSIGNMENTS -> ASSIGNMENT .)
-    TYPE_CHAR       reduce using rule 20 (ASSIGNMENTS -> ASSIGNMENT .)
-    TYPE_BOOL       reduce using rule 20 (ASSIGNMENTS -> ASSIGNMENT .)
-    METHOD_VOID     reduce using rule 20 (ASSIGNMENTS -> ASSIGNMENT .)
-    $end            reduce using rule 20 (ASSIGNMENTS -> ASSIGNMENT .)
-    RKEY            reduce using rule 20 (ASSIGNMENTS -> ASSIGNMENT .)
+    TYPE_INT        reduce using rule 58 (DECLARATIONS -> DECLARATION .)
+    TYPE_DOUBLE     reduce using rule 58 (DECLARATIONS -> DECLARATION .)
+    TYPE_STRING     reduce using rule 58 (DECLARATIONS -> DECLARATION .)
+    TYPE_CHAR       reduce using rule 58 (DECLARATIONS -> DECLARATION .)
+    TYPE_BOOL       reduce using rule 58 (DECLARATIONS -> DECLARATION .)
+    ID              reduce using rule 58 (DECLARATIONS -> DECLARATION .)
+    METHOD_VOID     reduce using rule 58 (DECLARATIONS -> DECLARATION .)
+    $end            reduce using rule 58 (DECLARATIONS -> DECLARATION .)
+    RKEY            reduce using rule 58 (DECLARATIONS -> DECLARATION .)
+    METHOD_RETURN   reduce using rule 58 (DECLARATIONS -> DECLARATION .)
+    CONDITIONAL_IF  reduce using rule 58 (DECLARATIONS -> DECLARATION .)
 
 
-state 12
+state 21
 
-    (14) DECLARATION -> TYPE_INT . ID IQUAL INT DOT_AN_DCOMMA
+    (65) ASSIGNMENTS -> ASSIGNMENT .
 
-    ID              shift and go to state 23
-
-
-state 13
-
-    (15) DECLARATION -> TYPE_DOUBLE . ID IQUAL FLOAT DOT_AN_DCOMMA
-
-    ID              shift and go to state 24
-
-
-state 14
-
-    (16) DECLARATION -> TYPE_STRING . ID IQUAL STRING DOT_AN_DCOMMA
-
-    ID              shift and go to state 25
+    ID              reduce using rule 65 (ASSIGNMENTS -> ASSIGNMENT .)
+    TYPE_INT        reduce using rule 65 (ASSIGNMENTS -> ASSIGNMENT .)
+    TYPE_DOUBLE     reduce using rule 65 (ASSIGNMENTS -> ASSIGNMENT .)
+    TYPE_STRING     reduce using rule 65 (ASSIGNMENTS -> ASSIGNMENT .)
+    TYPE_CHAR       reduce using rule 65 (ASSIGNMENTS -> ASSIGNMENT .)
+    TYPE_BOOL       reduce using rule 65 (ASSIGNMENTS -> ASSIGNMENT .)
+    METHOD_VOID     reduce using rule 65 (ASSIGNMENTS -> ASSIGNMENT .)
+    $end            reduce using rule 65 (ASSIGNMENTS -> ASSIGNMENT .)
+    RKEY            reduce using rule 65 (ASSIGNMENTS -> ASSIGNMENT .)
+    METHOD_RETURN   reduce using rule 65 (ASSIGNMENTS -> ASSIGNMENT .)
+    CONDITIONAL_IF  reduce using rule 65 (ASSIGNMENTS -> ASSIGNMENT .)
 
 
-state 15
-
-    (17) DECLARATION -> TYPE_CHAR . ID IQUAL CHAR DOT_AN_DCOMMA
-
-    ID              shift and go to state 26
-
-
-state 16
-
-    (18) DECLARATION -> TYPE_BOOL . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
-
-    ID              shift and go to state 27
-
-
-state 17
+state 22
 
     (2) L_INST -> L_INST INTS .
 
@@ -455,597 +696,2879 @@ state 17
     $end            reduce using rule 2 (L_INST -> L_INST INTS .)
 
 
-state 18
-
-    (4) INTS -> METHOD_VOID ID . LPAREN RPAREN LKEY RKEY
-    (5) INTS -> METHOD_VOID ID . LPAREN L_PARAMS RPAREN LKEY RKEY
-    (6) INTS -> METHOD_VOID ID . LPAREN L_PARAMS RPAREN LKEY SENTENCES RKEY
-
-    LPAREN          shift and go to state 28
-
-
-state 19
-
-    (21) ASSIGNMENT -> ID IQUAL . INT DOT_AN_DCOMMA
-    (22) ASSIGNMENT -> ID IQUAL . FLOAT DOT_AN_DCOMMA
-    (23) ASSIGNMENT -> ID IQUAL . STRING DOT_AN_DCOMMA
-    (24) ASSIGNMENT -> ID IQUAL . CHAR DOT_AN_DCOMMA
-    (25) ASSIGNMENT -> ID IQUAL . DATA_BOOL DOT_AN_DCOMMA
-
-    INT             shift and go to state 29
-    FLOAT           shift and go to state 30
-    STRING          shift and go to state 31
-    CHAR            shift and go to state 32
-    DATA_BOOL       shift and go to state 33
-
-
-state 20
-
-    (8) SENTENCES -> SENTENCES SENTENCE .
-
-    TYPE_INT        reduce using rule 8 (SENTENCES -> SENTENCES SENTENCE .)
-    TYPE_DOUBLE     reduce using rule 8 (SENTENCES -> SENTENCES SENTENCE .)
-    TYPE_STRING     reduce using rule 8 (SENTENCES -> SENTENCES SENTENCE .)
-    TYPE_CHAR       reduce using rule 8 (SENTENCES -> SENTENCES SENTENCE .)
-    TYPE_BOOL       reduce using rule 8 (SENTENCES -> SENTENCES SENTENCE .)
-    ID              reduce using rule 8 (SENTENCES -> SENTENCES SENTENCE .)
-    METHOD_VOID     reduce using rule 8 (SENTENCES -> SENTENCES SENTENCE .)
-    $end            reduce using rule 8 (SENTENCES -> SENTENCES SENTENCE .)
-    RKEY            reduce using rule 8 (SENTENCES -> SENTENCES SENTENCE .)
-
-
-state 21
-
-    (12) DECLARATIONS -> DECLARATIONS DECLARATION .
-
-    TYPE_INT        reduce using rule 12 (DECLARATIONS -> DECLARATIONS DECLARATION .)
-    TYPE_DOUBLE     reduce using rule 12 (DECLARATIONS -> DECLARATIONS DECLARATION .)
-    TYPE_STRING     reduce using rule 12 (DECLARATIONS -> DECLARATIONS DECLARATION .)
-    TYPE_CHAR       reduce using rule 12 (DECLARATIONS -> DECLARATIONS DECLARATION .)
-    TYPE_BOOL       reduce using rule 12 (DECLARATIONS -> DECLARATIONS DECLARATION .)
-    ID              reduce using rule 12 (DECLARATIONS -> DECLARATIONS DECLARATION .)
-    METHOD_VOID     reduce using rule 12 (DECLARATIONS -> DECLARATIONS DECLARATION .)
-    $end            reduce using rule 12 (DECLARATIONS -> DECLARATIONS DECLARATION .)
-    RKEY            reduce using rule 12 (DECLARATIONS -> DECLARATIONS DECLARATION .)
-
-
-state 22
-
-    (19) ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .
-
-    ID              reduce using rule 19 (ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .)
-    TYPE_INT        reduce using rule 19 (ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .)
-    TYPE_DOUBLE     reduce using rule 19 (ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .)
-    TYPE_STRING     reduce using rule 19 (ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .)
-    TYPE_CHAR       reduce using rule 19 (ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .)
-    TYPE_BOOL       reduce using rule 19 (ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .)
-    METHOD_VOID     reduce using rule 19 (ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .)
-    $end            reduce using rule 19 (ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .)
-    RKEY            reduce using rule 19 (ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .)
-
-
 state 23
 
-    (14) DECLARATION -> TYPE_INT ID . IQUAL INT DOT_AN_DCOMMA
+    (8) METHODS -> METHODS METHOD .
 
-    IQUAL           shift and go to state 34
+    METHOD_VOID     reduce using rule 8 (METHODS -> METHODS METHOD .)
+    TYPE_INT        reduce using rule 8 (METHODS -> METHODS METHOD .)
+    TYPE_DOUBLE     reduce using rule 8 (METHODS -> METHODS METHOD .)
+    TYPE_STRING     reduce using rule 8 (METHODS -> METHODS METHOD .)
+    TYPE_CHAR       reduce using rule 8 (METHODS -> METHODS METHOD .)
+    TYPE_BOOL       reduce using rule 8 (METHODS -> METHODS METHOD .)
+    ID              reduce using rule 8 (METHODS -> METHODS METHOD .)
+    $end            reduce using rule 8 (METHODS -> METHODS METHOD .)
 
 
 state 24
 
-    (15) DECLARATION -> TYPE_DOUBLE ID . IQUAL FLOAT DOT_AN_DCOMMA
+    (20) FUNTIONS -> FUNTIONS FUNTION .
 
-    IQUAL           shift and go to state 35
+    TYPE_INT        reduce using rule 20 (FUNTIONS -> FUNTIONS FUNTION .)
+    TYPE_DOUBLE     reduce using rule 20 (FUNTIONS -> FUNTIONS FUNTION .)
+    TYPE_STRING     reduce using rule 20 (FUNTIONS -> FUNTIONS FUNTION .)
+    TYPE_CHAR       reduce using rule 20 (FUNTIONS -> FUNTIONS FUNTION .)
+    TYPE_BOOL       reduce using rule 20 (FUNTIONS -> FUNTIONS FUNTION .)
+    METHOD_VOID     reduce using rule 20 (FUNTIONS -> FUNTIONS FUNTION .)
+    ID              reduce using rule 20 (FUNTIONS -> FUNTIONS FUNTION .)
+    $end            reduce using rule 20 (FUNTIONS -> FUNTIONS FUNTION .)
 
 
 state 25
 
-    (16) DECLARATION -> TYPE_STRING ID . IQUAL STRING DOT_AN_DCOMMA
+    (22) FUNTION -> TYPE_INT . COUPLER
+    (27) COUPLER -> . ID LPAREN RPAREN LKEY empty RKEY
+    (28) COUPLER -> . ID LPAREN RPAREN LKEY SENTENCES_FUNTION RKEY
+    (29) COUPLER -> . ID LPAREN L_PARAMS RPAREN LKEY empty RKEY
+    (30) COUPLER -> . ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_FUNTION RKEY
 
-    IQUAL           shift and go to state 36
+    ID              shift and go to state 50
 
+    COUPLER                        shift and go to state 38
 
 state 26
 
-    (17) DECLARATION -> TYPE_CHAR ID . IQUAL CHAR DOT_AN_DCOMMA
+    (23) FUNTION -> TYPE_DOUBLE . COUPLER
+    (27) COUPLER -> . ID LPAREN RPAREN LKEY empty RKEY
+    (28) COUPLER -> . ID LPAREN RPAREN LKEY SENTENCES_FUNTION RKEY
+    (29) COUPLER -> . ID LPAREN L_PARAMS RPAREN LKEY empty RKEY
+    (30) COUPLER -> . ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_FUNTION RKEY
 
-    IQUAL           shift and go to state 37
+    ID              shift and go to state 50
 
+    COUPLER                        shift and go to state 40
 
 state 27
 
-    (18) DECLARATION -> TYPE_BOOL ID . IQUAL DATA_BOOL DOT_AN_DCOMMA
+    (24) FUNTION -> TYPE_STRING . COUPLER
+    (27) COUPLER -> . ID LPAREN RPAREN LKEY empty RKEY
+    (28) COUPLER -> . ID LPAREN RPAREN LKEY SENTENCES_FUNTION RKEY
+    (29) COUPLER -> . ID LPAREN L_PARAMS RPAREN LKEY empty RKEY
+    (30) COUPLER -> . ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_FUNTION RKEY
 
-    IQUAL           shift and go to state 38
+    ID              shift and go to state 50
 
+    COUPLER                        shift and go to state 42
 
 state 28
 
-    (4) INTS -> METHOD_VOID ID LPAREN . RPAREN LKEY RKEY
-    (5) INTS -> METHOD_VOID ID LPAREN . L_PARAMS RPAREN LKEY RKEY
-    (6) INTS -> METHOD_VOID ID LPAREN . L_PARAMS RPAREN LKEY SENTENCES RKEY
-    (26) L_PARAMS -> . L_PARAMS COMMA PARAM
-    (27) L_PARAMS -> . PARAM
-    (28) PARAM -> . TYPE_INT ID
-    (29) PARAM -> . TYPE_STRING ID
+    (25) FUNTION -> TYPE_CHAR . COUPLER
+    (27) COUPLER -> . ID LPAREN RPAREN LKEY empty RKEY
+    (28) COUPLER -> . ID LPAREN RPAREN LKEY SENTENCES_FUNTION RKEY
+    (29) COUPLER -> . ID LPAREN L_PARAMS RPAREN LKEY empty RKEY
+    (30) COUPLER -> . ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_FUNTION RKEY
 
-    RPAREN          shift and go to state 39
-    TYPE_INT        shift and go to state 42
-    TYPE_STRING     shift and go to state 43
+    ID              shift and go to state 50
 
-    L_PARAMS                       shift and go to state 40
-    PARAM                          shift and go to state 41
+    COUPLER                        shift and go to state 44
 
 state 29
 
-    (21) ASSIGNMENT -> ID IQUAL INT . DOT_AN_DCOMMA
+    (26) FUNTION -> TYPE_BOOL . COUPLER
+    (27) COUPLER -> . ID LPAREN RPAREN LKEY empty RKEY
+    (28) COUPLER -> . ID LPAREN RPAREN LKEY SENTENCES_FUNTION RKEY
+    (29) COUPLER -> . ID LPAREN L_PARAMS RPAREN LKEY empty RKEY
+    (30) COUPLER -> . ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_FUNTION RKEY
 
-    DOT_AN_DCOMMA   shift and go to state 44
+    ID              shift and go to state 50
 
+    COUPLER                        shift and go to state 46
 
 state 30
 
-    (22) ASSIGNMENT -> ID IQUAL FLOAT . DOT_AN_DCOMMA
+    (53) SENTENCES -> SENTENCES SENTENCE .
 
-    DOT_AN_DCOMMA   shift and go to state 45
+    TYPE_INT        reduce using rule 53 (SENTENCES -> SENTENCES SENTENCE .)
+    TYPE_DOUBLE     reduce using rule 53 (SENTENCES -> SENTENCES SENTENCE .)
+    TYPE_STRING     reduce using rule 53 (SENTENCES -> SENTENCES SENTENCE .)
+    TYPE_CHAR       reduce using rule 53 (SENTENCES -> SENTENCES SENTENCE .)
+    TYPE_BOOL       reduce using rule 53 (SENTENCES -> SENTENCES SENTENCE .)
+    ID              reduce using rule 53 (SENTENCES -> SENTENCES SENTENCE .)
+    METHOD_VOID     reduce using rule 53 (SENTENCES -> SENTENCES SENTENCE .)
+    $end            reduce using rule 53 (SENTENCES -> SENTENCES SENTENCE .)
+    RKEY            reduce using rule 53 (SENTENCES -> SENTENCES SENTENCE .)
 
 
 state 31
 
-    (23) ASSIGNMENT -> ID IQUAL STRING . DOT_AN_DCOMMA
+    (59) DECLARATION -> TYPE_INT . ID IQUAL INT DOT_AN_DCOMMA
 
-    DOT_AN_DCOMMA   shift and go to state 46
+    ID              shift and go to state 51
 
 
 state 32
 
-    (24) ASSIGNMENT -> ID IQUAL CHAR . DOT_AN_DCOMMA
+    (60) DECLARATION -> TYPE_DOUBLE . ID IQUAL FLOAT DOT_AN_DCOMMA
 
-    DOT_AN_DCOMMA   shift and go to state 47
+    ID              shift and go to state 52
 
 
 state 33
 
-    (25) ASSIGNMENT -> ID IQUAL DATA_BOOL . DOT_AN_DCOMMA
+    (61) DECLARATION -> TYPE_STRING . ID IQUAL STRING DOT_AN_DCOMMA
 
-    DOT_AN_DCOMMA   shift and go to state 48
+    ID              shift and go to state 53
 
 
 state 34
 
-    (14) DECLARATION -> TYPE_INT ID IQUAL . INT DOT_AN_DCOMMA
+    (62) DECLARATION -> TYPE_CHAR . ID IQUAL CHAR DOT_AN_DCOMMA
 
-    INT             shift and go to state 49
+    ID              shift and go to state 54
 
 
 state 35
 
-    (15) DECLARATION -> TYPE_DOUBLE ID IQUAL . FLOAT DOT_AN_DCOMMA
+    (63) DECLARATION -> TYPE_BOOL . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
 
-    FLOAT           shift and go to state 50
+    ID              shift and go to state 55
 
 
 state 36
 
-    (16) DECLARATION -> TYPE_STRING ID IQUAL . STRING DOT_AN_DCOMMA
+    (10) METHOD -> METHOD_VOID ID . LPAREN RPAREN LKEY empty RKEY
+    (11) METHOD -> METHOD_VOID ID . LPAREN RPAREN LKEY SENTENCES_METHOD RKEY
+    (12) METHOD -> METHOD_VOID ID . LPAREN L_PARAMS RPAREN LKEY empty RKEY
+    (13) METHOD -> METHOD_VOID ID . LPAREN L_PARAMS RPAREN LKEY SENTENCES_METHOD RKEY
 
-    STRING          shift and go to state 51
+    LPAREN          shift and go to state 56
 
 
 state 37
 
-    (17) DECLARATION -> TYPE_CHAR ID IQUAL . CHAR DOT_AN_DCOMMA
+    (66) ASSIGNMENT -> ID IQUAL . INT DOT_AN_DCOMMA
+    (67) ASSIGNMENT -> ID IQUAL . FLOAT DOT_AN_DCOMMA
+    (68) ASSIGNMENT -> ID IQUAL . STRING DOT_AN_DCOMMA
+    (69) ASSIGNMENT -> ID IQUAL . CHAR DOT_AN_DCOMMA
+    (70) ASSIGNMENT -> ID IQUAL . DATA_BOOL DOT_AN_DCOMMA
 
-    CHAR            shift and go to state 52
+    INT             shift and go to state 57
+    FLOAT           shift and go to state 58
+    STRING          shift and go to state 59
+    CHAR            shift and go to state 60
+    DATA_BOOL       shift and go to state 61
 
 
 state 38
 
-    (18) DECLARATION -> TYPE_BOOL ID IQUAL . DATA_BOOL DOT_AN_DCOMMA
+    (22) FUNTION -> TYPE_INT COUPLER .
 
-    DATA_BOOL       shift and go to state 53
+    TYPE_INT        reduce using rule 22 (FUNTION -> TYPE_INT COUPLER .)
+    TYPE_DOUBLE     reduce using rule 22 (FUNTION -> TYPE_INT COUPLER .)
+    TYPE_STRING     reduce using rule 22 (FUNTION -> TYPE_INT COUPLER .)
+    TYPE_CHAR       reduce using rule 22 (FUNTION -> TYPE_INT COUPLER .)
+    TYPE_BOOL       reduce using rule 22 (FUNTION -> TYPE_INT COUPLER .)
+    METHOD_VOID     reduce using rule 22 (FUNTION -> TYPE_INT COUPLER .)
+    ID              reduce using rule 22 (FUNTION -> TYPE_INT COUPLER .)
+    $end            reduce using rule 22 (FUNTION -> TYPE_INT COUPLER .)
 
 
 state 39
 
-    (4) INTS -> METHOD_VOID ID LPAREN RPAREN . LKEY RKEY
+    (59) DECLARATION -> TYPE_INT ID . IQUAL INT DOT_AN_DCOMMA
+    (27) COUPLER -> ID . LPAREN RPAREN LKEY empty RKEY
+    (28) COUPLER -> ID . LPAREN RPAREN LKEY SENTENCES_FUNTION RKEY
+    (29) COUPLER -> ID . LPAREN L_PARAMS RPAREN LKEY empty RKEY
+    (30) COUPLER -> ID . LPAREN L_PARAMS RPAREN LKEY SENTENCES_FUNTION RKEY
 
-    LKEY            shift and go to state 54
+    IQUAL           shift and go to state 62
+    LPAREN          shift and go to state 63
 
 
 state 40
 
-    (5) INTS -> METHOD_VOID ID LPAREN L_PARAMS . RPAREN LKEY RKEY
-    (6) INTS -> METHOD_VOID ID LPAREN L_PARAMS . RPAREN LKEY SENTENCES RKEY
-    (26) L_PARAMS -> L_PARAMS . COMMA PARAM
+    (23) FUNTION -> TYPE_DOUBLE COUPLER .
 
-    RPAREN          shift and go to state 55
-    COMMA           shift and go to state 56
+    TYPE_INT        reduce using rule 23 (FUNTION -> TYPE_DOUBLE COUPLER .)
+    TYPE_DOUBLE     reduce using rule 23 (FUNTION -> TYPE_DOUBLE COUPLER .)
+    TYPE_STRING     reduce using rule 23 (FUNTION -> TYPE_DOUBLE COUPLER .)
+    TYPE_CHAR       reduce using rule 23 (FUNTION -> TYPE_DOUBLE COUPLER .)
+    TYPE_BOOL       reduce using rule 23 (FUNTION -> TYPE_DOUBLE COUPLER .)
+    METHOD_VOID     reduce using rule 23 (FUNTION -> TYPE_DOUBLE COUPLER .)
+    ID              reduce using rule 23 (FUNTION -> TYPE_DOUBLE COUPLER .)
+    $end            reduce using rule 23 (FUNTION -> TYPE_DOUBLE COUPLER .)
 
 
 state 41
 
-    (27) L_PARAMS -> PARAM .
+    (60) DECLARATION -> TYPE_DOUBLE ID . IQUAL FLOAT DOT_AN_DCOMMA
+    (27) COUPLER -> ID . LPAREN RPAREN LKEY empty RKEY
+    (28) COUPLER -> ID . LPAREN RPAREN LKEY SENTENCES_FUNTION RKEY
+    (29) COUPLER -> ID . LPAREN L_PARAMS RPAREN LKEY empty RKEY
+    (30) COUPLER -> ID . LPAREN L_PARAMS RPAREN LKEY SENTENCES_FUNTION RKEY
 
-    RPAREN          reduce using rule 27 (L_PARAMS -> PARAM .)
-    COMMA           reduce using rule 27 (L_PARAMS -> PARAM .)
+    IQUAL           shift and go to state 64
+    LPAREN          shift and go to state 63
 
 
 state 42
 
-    (28) PARAM -> TYPE_INT . ID
+    (24) FUNTION -> TYPE_STRING COUPLER .
 
-    ID              shift and go to state 57
+    TYPE_INT        reduce using rule 24 (FUNTION -> TYPE_STRING COUPLER .)
+    TYPE_DOUBLE     reduce using rule 24 (FUNTION -> TYPE_STRING COUPLER .)
+    TYPE_STRING     reduce using rule 24 (FUNTION -> TYPE_STRING COUPLER .)
+    TYPE_CHAR       reduce using rule 24 (FUNTION -> TYPE_STRING COUPLER .)
+    TYPE_BOOL       reduce using rule 24 (FUNTION -> TYPE_STRING COUPLER .)
+    METHOD_VOID     reduce using rule 24 (FUNTION -> TYPE_STRING COUPLER .)
+    ID              reduce using rule 24 (FUNTION -> TYPE_STRING COUPLER .)
+    $end            reduce using rule 24 (FUNTION -> TYPE_STRING COUPLER .)
 
 
 state 43
 
-    (29) PARAM -> TYPE_STRING . ID
+    (61) DECLARATION -> TYPE_STRING ID . IQUAL STRING DOT_AN_DCOMMA
+    (27) COUPLER -> ID . LPAREN RPAREN LKEY empty RKEY
+    (28) COUPLER -> ID . LPAREN RPAREN LKEY SENTENCES_FUNTION RKEY
+    (29) COUPLER -> ID . LPAREN L_PARAMS RPAREN LKEY empty RKEY
+    (30) COUPLER -> ID . LPAREN L_PARAMS RPAREN LKEY SENTENCES_FUNTION RKEY
 
-    ID              shift and go to state 58
+    IQUAL           shift and go to state 65
+    LPAREN          shift and go to state 63
 
 
 state 44
 
-    (21) ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .
+    (25) FUNTION -> TYPE_CHAR COUPLER .
 
-    ID              reduce using rule 21 (ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .)
-    TYPE_INT        reduce using rule 21 (ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .)
-    TYPE_DOUBLE     reduce using rule 21 (ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .)
-    TYPE_STRING     reduce using rule 21 (ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .)
-    TYPE_CHAR       reduce using rule 21 (ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .)
-    TYPE_BOOL       reduce using rule 21 (ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .)
-    METHOD_VOID     reduce using rule 21 (ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .)
-    $end            reduce using rule 21 (ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .)
-    RKEY            reduce using rule 21 (ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .)
+    TYPE_INT        reduce using rule 25 (FUNTION -> TYPE_CHAR COUPLER .)
+    TYPE_DOUBLE     reduce using rule 25 (FUNTION -> TYPE_CHAR COUPLER .)
+    TYPE_STRING     reduce using rule 25 (FUNTION -> TYPE_CHAR COUPLER .)
+    TYPE_CHAR       reduce using rule 25 (FUNTION -> TYPE_CHAR COUPLER .)
+    TYPE_BOOL       reduce using rule 25 (FUNTION -> TYPE_CHAR COUPLER .)
+    METHOD_VOID     reduce using rule 25 (FUNTION -> TYPE_CHAR COUPLER .)
+    ID              reduce using rule 25 (FUNTION -> TYPE_CHAR COUPLER .)
+    $end            reduce using rule 25 (FUNTION -> TYPE_CHAR COUPLER .)
 
 
 state 45
 
-    (22) ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .
+    (62) DECLARATION -> TYPE_CHAR ID . IQUAL CHAR DOT_AN_DCOMMA
+    (27) COUPLER -> ID . LPAREN RPAREN LKEY empty RKEY
+    (28) COUPLER -> ID . LPAREN RPAREN LKEY SENTENCES_FUNTION RKEY
+    (29) COUPLER -> ID . LPAREN L_PARAMS RPAREN LKEY empty RKEY
+    (30) COUPLER -> ID . LPAREN L_PARAMS RPAREN LKEY SENTENCES_FUNTION RKEY
 
-    ID              reduce using rule 22 (ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    TYPE_INT        reduce using rule 22 (ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    TYPE_DOUBLE     reduce using rule 22 (ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    TYPE_STRING     reduce using rule 22 (ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    TYPE_CHAR       reduce using rule 22 (ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    TYPE_BOOL       reduce using rule 22 (ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    METHOD_VOID     reduce using rule 22 (ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    $end            reduce using rule 22 (ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    RKEY            reduce using rule 22 (ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .)
+    IQUAL           shift and go to state 66
+    LPAREN          shift and go to state 63
 
 
 state 46
 
-    (23) ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .
+    (26) FUNTION -> TYPE_BOOL COUPLER .
 
-    ID              reduce using rule 23 (ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .)
-    TYPE_INT        reduce using rule 23 (ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .)
-    TYPE_DOUBLE     reduce using rule 23 (ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .)
-    TYPE_STRING     reduce using rule 23 (ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .)
-    TYPE_CHAR       reduce using rule 23 (ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .)
-    TYPE_BOOL       reduce using rule 23 (ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .)
-    METHOD_VOID     reduce using rule 23 (ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .)
-    $end            reduce using rule 23 (ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .)
-    RKEY            reduce using rule 23 (ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .)
+    TYPE_INT        reduce using rule 26 (FUNTION -> TYPE_BOOL COUPLER .)
+    TYPE_DOUBLE     reduce using rule 26 (FUNTION -> TYPE_BOOL COUPLER .)
+    TYPE_STRING     reduce using rule 26 (FUNTION -> TYPE_BOOL COUPLER .)
+    TYPE_CHAR       reduce using rule 26 (FUNTION -> TYPE_BOOL COUPLER .)
+    TYPE_BOOL       reduce using rule 26 (FUNTION -> TYPE_BOOL COUPLER .)
+    METHOD_VOID     reduce using rule 26 (FUNTION -> TYPE_BOOL COUPLER .)
+    ID              reduce using rule 26 (FUNTION -> TYPE_BOOL COUPLER .)
+    $end            reduce using rule 26 (FUNTION -> TYPE_BOOL COUPLER .)
 
 
 state 47
 
-    (24) ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .
+    (63) DECLARATION -> TYPE_BOOL ID . IQUAL DATA_BOOL DOT_AN_DCOMMA
+    (27) COUPLER -> ID . LPAREN RPAREN LKEY empty RKEY
+    (28) COUPLER -> ID . LPAREN RPAREN LKEY SENTENCES_FUNTION RKEY
+    (29) COUPLER -> ID . LPAREN L_PARAMS RPAREN LKEY empty RKEY
+    (30) COUPLER -> ID . LPAREN L_PARAMS RPAREN LKEY SENTENCES_FUNTION RKEY
 
-    ID              reduce using rule 24 (ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .)
-    TYPE_INT        reduce using rule 24 (ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .)
-    TYPE_DOUBLE     reduce using rule 24 (ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .)
-    TYPE_STRING     reduce using rule 24 (ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .)
-    TYPE_CHAR       reduce using rule 24 (ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .)
-    TYPE_BOOL       reduce using rule 24 (ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .)
-    METHOD_VOID     reduce using rule 24 (ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .)
-    $end            reduce using rule 24 (ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .)
-    RKEY            reduce using rule 24 (ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .)
+    IQUAL           shift and go to state 67
+    LPAREN          shift and go to state 63
 
 
 state 48
 
-    (25) ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .
+    (57) DECLARATIONS -> DECLARATIONS DECLARATION .
 
-    ID              reduce using rule 25 (ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    TYPE_INT        reduce using rule 25 (ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    TYPE_DOUBLE     reduce using rule 25 (ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    TYPE_STRING     reduce using rule 25 (ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    TYPE_CHAR       reduce using rule 25 (ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    TYPE_BOOL       reduce using rule 25 (ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    METHOD_VOID     reduce using rule 25 (ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    $end            reduce using rule 25 (ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    RKEY            reduce using rule 25 (ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
+    TYPE_INT        reduce using rule 57 (DECLARATIONS -> DECLARATIONS DECLARATION .)
+    TYPE_DOUBLE     reduce using rule 57 (DECLARATIONS -> DECLARATIONS DECLARATION .)
+    TYPE_STRING     reduce using rule 57 (DECLARATIONS -> DECLARATIONS DECLARATION .)
+    TYPE_CHAR       reduce using rule 57 (DECLARATIONS -> DECLARATIONS DECLARATION .)
+    TYPE_BOOL       reduce using rule 57 (DECLARATIONS -> DECLARATIONS DECLARATION .)
+    ID              reduce using rule 57 (DECLARATIONS -> DECLARATIONS DECLARATION .)
+    METHOD_VOID     reduce using rule 57 (DECLARATIONS -> DECLARATIONS DECLARATION .)
+    $end            reduce using rule 57 (DECLARATIONS -> DECLARATIONS DECLARATION .)
+    RKEY            reduce using rule 57 (DECLARATIONS -> DECLARATIONS DECLARATION .)
+    METHOD_RETURN   reduce using rule 57 (DECLARATIONS -> DECLARATIONS DECLARATION .)
+    CONDITIONAL_IF  reduce using rule 57 (DECLARATIONS -> DECLARATIONS DECLARATION .)
 
 
 state 49
 
-    (14) DECLARATION -> TYPE_INT ID IQUAL INT . DOT_AN_DCOMMA
+    (64) ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .
 
-    DOT_AN_DCOMMA   shift and go to state 59
+    ID              reduce using rule 64 (ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .)
+    TYPE_INT        reduce using rule 64 (ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .)
+    TYPE_DOUBLE     reduce using rule 64 (ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .)
+    TYPE_STRING     reduce using rule 64 (ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .)
+    TYPE_CHAR       reduce using rule 64 (ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .)
+    TYPE_BOOL       reduce using rule 64 (ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .)
+    METHOD_VOID     reduce using rule 64 (ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .)
+    $end            reduce using rule 64 (ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .)
+    RKEY            reduce using rule 64 (ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .)
+    METHOD_RETURN   reduce using rule 64 (ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .)
+    CONDITIONAL_IF  reduce using rule 64 (ASSIGNMENTS -> ASSIGNMENTS ASSIGNMENT .)
 
 
 state 50
 
-    (15) DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT . DOT_AN_DCOMMA
+    (27) COUPLER -> ID . LPAREN RPAREN LKEY empty RKEY
+    (28) COUPLER -> ID . LPAREN RPAREN LKEY SENTENCES_FUNTION RKEY
+    (29) COUPLER -> ID . LPAREN L_PARAMS RPAREN LKEY empty RKEY
+    (30) COUPLER -> ID . LPAREN L_PARAMS RPAREN LKEY SENTENCES_FUNTION RKEY
 
-    DOT_AN_DCOMMA   shift and go to state 60
+    LPAREN          shift and go to state 63
 
 
 state 51
 
-    (16) DECLARATION -> TYPE_STRING ID IQUAL STRING . DOT_AN_DCOMMA
+    (59) DECLARATION -> TYPE_INT ID . IQUAL INT DOT_AN_DCOMMA
 
-    DOT_AN_DCOMMA   shift and go to state 61
+    IQUAL           shift and go to state 62
 
 
 state 52
 
-    (17) DECLARATION -> TYPE_CHAR ID IQUAL CHAR . DOT_AN_DCOMMA
+    (60) DECLARATION -> TYPE_DOUBLE ID . IQUAL FLOAT DOT_AN_DCOMMA
 
-    DOT_AN_DCOMMA   shift and go to state 62
+    IQUAL           shift and go to state 64
 
 
 state 53
 
-    (18) DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL . DOT_AN_DCOMMA
+    (61) DECLARATION -> TYPE_STRING ID . IQUAL STRING DOT_AN_DCOMMA
 
-    DOT_AN_DCOMMA   shift and go to state 63
+    IQUAL           shift and go to state 65
 
 
 state 54
 
-    (4) INTS -> METHOD_VOID ID LPAREN RPAREN LKEY . RKEY
+    (62) DECLARATION -> TYPE_CHAR ID . IQUAL CHAR DOT_AN_DCOMMA
 
-    RKEY            shift and go to state 64
+    IQUAL           shift and go to state 66
 
 
 state 55
 
-    (5) INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN . LKEY RKEY
-    (6) INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN . LKEY SENTENCES RKEY
+    (63) DECLARATION -> TYPE_BOOL ID . IQUAL DATA_BOOL DOT_AN_DCOMMA
 
-    LKEY            shift and go to state 65
+    IQUAL           shift and go to state 67
 
 
 state 56
 
-    (26) L_PARAMS -> L_PARAMS COMMA . PARAM
-    (28) PARAM -> . TYPE_INT ID
-    (29) PARAM -> . TYPE_STRING ID
+    (10) METHOD -> METHOD_VOID ID LPAREN . RPAREN LKEY empty RKEY
+    (11) METHOD -> METHOD_VOID ID LPAREN . RPAREN LKEY SENTENCES_METHOD RKEY
+    (12) METHOD -> METHOD_VOID ID LPAREN . L_PARAMS RPAREN LKEY empty RKEY
+    (13) METHOD -> METHOD_VOID ID LPAREN . L_PARAMS RPAREN LKEY SENTENCES_METHOD RKEY
+    (71) L_PARAMS -> . L_PARAMS COMMA PARAM
+    (72) L_PARAMS -> . PARAM
+    (73) PARAM -> . TYPE_INT ID
+    (74) PARAM -> . TYPE_DOUBLE ID
+    (75) PARAM -> . TYPE_STRING ID
+    (76) PARAM -> . TYPE_CHAR ID
+    (77) PARAM -> . TYPE_BOOL ID
 
-    TYPE_INT        shift and go to state 42
-    TYPE_STRING     shift and go to state 43
+    RPAREN          shift and go to state 68
+    TYPE_INT        shift and go to state 71
+    TYPE_DOUBLE     shift and go to state 72
+    TYPE_STRING     shift and go to state 73
+    TYPE_CHAR       shift and go to state 74
+    TYPE_BOOL       shift and go to state 75
 
-    PARAM                          shift and go to state 66
+    L_PARAMS                       shift and go to state 69
+    PARAM                          shift and go to state 70
 
 state 57
 
-    (28) PARAM -> TYPE_INT ID .
+    (66) ASSIGNMENT -> ID IQUAL INT . DOT_AN_DCOMMA
 
-    RPAREN          reduce using rule 28 (PARAM -> TYPE_INT ID .)
-    COMMA           reduce using rule 28 (PARAM -> TYPE_INT ID .)
+    DOT_AN_DCOMMA   shift and go to state 76
 
 
 state 58
 
-    (29) PARAM -> TYPE_STRING ID .
+    (67) ASSIGNMENT -> ID IQUAL FLOAT . DOT_AN_DCOMMA
 
-    RPAREN          reduce using rule 29 (PARAM -> TYPE_STRING ID .)
-    COMMA           reduce using rule 29 (PARAM -> TYPE_STRING ID .)
+    DOT_AN_DCOMMA   shift and go to state 77
 
 
 state 59
 
-    (14) DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .
+    (68) ASSIGNMENT -> ID IQUAL STRING . DOT_AN_DCOMMA
 
-    TYPE_INT        reduce using rule 14 (DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .)
-    TYPE_DOUBLE     reduce using rule 14 (DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .)
-    TYPE_STRING     reduce using rule 14 (DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .)
-    TYPE_CHAR       reduce using rule 14 (DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .)
-    TYPE_BOOL       reduce using rule 14 (DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .)
-    ID              reduce using rule 14 (DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .)
-    METHOD_VOID     reduce using rule 14 (DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .)
-    $end            reduce using rule 14 (DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .)
-    RKEY            reduce using rule 14 (DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .)
+    DOT_AN_DCOMMA   shift and go to state 78
 
 
 state 60
 
-    (15) DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .
+    (69) ASSIGNMENT -> ID IQUAL CHAR . DOT_AN_DCOMMA
 
-    TYPE_INT        reduce using rule 15 (DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    TYPE_DOUBLE     reduce using rule 15 (DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    TYPE_STRING     reduce using rule 15 (DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    TYPE_CHAR       reduce using rule 15 (DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    TYPE_BOOL       reduce using rule 15 (DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    ID              reduce using rule 15 (DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    METHOD_VOID     reduce using rule 15 (DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    $end            reduce using rule 15 (DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .)
-    RKEY            reduce using rule 15 (DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .)
+    DOT_AN_DCOMMA   shift and go to state 79
 
 
 state 61
 
-    (16) DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .
+    (70) ASSIGNMENT -> ID IQUAL DATA_BOOL . DOT_AN_DCOMMA
 
-    TYPE_INT        reduce using rule 16 (DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .)
-    TYPE_DOUBLE     reduce using rule 16 (DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .)
-    TYPE_STRING     reduce using rule 16 (DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .)
-    TYPE_CHAR       reduce using rule 16 (DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .)
-    TYPE_BOOL       reduce using rule 16 (DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .)
-    ID              reduce using rule 16 (DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .)
-    METHOD_VOID     reduce using rule 16 (DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .)
-    $end            reduce using rule 16 (DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .)
-    RKEY            reduce using rule 16 (DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .)
+    DOT_AN_DCOMMA   shift and go to state 80
 
 
 state 62
 
-    (17) DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .
+    (59) DECLARATION -> TYPE_INT ID IQUAL . INT DOT_AN_DCOMMA
 
-    TYPE_INT        reduce using rule 17 (DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .)
-    TYPE_DOUBLE     reduce using rule 17 (DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .)
-    TYPE_STRING     reduce using rule 17 (DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .)
-    TYPE_CHAR       reduce using rule 17 (DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .)
-    TYPE_BOOL       reduce using rule 17 (DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .)
-    ID              reduce using rule 17 (DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .)
-    METHOD_VOID     reduce using rule 17 (DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .)
-    $end            reduce using rule 17 (DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .)
-    RKEY            reduce using rule 17 (DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .)
+    INT             shift and go to state 81
 
 
 state 63
 
-    (18) DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .
+    (27) COUPLER -> ID LPAREN . RPAREN LKEY empty RKEY
+    (28) COUPLER -> ID LPAREN . RPAREN LKEY SENTENCES_FUNTION RKEY
+    (29) COUPLER -> ID LPAREN . L_PARAMS RPAREN LKEY empty RKEY
+    (30) COUPLER -> ID LPAREN . L_PARAMS RPAREN LKEY SENTENCES_FUNTION RKEY
+    (71) L_PARAMS -> . L_PARAMS COMMA PARAM
+    (72) L_PARAMS -> . PARAM
+    (73) PARAM -> . TYPE_INT ID
+    (74) PARAM -> . TYPE_DOUBLE ID
+    (75) PARAM -> . TYPE_STRING ID
+    (76) PARAM -> . TYPE_CHAR ID
+    (77) PARAM -> . TYPE_BOOL ID
 
-    TYPE_INT        reduce using rule 18 (DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    TYPE_DOUBLE     reduce using rule 18 (DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    TYPE_STRING     reduce using rule 18 (DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    TYPE_CHAR       reduce using rule 18 (DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    TYPE_BOOL       reduce using rule 18 (DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    ID              reduce using rule 18 (DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    METHOD_VOID     reduce using rule 18 (DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    $end            reduce using rule 18 (DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
-    RKEY            reduce using rule 18 (DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
+    RPAREN          shift and go to state 82
+    TYPE_INT        shift and go to state 71
+    TYPE_DOUBLE     shift and go to state 72
+    TYPE_STRING     shift and go to state 73
+    TYPE_CHAR       shift and go to state 74
+    TYPE_BOOL       shift and go to state 75
 
+    L_PARAMS                       shift and go to state 83
+    PARAM                          shift and go to state 70
 
 state 64
 
-    (4) INTS -> METHOD_VOID ID LPAREN RPAREN LKEY RKEY .
+    (60) DECLARATION -> TYPE_DOUBLE ID IQUAL . FLOAT DOT_AN_DCOMMA
 
-    METHOD_VOID     reduce using rule 4 (INTS -> METHOD_VOID ID LPAREN RPAREN LKEY RKEY .)
-    TYPE_INT        reduce using rule 4 (INTS -> METHOD_VOID ID LPAREN RPAREN LKEY RKEY .)
-    TYPE_DOUBLE     reduce using rule 4 (INTS -> METHOD_VOID ID LPAREN RPAREN LKEY RKEY .)
-    TYPE_STRING     reduce using rule 4 (INTS -> METHOD_VOID ID LPAREN RPAREN LKEY RKEY .)
-    TYPE_CHAR       reduce using rule 4 (INTS -> METHOD_VOID ID LPAREN RPAREN LKEY RKEY .)
-    TYPE_BOOL       reduce using rule 4 (INTS -> METHOD_VOID ID LPAREN RPAREN LKEY RKEY .)
-    ID              reduce using rule 4 (INTS -> METHOD_VOID ID LPAREN RPAREN LKEY RKEY .)
-    $end            reduce using rule 4 (INTS -> METHOD_VOID ID LPAREN RPAREN LKEY RKEY .)
+    FLOAT           shift and go to state 84
 
 
 state 65
 
-    (5) INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY . RKEY
-    (6) INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY . SENTENCES RKEY
-    (8) SENTENCES -> . SENTENCES SENTENCE
-    (9) SENTENCES -> . SENTENCE
-    (10) SENTENCE -> . DECLARATIONS
-    (11) SENTENCE -> . ASSIGNMENTS
-    (12) DECLARATIONS -> . DECLARATIONS DECLARATION
-    (13) DECLARATIONS -> . DECLARATION
-    (19) ASSIGNMENTS -> . ASSIGNMENTS ASSIGNMENT
-    (20) ASSIGNMENTS -> . ASSIGNMENT
-    (14) DECLARATION -> . TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
-    (15) DECLARATION -> . TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
-    (16) DECLARATION -> . TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
-    (17) DECLARATION -> . TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
-    (18) DECLARATION -> . TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
-    (21) ASSIGNMENT -> . ID IQUAL INT DOT_AN_DCOMMA
-    (22) ASSIGNMENT -> . ID IQUAL FLOAT DOT_AN_DCOMMA
-    (23) ASSIGNMENT -> . ID IQUAL STRING DOT_AN_DCOMMA
-    (24) ASSIGNMENT -> . ID IQUAL CHAR DOT_AN_DCOMMA
-    (25) ASSIGNMENT -> . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+    (61) DECLARATION -> TYPE_STRING ID IQUAL . STRING DOT_AN_DCOMMA
 
-    RKEY            shift and go to state 67
-    TYPE_INT        shift and go to state 12
-    TYPE_DOUBLE     shift and go to state 13
-    TYPE_STRING     shift and go to state 14
-    TYPE_CHAR       shift and go to state 15
-    TYPE_BOOL       shift and go to state 16
-    ID              shift and go to state 5
+    STRING          shift and go to state 85
 
-    SENTENCES                      shift and go to state 68
-    SENTENCE                       shift and go to state 7
-    DECLARATIONS                   shift and go to state 8
-    ASSIGNMENTS                    shift and go to state 9
-    DECLARATION                    shift and go to state 10
-    ASSIGNMENT                     shift and go to state 11
 
 state 66
 
-    (26) L_PARAMS -> L_PARAMS COMMA PARAM .
+    (62) DECLARATION -> TYPE_CHAR ID IQUAL . CHAR DOT_AN_DCOMMA
 
-    RPAREN          reduce using rule 26 (L_PARAMS -> L_PARAMS COMMA PARAM .)
-    COMMA           reduce using rule 26 (L_PARAMS -> L_PARAMS COMMA PARAM .)
+    CHAR            shift and go to state 86
 
 
 state 67
 
-    (5) INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY .
+    (63) DECLARATION -> TYPE_BOOL ID IQUAL . DATA_BOOL DOT_AN_DCOMMA
 
-    METHOD_VOID     reduce using rule 5 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY .)
-    TYPE_INT        reduce using rule 5 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY .)
-    TYPE_DOUBLE     reduce using rule 5 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY .)
-    TYPE_STRING     reduce using rule 5 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY .)
-    TYPE_CHAR       reduce using rule 5 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY .)
-    TYPE_BOOL       reduce using rule 5 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY .)
-    ID              reduce using rule 5 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY .)
-    $end            reduce using rule 5 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY RKEY .)
+    DATA_BOOL       shift and go to state 87
 
 
 state 68
 
-    (6) INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES . RKEY
-    (8) SENTENCES -> SENTENCES . SENTENCE
-    (10) SENTENCE -> . DECLARATIONS
-    (11) SENTENCE -> . ASSIGNMENTS
-    (12) DECLARATIONS -> . DECLARATIONS DECLARATION
-    (13) DECLARATIONS -> . DECLARATION
-    (19) ASSIGNMENTS -> . ASSIGNMENTS ASSIGNMENT
-    (20) ASSIGNMENTS -> . ASSIGNMENT
-    (14) DECLARATION -> . TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
-    (15) DECLARATION -> . TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
-    (16) DECLARATION -> . TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
-    (17) DECLARATION -> . TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
-    (18) DECLARATION -> . TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
-    (21) ASSIGNMENT -> . ID IQUAL INT DOT_AN_DCOMMA
-    (22) ASSIGNMENT -> . ID IQUAL FLOAT DOT_AN_DCOMMA
-    (23) ASSIGNMENT -> . ID IQUAL STRING DOT_AN_DCOMMA
-    (24) ASSIGNMENT -> . ID IQUAL CHAR DOT_AN_DCOMMA
-    (25) ASSIGNMENT -> . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+    (10) METHOD -> METHOD_VOID ID LPAREN RPAREN . LKEY empty RKEY
+    (11) METHOD -> METHOD_VOID ID LPAREN RPAREN . LKEY SENTENCES_METHOD RKEY
 
-    RKEY            shift and go to state 69
-    TYPE_INT        shift and go to state 12
-    TYPE_DOUBLE     shift and go to state 13
-    TYPE_STRING     shift and go to state 14
-    TYPE_CHAR       shift and go to state 15
-    TYPE_BOOL       shift and go to state 16
-    ID              shift and go to state 5
+    LKEY            shift and go to state 88
 
-    SENTENCE                       shift and go to state 20
-    DECLARATIONS                   shift and go to state 8
-    ASSIGNMENTS                    shift and go to state 9
-    DECLARATION                    shift and go to state 10
-    ASSIGNMENT                     shift and go to state 11
 
 state 69
 
-    (6) INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES RKEY .
+    (12) METHOD -> METHOD_VOID ID LPAREN L_PARAMS . RPAREN LKEY empty RKEY
+    (13) METHOD -> METHOD_VOID ID LPAREN L_PARAMS . RPAREN LKEY SENTENCES_METHOD RKEY
+    (71) L_PARAMS -> L_PARAMS . COMMA PARAM
 
-    METHOD_VOID     reduce using rule 6 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES RKEY .)
-    TYPE_INT        reduce using rule 6 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES RKEY .)
-    TYPE_DOUBLE     reduce using rule 6 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES RKEY .)
-    TYPE_STRING     reduce using rule 6 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES RKEY .)
-    TYPE_CHAR       reduce using rule 6 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES RKEY .)
-    TYPE_BOOL       reduce using rule 6 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES RKEY .)
-    ID              reduce using rule 6 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES RKEY .)
-    $end            reduce using rule 6 (INTS -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES RKEY .)
+    RPAREN          shift and go to state 89
+    COMMA           shift and go to state 90
+
+
+state 70
+
+    (72) L_PARAMS -> PARAM .
+
+    RPAREN          reduce using rule 72 (L_PARAMS -> PARAM .)
+    COMMA           reduce using rule 72 (L_PARAMS -> PARAM .)
+
+
+state 71
+
+    (73) PARAM -> TYPE_INT . ID
+
+    ID              shift and go to state 91
+
+
+state 72
+
+    (74) PARAM -> TYPE_DOUBLE . ID
+
+    ID              shift and go to state 92
+
+
+state 73
+
+    (75) PARAM -> TYPE_STRING . ID
+
+    ID              shift and go to state 93
+
+
+state 74
+
+    (76) PARAM -> TYPE_CHAR . ID
+
+    ID              shift and go to state 94
+
+
+state 75
+
+    (77) PARAM -> TYPE_BOOL . ID
+
+    ID              shift and go to state 95
+
+
+state 76
+
+    (66) ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .
+
+    ID              reduce using rule 66 (ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .)
+    TYPE_INT        reduce using rule 66 (ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .)
+    TYPE_DOUBLE     reduce using rule 66 (ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .)
+    TYPE_STRING     reduce using rule 66 (ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .)
+    TYPE_CHAR       reduce using rule 66 (ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .)
+    TYPE_BOOL       reduce using rule 66 (ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .)
+    METHOD_VOID     reduce using rule 66 (ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .)
+    $end            reduce using rule 66 (ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .)
+    RKEY            reduce using rule 66 (ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .)
+    METHOD_RETURN   reduce using rule 66 (ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .)
+    CONDITIONAL_IF  reduce using rule 66 (ASSIGNMENT -> ID IQUAL INT DOT_AN_DCOMMA .)
+
+
+state 77
+
+    (67) ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .
+
+    ID              reduce using rule 67 (ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .)
+    TYPE_INT        reduce using rule 67 (ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .)
+    TYPE_DOUBLE     reduce using rule 67 (ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .)
+    TYPE_STRING     reduce using rule 67 (ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .)
+    TYPE_CHAR       reduce using rule 67 (ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .)
+    TYPE_BOOL       reduce using rule 67 (ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .)
+    METHOD_VOID     reduce using rule 67 (ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .)
+    $end            reduce using rule 67 (ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .)
+    RKEY            reduce using rule 67 (ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .)
+    METHOD_RETURN   reduce using rule 67 (ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .)
+    CONDITIONAL_IF  reduce using rule 67 (ASSIGNMENT -> ID IQUAL FLOAT DOT_AN_DCOMMA .)
+
+
+state 78
+
+    (68) ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .
+
+    ID              reduce using rule 68 (ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .)
+    TYPE_INT        reduce using rule 68 (ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .)
+    TYPE_DOUBLE     reduce using rule 68 (ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .)
+    TYPE_STRING     reduce using rule 68 (ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .)
+    TYPE_CHAR       reduce using rule 68 (ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .)
+    TYPE_BOOL       reduce using rule 68 (ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .)
+    METHOD_VOID     reduce using rule 68 (ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .)
+    $end            reduce using rule 68 (ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .)
+    RKEY            reduce using rule 68 (ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .)
+    METHOD_RETURN   reduce using rule 68 (ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .)
+    CONDITIONAL_IF  reduce using rule 68 (ASSIGNMENT -> ID IQUAL STRING DOT_AN_DCOMMA .)
+
+
+state 79
+
+    (69) ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .
+
+    ID              reduce using rule 69 (ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .)
+    TYPE_INT        reduce using rule 69 (ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .)
+    TYPE_DOUBLE     reduce using rule 69 (ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .)
+    TYPE_STRING     reduce using rule 69 (ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .)
+    TYPE_CHAR       reduce using rule 69 (ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .)
+    TYPE_BOOL       reduce using rule 69 (ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .)
+    METHOD_VOID     reduce using rule 69 (ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .)
+    $end            reduce using rule 69 (ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .)
+    RKEY            reduce using rule 69 (ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .)
+    METHOD_RETURN   reduce using rule 69 (ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .)
+    CONDITIONAL_IF  reduce using rule 69 (ASSIGNMENT -> ID IQUAL CHAR DOT_AN_DCOMMA .)
+
+
+state 80
+
+    (70) ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .
+
+    ID              reduce using rule 70 (ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
+    TYPE_INT        reduce using rule 70 (ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
+    TYPE_DOUBLE     reduce using rule 70 (ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
+    TYPE_STRING     reduce using rule 70 (ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
+    TYPE_CHAR       reduce using rule 70 (ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
+    TYPE_BOOL       reduce using rule 70 (ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
+    METHOD_VOID     reduce using rule 70 (ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
+    $end            reduce using rule 70 (ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
+    RKEY            reduce using rule 70 (ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
+    METHOD_RETURN   reduce using rule 70 (ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
+    CONDITIONAL_IF  reduce using rule 70 (ASSIGNMENT -> ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
+
+
+state 81
+
+    (59) DECLARATION -> TYPE_INT ID IQUAL INT . DOT_AN_DCOMMA
+
+    DOT_AN_DCOMMA   shift and go to state 96
+
+
+state 82
+
+    (27) COUPLER -> ID LPAREN RPAREN . LKEY empty RKEY
+    (28) COUPLER -> ID LPAREN RPAREN . LKEY SENTENCES_FUNTION RKEY
+
+    LKEY            shift and go to state 97
+
+
+state 83
+
+    (29) COUPLER -> ID LPAREN L_PARAMS . RPAREN LKEY empty RKEY
+    (30) COUPLER -> ID LPAREN L_PARAMS . RPAREN LKEY SENTENCES_FUNTION RKEY
+    (71) L_PARAMS -> L_PARAMS . COMMA PARAM
+
+    RPAREN          shift and go to state 98
+    COMMA           shift and go to state 90
+
+
+state 84
+
+    (60) DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT . DOT_AN_DCOMMA
+
+    DOT_AN_DCOMMA   shift and go to state 99
+
+
+state 85
+
+    (61) DECLARATION -> TYPE_STRING ID IQUAL STRING . DOT_AN_DCOMMA
+
+    DOT_AN_DCOMMA   shift and go to state 100
+
+
+state 86
+
+    (62) DECLARATION -> TYPE_CHAR ID IQUAL CHAR . DOT_AN_DCOMMA
+
+    DOT_AN_DCOMMA   shift and go to state 101
+
+
+state 87
+
+    (63) DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL . DOT_AN_DCOMMA
+
+    DOT_AN_DCOMMA   shift and go to state 102
+
+
+state 88
+
+    (10) METHOD -> METHOD_VOID ID LPAREN RPAREN LKEY . empty RKEY
+    (11) METHOD -> METHOD_VOID ID LPAREN RPAREN LKEY . SENTENCES_METHOD RKEY
+    (83) empty -> .
+    (14) SENTENCES_METHOD -> . SENTENCES_METHOD SENTENCE_METHOD
+    (15) SENTENCES_METHOD -> . SENTENCE_METHOD
+    (16) SENTENCE_METHOD -> . DECLARATIONS
+    (17) SENTENCE_METHOD -> . ASSIGNMENTS
+    (18) SENTENCE_METHOD -> . SENTENCES_IF
+    (19) SENTENCE_METHOD -> . METHOD_RETURN DOT_AN_DCOMMA
+    (57) DECLARATIONS -> . DECLARATIONS DECLARATION
+    (58) DECLARATIONS -> . DECLARATION
+    (64) ASSIGNMENTS -> . ASSIGNMENTS ASSIGNMENT
+    (65) ASSIGNMENTS -> . ASSIGNMENT
+    (37) SENTENCES_IF -> . SENTENCES_IF SENTENCE_IF
+    (38) SENTENCES_IF -> . SENTENCE_IF
+    (59) DECLARATION -> . TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
+    (60) DECLARATION -> . TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
+    (61) DECLARATION -> . TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
+    (62) DECLARATION -> . TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
+    (63) DECLARATION -> . TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+    (66) ASSIGNMENT -> . ID IQUAL INT DOT_AN_DCOMMA
+    (67) ASSIGNMENT -> . ID IQUAL FLOAT DOT_AN_DCOMMA
+    (68) ASSIGNMENT -> . ID IQUAL STRING DOT_AN_DCOMMA
+    (69) ASSIGNMENT -> . ID IQUAL CHAR DOT_AN_DCOMMA
+    (70) ASSIGNMENT -> . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+    (39) SENTENCE_IF -> . CONDITIONAL_IF LPAREN OPTIONS RPAREN LKEY SENTENCES RKEY
+
+    RKEY            reduce using rule 83 (empty -> .)
+    METHOD_RETURN   shift and go to state 109
+    TYPE_INT        shift and go to state 31
+    TYPE_DOUBLE     shift and go to state 32
+    TYPE_STRING     shift and go to state 33
+    TYPE_CHAR       shift and go to state 34
+    TYPE_BOOL       shift and go to state 35
+    ID              shift and go to state 12
+    CONDITIONAL_IF  shift and go to state 111
+
+    empty                          shift and go to state 103
+    SENTENCES_METHOD               shift and go to state 104
+    SENTENCE_METHOD                shift and go to state 105
+    DECLARATIONS                   shift and go to state 106
+    ASSIGNMENTS                    shift and go to state 107
+    SENTENCES_IF                   shift and go to state 108
+    DECLARATION                    shift and go to state 20
+    ASSIGNMENT                     shift and go to state 21
+    SENTENCE_IF                    shift and go to state 110
+
+state 89
+
+    (12) METHOD -> METHOD_VOID ID LPAREN L_PARAMS RPAREN . LKEY empty RKEY
+    (13) METHOD -> METHOD_VOID ID LPAREN L_PARAMS RPAREN . LKEY SENTENCES_METHOD RKEY
+
+    LKEY            shift and go to state 112
+
+
+state 90
+
+    (71) L_PARAMS -> L_PARAMS COMMA . PARAM
+    (73) PARAM -> . TYPE_INT ID
+    (74) PARAM -> . TYPE_DOUBLE ID
+    (75) PARAM -> . TYPE_STRING ID
+    (76) PARAM -> . TYPE_CHAR ID
+    (77) PARAM -> . TYPE_BOOL ID
+
+    TYPE_INT        shift and go to state 71
+    TYPE_DOUBLE     shift and go to state 72
+    TYPE_STRING     shift and go to state 73
+    TYPE_CHAR       shift and go to state 74
+    TYPE_BOOL       shift and go to state 75
+
+    PARAM                          shift and go to state 113
+
+state 91
+
+    (73) PARAM -> TYPE_INT ID .
+
+    RPAREN          reduce using rule 73 (PARAM -> TYPE_INT ID .)
+    COMMA           reduce using rule 73 (PARAM -> TYPE_INT ID .)
+
+
+state 92
+
+    (74) PARAM -> TYPE_DOUBLE ID .
+
+    RPAREN          reduce using rule 74 (PARAM -> TYPE_DOUBLE ID .)
+    COMMA           reduce using rule 74 (PARAM -> TYPE_DOUBLE ID .)
+
+
+state 93
+
+    (75) PARAM -> TYPE_STRING ID .
+
+    RPAREN          reduce using rule 75 (PARAM -> TYPE_STRING ID .)
+    COMMA           reduce using rule 75 (PARAM -> TYPE_STRING ID .)
+
+
+state 94
+
+    (76) PARAM -> TYPE_CHAR ID .
+
+    RPAREN          reduce using rule 76 (PARAM -> TYPE_CHAR ID .)
+    COMMA           reduce using rule 76 (PARAM -> TYPE_CHAR ID .)
+
+
+state 95
+
+    (77) PARAM -> TYPE_BOOL ID .
+
+    RPAREN          reduce using rule 77 (PARAM -> TYPE_BOOL ID .)
+    COMMA           reduce using rule 77 (PARAM -> TYPE_BOOL ID .)
+
+
+state 96
+
+    (59) DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .
+
+    TYPE_INT        reduce using rule 59 (DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .)
+    TYPE_DOUBLE     reduce using rule 59 (DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .)
+    TYPE_STRING     reduce using rule 59 (DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .)
+    TYPE_CHAR       reduce using rule 59 (DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .)
+    TYPE_BOOL       reduce using rule 59 (DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .)
+    ID              reduce using rule 59 (DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .)
+    METHOD_VOID     reduce using rule 59 (DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .)
+    $end            reduce using rule 59 (DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .)
+    RKEY            reduce using rule 59 (DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .)
+    METHOD_RETURN   reduce using rule 59 (DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .)
+    CONDITIONAL_IF  reduce using rule 59 (DECLARATION -> TYPE_INT ID IQUAL INT DOT_AN_DCOMMA .)
+
+
+state 97
+
+    (27) COUPLER -> ID LPAREN RPAREN LKEY . empty RKEY
+    (28) COUPLER -> ID LPAREN RPAREN LKEY . SENTENCES_FUNTION RKEY
+    (83) empty -> .
+    (31) SENTENCES_FUNTION -> . SENTENCES_FUNTION SENTENCE_FUNTION
+    (32) SENTENCES_FUNTION -> . SENTENCE_FUNTION
+    (33) SENTENCE_FUNTION -> . DECLARATIONS
+    (34) SENTENCE_FUNTION -> . ASSIGNMENTS
+    (35) SENTENCE_FUNTION -> . METHOD_RETURN TYPE_DATO DOT_AN_DCOMMA
+    (36) SENTENCE_FUNTION -> . METHOD_RETURN ID DOT_AN_DCOMMA
+    (57) DECLARATIONS -> . DECLARATIONS DECLARATION
+    (58) DECLARATIONS -> . DECLARATION
+    (64) ASSIGNMENTS -> . ASSIGNMENTS ASSIGNMENT
+    (65) ASSIGNMENTS -> . ASSIGNMENT
+    (59) DECLARATION -> . TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
+    (60) DECLARATION -> . TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
+    (61) DECLARATION -> . TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
+    (62) DECLARATION -> . TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
+    (63) DECLARATION -> . TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+    (66) ASSIGNMENT -> . ID IQUAL INT DOT_AN_DCOMMA
+    (67) ASSIGNMENT -> . ID IQUAL FLOAT DOT_AN_DCOMMA
+    (68) ASSIGNMENT -> . ID IQUAL STRING DOT_AN_DCOMMA
+    (69) ASSIGNMENT -> . ID IQUAL CHAR DOT_AN_DCOMMA
+    (70) ASSIGNMENT -> . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+
+    RKEY            reduce using rule 83 (empty -> .)
+    METHOD_RETURN   shift and go to state 119
+    TYPE_INT        shift and go to state 31
+    TYPE_DOUBLE     shift and go to state 32
+    TYPE_STRING     shift and go to state 33
+    TYPE_CHAR       shift and go to state 34
+    TYPE_BOOL       shift and go to state 35
+    ID              shift and go to state 12
+
+    empty                          shift and go to state 114
+    SENTENCES_FUNTION              shift and go to state 115
+    SENTENCE_FUNTION               shift and go to state 116
+    DECLARATIONS                   shift and go to state 117
+    ASSIGNMENTS                    shift and go to state 118
+    DECLARATION                    shift and go to state 20
+    ASSIGNMENT                     shift and go to state 21
+
+state 98
+
+    (29) COUPLER -> ID LPAREN L_PARAMS RPAREN . LKEY empty RKEY
+    (30) COUPLER -> ID LPAREN L_PARAMS RPAREN . LKEY SENTENCES_FUNTION RKEY
+
+    LKEY            shift and go to state 120
+
+
+state 99
+
+    (60) DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .
+
+    TYPE_INT        reduce using rule 60 (DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .)
+    TYPE_DOUBLE     reduce using rule 60 (DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .)
+    TYPE_STRING     reduce using rule 60 (DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .)
+    TYPE_CHAR       reduce using rule 60 (DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .)
+    TYPE_BOOL       reduce using rule 60 (DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .)
+    ID              reduce using rule 60 (DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .)
+    METHOD_VOID     reduce using rule 60 (DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .)
+    $end            reduce using rule 60 (DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .)
+    RKEY            reduce using rule 60 (DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .)
+    METHOD_RETURN   reduce using rule 60 (DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .)
+    CONDITIONAL_IF  reduce using rule 60 (DECLARATION -> TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA .)
+
+
+state 100
+
+    (61) DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .
+
+    TYPE_INT        reduce using rule 61 (DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .)
+    TYPE_DOUBLE     reduce using rule 61 (DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .)
+    TYPE_STRING     reduce using rule 61 (DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .)
+    TYPE_CHAR       reduce using rule 61 (DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .)
+    TYPE_BOOL       reduce using rule 61 (DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .)
+    ID              reduce using rule 61 (DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .)
+    METHOD_VOID     reduce using rule 61 (DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .)
+    $end            reduce using rule 61 (DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .)
+    RKEY            reduce using rule 61 (DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .)
+    METHOD_RETURN   reduce using rule 61 (DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .)
+    CONDITIONAL_IF  reduce using rule 61 (DECLARATION -> TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA .)
+
+
+state 101
+
+    (62) DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .
+
+    TYPE_INT        reduce using rule 62 (DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .)
+    TYPE_DOUBLE     reduce using rule 62 (DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .)
+    TYPE_STRING     reduce using rule 62 (DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .)
+    TYPE_CHAR       reduce using rule 62 (DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .)
+    TYPE_BOOL       reduce using rule 62 (DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .)
+    ID              reduce using rule 62 (DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .)
+    METHOD_VOID     reduce using rule 62 (DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .)
+    $end            reduce using rule 62 (DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .)
+    RKEY            reduce using rule 62 (DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .)
+    METHOD_RETURN   reduce using rule 62 (DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .)
+    CONDITIONAL_IF  reduce using rule 62 (DECLARATION -> TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA .)
+
+
+state 102
+
+    (63) DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .
+
+    TYPE_INT        reduce using rule 63 (DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
+    TYPE_DOUBLE     reduce using rule 63 (DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
+    TYPE_STRING     reduce using rule 63 (DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
+    TYPE_CHAR       reduce using rule 63 (DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
+    TYPE_BOOL       reduce using rule 63 (DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
+    ID              reduce using rule 63 (DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
+    METHOD_VOID     reduce using rule 63 (DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
+    $end            reduce using rule 63 (DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
+    RKEY            reduce using rule 63 (DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
+    METHOD_RETURN   reduce using rule 63 (DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
+    CONDITIONAL_IF  reduce using rule 63 (DECLARATION -> TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA .)
+
+
+state 103
+
+    (10) METHOD -> METHOD_VOID ID LPAREN RPAREN LKEY empty . RKEY
+
+    RKEY            shift and go to state 121
+
+
+state 104
+
+    (11) METHOD -> METHOD_VOID ID LPAREN RPAREN LKEY SENTENCES_METHOD . RKEY
+    (14) SENTENCES_METHOD -> SENTENCES_METHOD . SENTENCE_METHOD
+    (16) SENTENCE_METHOD -> . DECLARATIONS
+    (17) SENTENCE_METHOD -> . ASSIGNMENTS
+    (18) SENTENCE_METHOD -> . SENTENCES_IF
+    (19) SENTENCE_METHOD -> . METHOD_RETURN DOT_AN_DCOMMA
+    (57) DECLARATIONS -> . DECLARATIONS DECLARATION
+    (58) DECLARATIONS -> . DECLARATION
+    (64) ASSIGNMENTS -> . ASSIGNMENTS ASSIGNMENT
+    (65) ASSIGNMENTS -> . ASSIGNMENT
+    (37) SENTENCES_IF -> . SENTENCES_IF SENTENCE_IF
+    (38) SENTENCES_IF -> . SENTENCE_IF
+    (59) DECLARATION -> . TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
+    (60) DECLARATION -> . TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
+    (61) DECLARATION -> . TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
+    (62) DECLARATION -> . TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
+    (63) DECLARATION -> . TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+    (66) ASSIGNMENT -> . ID IQUAL INT DOT_AN_DCOMMA
+    (67) ASSIGNMENT -> . ID IQUAL FLOAT DOT_AN_DCOMMA
+    (68) ASSIGNMENT -> . ID IQUAL STRING DOT_AN_DCOMMA
+    (69) ASSIGNMENT -> . ID IQUAL CHAR DOT_AN_DCOMMA
+    (70) ASSIGNMENT -> . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+    (39) SENTENCE_IF -> . CONDITIONAL_IF LPAREN OPTIONS RPAREN LKEY SENTENCES RKEY
+
+    RKEY            shift and go to state 122
+    METHOD_RETURN   shift and go to state 109
+    TYPE_INT        shift and go to state 31
+    TYPE_DOUBLE     shift and go to state 32
+    TYPE_STRING     shift and go to state 33
+    TYPE_CHAR       shift and go to state 34
+    TYPE_BOOL       shift and go to state 35
+    ID              shift and go to state 12
+    CONDITIONAL_IF  shift and go to state 111
+
+    SENTENCE_METHOD                shift and go to state 123
+    DECLARATIONS                   shift and go to state 106
+    ASSIGNMENTS                    shift and go to state 107
+    SENTENCES_IF                   shift and go to state 108
+    DECLARATION                    shift and go to state 20
+    ASSIGNMENT                     shift and go to state 21
+    SENTENCE_IF                    shift and go to state 110
+
+state 105
+
+    (15) SENTENCES_METHOD -> SENTENCE_METHOD .
+
+    RKEY            reduce using rule 15 (SENTENCES_METHOD -> SENTENCE_METHOD .)
+    METHOD_RETURN   reduce using rule 15 (SENTENCES_METHOD -> SENTENCE_METHOD .)
+    TYPE_INT        reduce using rule 15 (SENTENCES_METHOD -> SENTENCE_METHOD .)
+    TYPE_DOUBLE     reduce using rule 15 (SENTENCES_METHOD -> SENTENCE_METHOD .)
+    TYPE_STRING     reduce using rule 15 (SENTENCES_METHOD -> SENTENCE_METHOD .)
+    TYPE_CHAR       reduce using rule 15 (SENTENCES_METHOD -> SENTENCE_METHOD .)
+    TYPE_BOOL       reduce using rule 15 (SENTENCES_METHOD -> SENTENCE_METHOD .)
+    ID              reduce using rule 15 (SENTENCES_METHOD -> SENTENCE_METHOD .)
+    CONDITIONAL_IF  reduce using rule 15 (SENTENCES_METHOD -> SENTENCE_METHOD .)
+
+
+state 106
+
+    (16) SENTENCE_METHOD -> DECLARATIONS .
+    (57) DECLARATIONS -> DECLARATIONS . DECLARATION
+    (59) DECLARATION -> . TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
+    (60) DECLARATION -> . TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
+    (61) DECLARATION -> . TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
+    (62) DECLARATION -> . TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
+    (63) DECLARATION -> . TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+
+  ! shift/reduce conflict for TYPE_INT resolved as shift
+  ! shift/reduce conflict for TYPE_DOUBLE resolved as shift
+  ! shift/reduce conflict for TYPE_STRING resolved as shift
+  ! shift/reduce conflict for TYPE_CHAR resolved as shift
+  ! shift/reduce conflict for TYPE_BOOL resolved as shift
+    RKEY            reduce using rule 16 (SENTENCE_METHOD -> DECLARATIONS .)
+    METHOD_RETURN   reduce using rule 16 (SENTENCE_METHOD -> DECLARATIONS .)
+    ID              reduce using rule 16 (SENTENCE_METHOD -> DECLARATIONS .)
+    CONDITIONAL_IF  reduce using rule 16 (SENTENCE_METHOD -> DECLARATIONS .)
+    TYPE_INT        shift and go to state 31
+    TYPE_DOUBLE     shift and go to state 32
+    TYPE_STRING     shift and go to state 33
+    TYPE_CHAR       shift and go to state 34
+    TYPE_BOOL       shift and go to state 35
+
+  ! TYPE_INT        [ reduce using rule 16 (SENTENCE_METHOD -> DECLARATIONS .) ]
+  ! TYPE_DOUBLE     [ reduce using rule 16 (SENTENCE_METHOD -> DECLARATIONS .) ]
+  ! TYPE_STRING     [ reduce using rule 16 (SENTENCE_METHOD -> DECLARATIONS .) ]
+  ! TYPE_CHAR       [ reduce using rule 16 (SENTENCE_METHOD -> DECLARATIONS .) ]
+  ! TYPE_BOOL       [ reduce using rule 16 (SENTENCE_METHOD -> DECLARATIONS .) ]
+
+    DECLARATION                    shift and go to state 48
+
+state 107
+
+    (17) SENTENCE_METHOD -> ASSIGNMENTS .
+    (64) ASSIGNMENTS -> ASSIGNMENTS . ASSIGNMENT
+    (66) ASSIGNMENT -> . ID IQUAL INT DOT_AN_DCOMMA
+    (67) ASSIGNMENT -> . ID IQUAL FLOAT DOT_AN_DCOMMA
+    (68) ASSIGNMENT -> . ID IQUAL STRING DOT_AN_DCOMMA
+    (69) ASSIGNMENT -> . ID IQUAL CHAR DOT_AN_DCOMMA
+    (70) ASSIGNMENT -> . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+
+  ! shift/reduce conflict for ID resolved as shift
+    RKEY            reduce using rule 17 (SENTENCE_METHOD -> ASSIGNMENTS .)
+    METHOD_RETURN   reduce using rule 17 (SENTENCE_METHOD -> ASSIGNMENTS .)
+    TYPE_INT        reduce using rule 17 (SENTENCE_METHOD -> ASSIGNMENTS .)
+    TYPE_DOUBLE     reduce using rule 17 (SENTENCE_METHOD -> ASSIGNMENTS .)
+    TYPE_STRING     reduce using rule 17 (SENTENCE_METHOD -> ASSIGNMENTS .)
+    TYPE_CHAR       reduce using rule 17 (SENTENCE_METHOD -> ASSIGNMENTS .)
+    TYPE_BOOL       reduce using rule 17 (SENTENCE_METHOD -> ASSIGNMENTS .)
+    CONDITIONAL_IF  reduce using rule 17 (SENTENCE_METHOD -> ASSIGNMENTS .)
+    ID              shift and go to state 12
+
+  ! ID              [ reduce using rule 17 (SENTENCE_METHOD -> ASSIGNMENTS .) ]
+
+    ASSIGNMENT                     shift and go to state 49
+
+state 108
+
+    (18) SENTENCE_METHOD -> SENTENCES_IF .
+    (37) SENTENCES_IF -> SENTENCES_IF . SENTENCE_IF
+    (39) SENTENCE_IF -> . CONDITIONAL_IF LPAREN OPTIONS RPAREN LKEY SENTENCES RKEY
+
+  ! shift/reduce conflict for CONDITIONAL_IF resolved as shift
+    RKEY            reduce using rule 18 (SENTENCE_METHOD -> SENTENCES_IF .)
+    METHOD_RETURN   reduce using rule 18 (SENTENCE_METHOD -> SENTENCES_IF .)
+    TYPE_INT        reduce using rule 18 (SENTENCE_METHOD -> SENTENCES_IF .)
+    TYPE_DOUBLE     reduce using rule 18 (SENTENCE_METHOD -> SENTENCES_IF .)
+    TYPE_STRING     reduce using rule 18 (SENTENCE_METHOD -> SENTENCES_IF .)
+    TYPE_CHAR       reduce using rule 18 (SENTENCE_METHOD -> SENTENCES_IF .)
+    TYPE_BOOL       reduce using rule 18 (SENTENCE_METHOD -> SENTENCES_IF .)
+    ID              reduce using rule 18 (SENTENCE_METHOD -> SENTENCES_IF .)
+    CONDITIONAL_IF  shift and go to state 111
+
+  ! CONDITIONAL_IF  [ reduce using rule 18 (SENTENCE_METHOD -> SENTENCES_IF .) ]
+
+    SENTENCE_IF                    shift and go to state 124
+
+state 109
+
+    (19) SENTENCE_METHOD -> METHOD_RETURN . DOT_AN_DCOMMA
+
+    DOT_AN_DCOMMA   shift and go to state 125
+
+
+state 110
+
+    (38) SENTENCES_IF -> SENTENCE_IF .
+
+    CONDITIONAL_IF  reduce using rule 38 (SENTENCES_IF -> SENTENCE_IF .)
+    RKEY            reduce using rule 38 (SENTENCES_IF -> SENTENCE_IF .)
+    METHOD_RETURN   reduce using rule 38 (SENTENCES_IF -> SENTENCE_IF .)
+    TYPE_INT        reduce using rule 38 (SENTENCES_IF -> SENTENCE_IF .)
+    TYPE_DOUBLE     reduce using rule 38 (SENTENCES_IF -> SENTENCE_IF .)
+    TYPE_STRING     reduce using rule 38 (SENTENCES_IF -> SENTENCE_IF .)
+    TYPE_CHAR       reduce using rule 38 (SENTENCES_IF -> SENTENCE_IF .)
+    TYPE_BOOL       reduce using rule 38 (SENTENCES_IF -> SENTENCE_IF .)
+    ID              reduce using rule 38 (SENTENCES_IF -> SENTENCE_IF .)
+
+
+state 111
+
+    (39) SENTENCE_IF -> CONDITIONAL_IF . LPAREN OPTIONS RPAREN LKEY SENTENCES RKEY
+
+    LPAREN          shift and go to state 126
+
+
+state 112
+
+    (12) METHOD -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY . empty RKEY
+    (13) METHOD -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY . SENTENCES_METHOD RKEY
+    (83) empty -> .
+    (14) SENTENCES_METHOD -> . SENTENCES_METHOD SENTENCE_METHOD
+    (15) SENTENCES_METHOD -> . SENTENCE_METHOD
+    (16) SENTENCE_METHOD -> . DECLARATIONS
+    (17) SENTENCE_METHOD -> . ASSIGNMENTS
+    (18) SENTENCE_METHOD -> . SENTENCES_IF
+    (19) SENTENCE_METHOD -> . METHOD_RETURN DOT_AN_DCOMMA
+    (57) DECLARATIONS -> . DECLARATIONS DECLARATION
+    (58) DECLARATIONS -> . DECLARATION
+    (64) ASSIGNMENTS -> . ASSIGNMENTS ASSIGNMENT
+    (65) ASSIGNMENTS -> . ASSIGNMENT
+    (37) SENTENCES_IF -> . SENTENCES_IF SENTENCE_IF
+    (38) SENTENCES_IF -> . SENTENCE_IF
+    (59) DECLARATION -> . TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
+    (60) DECLARATION -> . TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
+    (61) DECLARATION -> . TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
+    (62) DECLARATION -> . TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
+    (63) DECLARATION -> . TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+    (66) ASSIGNMENT -> . ID IQUAL INT DOT_AN_DCOMMA
+    (67) ASSIGNMENT -> . ID IQUAL FLOAT DOT_AN_DCOMMA
+    (68) ASSIGNMENT -> . ID IQUAL STRING DOT_AN_DCOMMA
+    (69) ASSIGNMENT -> . ID IQUAL CHAR DOT_AN_DCOMMA
+    (70) ASSIGNMENT -> . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+    (39) SENTENCE_IF -> . CONDITIONAL_IF LPAREN OPTIONS RPAREN LKEY SENTENCES RKEY
+
+    RKEY            reduce using rule 83 (empty -> .)
+    METHOD_RETURN   shift and go to state 109
+    TYPE_INT        shift and go to state 31
+    TYPE_DOUBLE     shift and go to state 32
+    TYPE_STRING     shift and go to state 33
+    TYPE_CHAR       shift and go to state 34
+    TYPE_BOOL       shift and go to state 35
+    ID              shift and go to state 12
+    CONDITIONAL_IF  shift and go to state 111
+
+    empty                          shift and go to state 127
+    SENTENCES_METHOD               shift and go to state 128
+    SENTENCE_METHOD                shift and go to state 105
+    DECLARATIONS                   shift and go to state 106
+    ASSIGNMENTS                    shift and go to state 107
+    SENTENCES_IF                   shift and go to state 108
+    DECLARATION                    shift and go to state 20
+    ASSIGNMENT                     shift and go to state 21
+    SENTENCE_IF                    shift and go to state 110
+
+state 113
+
+    (71) L_PARAMS -> L_PARAMS COMMA PARAM .
+
+    RPAREN          reduce using rule 71 (L_PARAMS -> L_PARAMS COMMA PARAM .)
+    COMMA           reduce using rule 71 (L_PARAMS -> L_PARAMS COMMA PARAM .)
+
+
+state 114
+
+    (27) COUPLER -> ID LPAREN RPAREN LKEY empty . RKEY
+
+    RKEY            shift and go to state 129
+
+
+state 115
+
+    (28) COUPLER -> ID LPAREN RPAREN LKEY SENTENCES_FUNTION . RKEY
+    (31) SENTENCES_FUNTION -> SENTENCES_FUNTION . SENTENCE_FUNTION
+    (33) SENTENCE_FUNTION -> . DECLARATIONS
+    (34) SENTENCE_FUNTION -> . ASSIGNMENTS
+    (35) SENTENCE_FUNTION -> . METHOD_RETURN TYPE_DATO DOT_AN_DCOMMA
+    (36) SENTENCE_FUNTION -> . METHOD_RETURN ID DOT_AN_DCOMMA
+    (57) DECLARATIONS -> . DECLARATIONS DECLARATION
+    (58) DECLARATIONS -> . DECLARATION
+    (64) ASSIGNMENTS -> . ASSIGNMENTS ASSIGNMENT
+    (65) ASSIGNMENTS -> . ASSIGNMENT
+    (59) DECLARATION -> . TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
+    (60) DECLARATION -> . TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
+    (61) DECLARATION -> . TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
+    (62) DECLARATION -> . TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
+    (63) DECLARATION -> . TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+    (66) ASSIGNMENT -> . ID IQUAL INT DOT_AN_DCOMMA
+    (67) ASSIGNMENT -> . ID IQUAL FLOAT DOT_AN_DCOMMA
+    (68) ASSIGNMENT -> . ID IQUAL STRING DOT_AN_DCOMMA
+    (69) ASSIGNMENT -> . ID IQUAL CHAR DOT_AN_DCOMMA
+    (70) ASSIGNMENT -> . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+
+    RKEY            shift and go to state 130
+    METHOD_RETURN   shift and go to state 119
+    TYPE_INT        shift and go to state 31
+    TYPE_DOUBLE     shift and go to state 32
+    TYPE_STRING     shift and go to state 33
+    TYPE_CHAR       shift and go to state 34
+    TYPE_BOOL       shift and go to state 35
+    ID              shift and go to state 12
+
+    SENTENCE_FUNTION               shift and go to state 131
+    DECLARATIONS                   shift and go to state 117
+    ASSIGNMENTS                    shift and go to state 118
+    DECLARATION                    shift and go to state 20
+    ASSIGNMENT                     shift and go to state 21
+
+state 116
+
+    (32) SENTENCES_FUNTION -> SENTENCE_FUNTION .
+
+    RKEY            reduce using rule 32 (SENTENCES_FUNTION -> SENTENCE_FUNTION .)
+    METHOD_RETURN   reduce using rule 32 (SENTENCES_FUNTION -> SENTENCE_FUNTION .)
+    TYPE_INT        reduce using rule 32 (SENTENCES_FUNTION -> SENTENCE_FUNTION .)
+    TYPE_DOUBLE     reduce using rule 32 (SENTENCES_FUNTION -> SENTENCE_FUNTION .)
+    TYPE_STRING     reduce using rule 32 (SENTENCES_FUNTION -> SENTENCE_FUNTION .)
+    TYPE_CHAR       reduce using rule 32 (SENTENCES_FUNTION -> SENTENCE_FUNTION .)
+    TYPE_BOOL       reduce using rule 32 (SENTENCES_FUNTION -> SENTENCE_FUNTION .)
+    ID              reduce using rule 32 (SENTENCES_FUNTION -> SENTENCE_FUNTION .)
+
+
+state 117
+
+    (33) SENTENCE_FUNTION -> DECLARATIONS .
+    (57) DECLARATIONS -> DECLARATIONS . DECLARATION
+    (59) DECLARATION -> . TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
+    (60) DECLARATION -> . TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
+    (61) DECLARATION -> . TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
+    (62) DECLARATION -> . TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
+    (63) DECLARATION -> . TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+
+  ! shift/reduce conflict for TYPE_INT resolved as shift
+  ! shift/reduce conflict for TYPE_DOUBLE resolved as shift
+  ! shift/reduce conflict for TYPE_STRING resolved as shift
+  ! shift/reduce conflict for TYPE_CHAR resolved as shift
+  ! shift/reduce conflict for TYPE_BOOL resolved as shift
+    RKEY            reduce using rule 33 (SENTENCE_FUNTION -> DECLARATIONS .)
+    METHOD_RETURN   reduce using rule 33 (SENTENCE_FUNTION -> DECLARATIONS .)
+    ID              reduce using rule 33 (SENTENCE_FUNTION -> DECLARATIONS .)
+    TYPE_INT        shift and go to state 31
+    TYPE_DOUBLE     shift and go to state 32
+    TYPE_STRING     shift and go to state 33
+    TYPE_CHAR       shift and go to state 34
+    TYPE_BOOL       shift and go to state 35
+
+  ! TYPE_INT        [ reduce using rule 33 (SENTENCE_FUNTION -> DECLARATIONS .) ]
+  ! TYPE_DOUBLE     [ reduce using rule 33 (SENTENCE_FUNTION -> DECLARATIONS .) ]
+  ! TYPE_STRING     [ reduce using rule 33 (SENTENCE_FUNTION -> DECLARATIONS .) ]
+  ! TYPE_CHAR       [ reduce using rule 33 (SENTENCE_FUNTION -> DECLARATIONS .) ]
+  ! TYPE_BOOL       [ reduce using rule 33 (SENTENCE_FUNTION -> DECLARATIONS .) ]
+
+    DECLARATION                    shift and go to state 48
+
+state 118
+
+    (34) SENTENCE_FUNTION -> ASSIGNMENTS .
+    (64) ASSIGNMENTS -> ASSIGNMENTS . ASSIGNMENT
+    (66) ASSIGNMENT -> . ID IQUAL INT DOT_AN_DCOMMA
+    (67) ASSIGNMENT -> . ID IQUAL FLOAT DOT_AN_DCOMMA
+    (68) ASSIGNMENT -> . ID IQUAL STRING DOT_AN_DCOMMA
+    (69) ASSIGNMENT -> . ID IQUAL CHAR DOT_AN_DCOMMA
+    (70) ASSIGNMENT -> . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+
+  ! shift/reduce conflict for ID resolved as shift
+    RKEY            reduce using rule 34 (SENTENCE_FUNTION -> ASSIGNMENTS .)
+    METHOD_RETURN   reduce using rule 34 (SENTENCE_FUNTION -> ASSIGNMENTS .)
+    TYPE_INT        reduce using rule 34 (SENTENCE_FUNTION -> ASSIGNMENTS .)
+    TYPE_DOUBLE     reduce using rule 34 (SENTENCE_FUNTION -> ASSIGNMENTS .)
+    TYPE_STRING     reduce using rule 34 (SENTENCE_FUNTION -> ASSIGNMENTS .)
+    TYPE_CHAR       reduce using rule 34 (SENTENCE_FUNTION -> ASSIGNMENTS .)
+    TYPE_BOOL       reduce using rule 34 (SENTENCE_FUNTION -> ASSIGNMENTS .)
+    ID              shift and go to state 12
+
+  ! ID              [ reduce using rule 34 (SENTENCE_FUNTION -> ASSIGNMENTS .) ]
+
+    ASSIGNMENT                     shift and go to state 49
+
+state 119
+
+    (35) SENTENCE_FUNTION -> METHOD_RETURN . TYPE_DATO DOT_AN_DCOMMA
+    (36) SENTENCE_FUNTION -> METHOD_RETURN . ID DOT_AN_DCOMMA
+    (78) TYPE_DATO -> . INT
+    (79) TYPE_DATO -> . FLOAT
+    (80) TYPE_DATO -> . STRING
+    (81) TYPE_DATO -> . CHAR
+    (82) TYPE_DATO -> . DATA_BOOL
+
+    ID              shift and go to state 133
+    INT             shift and go to state 134
+    FLOAT           shift and go to state 135
+    STRING          shift and go to state 136
+    CHAR            shift and go to state 137
+    DATA_BOOL       shift and go to state 138
+
+    TYPE_DATO                      shift and go to state 132
+
+state 120
+
+    (29) COUPLER -> ID LPAREN L_PARAMS RPAREN LKEY . empty RKEY
+    (30) COUPLER -> ID LPAREN L_PARAMS RPAREN LKEY . SENTENCES_FUNTION RKEY
+    (83) empty -> .
+    (31) SENTENCES_FUNTION -> . SENTENCES_FUNTION SENTENCE_FUNTION
+    (32) SENTENCES_FUNTION -> . SENTENCE_FUNTION
+    (33) SENTENCE_FUNTION -> . DECLARATIONS
+    (34) SENTENCE_FUNTION -> . ASSIGNMENTS
+    (35) SENTENCE_FUNTION -> . METHOD_RETURN TYPE_DATO DOT_AN_DCOMMA
+    (36) SENTENCE_FUNTION -> . METHOD_RETURN ID DOT_AN_DCOMMA
+    (57) DECLARATIONS -> . DECLARATIONS DECLARATION
+    (58) DECLARATIONS -> . DECLARATION
+    (64) ASSIGNMENTS -> . ASSIGNMENTS ASSIGNMENT
+    (65) ASSIGNMENTS -> . ASSIGNMENT
+    (59) DECLARATION -> . TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
+    (60) DECLARATION -> . TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
+    (61) DECLARATION -> . TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
+    (62) DECLARATION -> . TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
+    (63) DECLARATION -> . TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+    (66) ASSIGNMENT -> . ID IQUAL INT DOT_AN_DCOMMA
+    (67) ASSIGNMENT -> . ID IQUAL FLOAT DOT_AN_DCOMMA
+    (68) ASSIGNMENT -> . ID IQUAL STRING DOT_AN_DCOMMA
+    (69) ASSIGNMENT -> . ID IQUAL CHAR DOT_AN_DCOMMA
+    (70) ASSIGNMENT -> . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+
+    RKEY            reduce using rule 83 (empty -> .)
+    METHOD_RETURN   shift and go to state 119
+    TYPE_INT        shift and go to state 31
+    TYPE_DOUBLE     shift and go to state 32
+    TYPE_STRING     shift and go to state 33
+    TYPE_CHAR       shift and go to state 34
+    TYPE_BOOL       shift and go to state 35
+    ID              shift and go to state 12
+
+    empty                          shift and go to state 139
+    SENTENCES_FUNTION              shift and go to state 140
+    SENTENCE_FUNTION               shift and go to state 116
+    DECLARATIONS                   shift and go to state 117
+    ASSIGNMENTS                    shift and go to state 118
+    DECLARATION                    shift and go to state 20
+    ASSIGNMENT                     shift and go to state 21
+
+state 121
+
+    (10) METHOD -> METHOD_VOID ID LPAREN RPAREN LKEY empty RKEY .
+
+    METHOD_VOID     reduce using rule 10 (METHOD -> METHOD_VOID ID LPAREN RPAREN LKEY empty RKEY .)
+    TYPE_INT        reduce using rule 10 (METHOD -> METHOD_VOID ID LPAREN RPAREN LKEY empty RKEY .)
+    TYPE_DOUBLE     reduce using rule 10 (METHOD -> METHOD_VOID ID LPAREN RPAREN LKEY empty RKEY .)
+    TYPE_STRING     reduce using rule 10 (METHOD -> METHOD_VOID ID LPAREN RPAREN LKEY empty RKEY .)
+    TYPE_CHAR       reduce using rule 10 (METHOD -> METHOD_VOID ID LPAREN RPAREN LKEY empty RKEY .)
+    TYPE_BOOL       reduce using rule 10 (METHOD -> METHOD_VOID ID LPAREN RPAREN LKEY empty RKEY .)
+    ID              reduce using rule 10 (METHOD -> METHOD_VOID ID LPAREN RPAREN LKEY empty RKEY .)
+    $end            reduce using rule 10 (METHOD -> METHOD_VOID ID LPAREN RPAREN LKEY empty RKEY .)
+
+
+state 122
+
+    (11) METHOD -> METHOD_VOID ID LPAREN RPAREN LKEY SENTENCES_METHOD RKEY .
+
+    METHOD_VOID     reduce using rule 11 (METHOD -> METHOD_VOID ID LPAREN RPAREN LKEY SENTENCES_METHOD RKEY .)
+    TYPE_INT        reduce using rule 11 (METHOD -> METHOD_VOID ID LPAREN RPAREN LKEY SENTENCES_METHOD RKEY .)
+    TYPE_DOUBLE     reduce using rule 11 (METHOD -> METHOD_VOID ID LPAREN RPAREN LKEY SENTENCES_METHOD RKEY .)
+    TYPE_STRING     reduce using rule 11 (METHOD -> METHOD_VOID ID LPAREN RPAREN LKEY SENTENCES_METHOD RKEY .)
+    TYPE_CHAR       reduce using rule 11 (METHOD -> METHOD_VOID ID LPAREN RPAREN LKEY SENTENCES_METHOD RKEY .)
+    TYPE_BOOL       reduce using rule 11 (METHOD -> METHOD_VOID ID LPAREN RPAREN LKEY SENTENCES_METHOD RKEY .)
+    ID              reduce using rule 11 (METHOD -> METHOD_VOID ID LPAREN RPAREN LKEY SENTENCES_METHOD RKEY .)
+    $end            reduce using rule 11 (METHOD -> METHOD_VOID ID LPAREN RPAREN LKEY SENTENCES_METHOD RKEY .)
+
+
+state 123
+
+    (14) SENTENCES_METHOD -> SENTENCES_METHOD SENTENCE_METHOD .
+
+    RKEY            reduce using rule 14 (SENTENCES_METHOD -> SENTENCES_METHOD SENTENCE_METHOD .)
+    METHOD_RETURN   reduce using rule 14 (SENTENCES_METHOD -> SENTENCES_METHOD SENTENCE_METHOD .)
+    TYPE_INT        reduce using rule 14 (SENTENCES_METHOD -> SENTENCES_METHOD SENTENCE_METHOD .)
+    TYPE_DOUBLE     reduce using rule 14 (SENTENCES_METHOD -> SENTENCES_METHOD SENTENCE_METHOD .)
+    TYPE_STRING     reduce using rule 14 (SENTENCES_METHOD -> SENTENCES_METHOD SENTENCE_METHOD .)
+    TYPE_CHAR       reduce using rule 14 (SENTENCES_METHOD -> SENTENCES_METHOD SENTENCE_METHOD .)
+    TYPE_BOOL       reduce using rule 14 (SENTENCES_METHOD -> SENTENCES_METHOD SENTENCE_METHOD .)
+    ID              reduce using rule 14 (SENTENCES_METHOD -> SENTENCES_METHOD SENTENCE_METHOD .)
+    CONDITIONAL_IF  reduce using rule 14 (SENTENCES_METHOD -> SENTENCES_METHOD SENTENCE_METHOD .)
+
+
+state 124
+
+    (37) SENTENCES_IF -> SENTENCES_IF SENTENCE_IF .
+
+    CONDITIONAL_IF  reduce using rule 37 (SENTENCES_IF -> SENTENCES_IF SENTENCE_IF .)
+    RKEY            reduce using rule 37 (SENTENCES_IF -> SENTENCES_IF SENTENCE_IF .)
+    METHOD_RETURN   reduce using rule 37 (SENTENCES_IF -> SENTENCES_IF SENTENCE_IF .)
+    TYPE_INT        reduce using rule 37 (SENTENCES_IF -> SENTENCES_IF SENTENCE_IF .)
+    TYPE_DOUBLE     reduce using rule 37 (SENTENCES_IF -> SENTENCES_IF SENTENCE_IF .)
+    TYPE_STRING     reduce using rule 37 (SENTENCES_IF -> SENTENCES_IF SENTENCE_IF .)
+    TYPE_CHAR       reduce using rule 37 (SENTENCES_IF -> SENTENCES_IF SENTENCE_IF .)
+    TYPE_BOOL       reduce using rule 37 (SENTENCES_IF -> SENTENCES_IF SENTENCE_IF .)
+    ID              reduce using rule 37 (SENTENCES_IF -> SENTENCES_IF SENTENCE_IF .)
+
+
+state 125
+
+    (19) SENTENCE_METHOD -> METHOD_RETURN DOT_AN_DCOMMA .
+
+    RKEY            reduce using rule 19 (SENTENCE_METHOD -> METHOD_RETURN DOT_AN_DCOMMA .)
+    METHOD_RETURN   reduce using rule 19 (SENTENCE_METHOD -> METHOD_RETURN DOT_AN_DCOMMA .)
+    TYPE_INT        reduce using rule 19 (SENTENCE_METHOD -> METHOD_RETURN DOT_AN_DCOMMA .)
+    TYPE_DOUBLE     reduce using rule 19 (SENTENCE_METHOD -> METHOD_RETURN DOT_AN_DCOMMA .)
+    TYPE_STRING     reduce using rule 19 (SENTENCE_METHOD -> METHOD_RETURN DOT_AN_DCOMMA .)
+    TYPE_CHAR       reduce using rule 19 (SENTENCE_METHOD -> METHOD_RETURN DOT_AN_DCOMMA .)
+    TYPE_BOOL       reduce using rule 19 (SENTENCE_METHOD -> METHOD_RETURN DOT_AN_DCOMMA .)
+    ID              reduce using rule 19 (SENTENCE_METHOD -> METHOD_RETURN DOT_AN_DCOMMA .)
+    CONDITIONAL_IF  reduce using rule 19 (SENTENCE_METHOD -> METHOD_RETURN DOT_AN_DCOMMA .)
+
+
+state 126
+
+    (39) SENTENCE_IF -> CONDITIONAL_IF LPAREN . OPTIONS RPAREN LKEY SENTENCES RKEY
+    (40) OPTIONS -> . OPTIONS OPTION
+    (41) OPTIONS -> . OPTION
+    (42) OPTION -> . OPTION IQUALS OPTION
+    (43) OPTION -> . OPTION DIFFERENT OPTION
+    (44) OPTION -> . OPTION IQUAL_GREATER OPTION
+    (45) OPTION -> . OPTION IQUAL_LESS OPTION
+    (46) OPTION -> . OPTION AND OPTION
+    (47) OPTION -> . OPTION OR OPTION
+    (48) OPTION -> . OPTION NOT OPTION
+    (49) OPTION -> . OPTION GREATER OPTION
+    (50) OPTION -> . OPTION LESS OPTION
+    (51) OPTION -> . ID
+    (52) OPTION -> . TYPE_DATO
+    (78) TYPE_DATO -> . INT
+    (79) TYPE_DATO -> . FLOAT
+    (80) TYPE_DATO -> . STRING
+    (81) TYPE_DATO -> . CHAR
+    (82) TYPE_DATO -> . DATA_BOOL
+
+    ID              shift and go to state 143
+    INT             shift and go to state 134
+    FLOAT           shift and go to state 135
+    STRING          shift and go to state 136
+    CHAR            shift and go to state 137
+    DATA_BOOL       shift and go to state 138
+
+    OPTIONS                        shift and go to state 141
+    OPTION                         shift and go to state 142
+    TYPE_DATO                      shift and go to state 144
+
+state 127
+
+    (12) METHOD -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY empty . RKEY
+
+    RKEY            shift and go to state 145
+
+
+state 128
+
+    (13) METHOD -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_METHOD . RKEY
+    (14) SENTENCES_METHOD -> SENTENCES_METHOD . SENTENCE_METHOD
+    (16) SENTENCE_METHOD -> . DECLARATIONS
+    (17) SENTENCE_METHOD -> . ASSIGNMENTS
+    (18) SENTENCE_METHOD -> . SENTENCES_IF
+    (19) SENTENCE_METHOD -> . METHOD_RETURN DOT_AN_DCOMMA
+    (57) DECLARATIONS -> . DECLARATIONS DECLARATION
+    (58) DECLARATIONS -> . DECLARATION
+    (64) ASSIGNMENTS -> . ASSIGNMENTS ASSIGNMENT
+    (65) ASSIGNMENTS -> . ASSIGNMENT
+    (37) SENTENCES_IF -> . SENTENCES_IF SENTENCE_IF
+    (38) SENTENCES_IF -> . SENTENCE_IF
+    (59) DECLARATION -> . TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
+    (60) DECLARATION -> . TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
+    (61) DECLARATION -> . TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
+    (62) DECLARATION -> . TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
+    (63) DECLARATION -> . TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+    (66) ASSIGNMENT -> . ID IQUAL INT DOT_AN_DCOMMA
+    (67) ASSIGNMENT -> . ID IQUAL FLOAT DOT_AN_DCOMMA
+    (68) ASSIGNMENT -> . ID IQUAL STRING DOT_AN_DCOMMA
+    (69) ASSIGNMENT -> . ID IQUAL CHAR DOT_AN_DCOMMA
+    (70) ASSIGNMENT -> . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+    (39) SENTENCE_IF -> . CONDITIONAL_IF LPAREN OPTIONS RPAREN LKEY SENTENCES RKEY
+
+    RKEY            shift and go to state 146
+    METHOD_RETURN   shift and go to state 109
+    TYPE_INT        shift and go to state 31
+    TYPE_DOUBLE     shift and go to state 32
+    TYPE_STRING     shift and go to state 33
+    TYPE_CHAR       shift and go to state 34
+    TYPE_BOOL       shift and go to state 35
+    ID              shift and go to state 12
+    CONDITIONAL_IF  shift and go to state 111
+
+    SENTENCE_METHOD                shift and go to state 123
+    DECLARATIONS                   shift and go to state 106
+    ASSIGNMENTS                    shift and go to state 107
+    SENTENCES_IF                   shift and go to state 108
+    DECLARATION                    shift and go to state 20
+    ASSIGNMENT                     shift and go to state 21
+    SENTENCE_IF                    shift and go to state 110
+
+state 129
+
+    (27) COUPLER -> ID LPAREN RPAREN LKEY empty RKEY .
+
+    TYPE_INT        reduce using rule 27 (COUPLER -> ID LPAREN RPAREN LKEY empty RKEY .)
+    TYPE_DOUBLE     reduce using rule 27 (COUPLER -> ID LPAREN RPAREN LKEY empty RKEY .)
+    TYPE_STRING     reduce using rule 27 (COUPLER -> ID LPAREN RPAREN LKEY empty RKEY .)
+    TYPE_CHAR       reduce using rule 27 (COUPLER -> ID LPAREN RPAREN LKEY empty RKEY .)
+    TYPE_BOOL       reduce using rule 27 (COUPLER -> ID LPAREN RPAREN LKEY empty RKEY .)
+    METHOD_VOID     reduce using rule 27 (COUPLER -> ID LPAREN RPAREN LKEY empty RKEY .)
+    ID              reduce using rule 27 (COUPLER -> ID LPAREN RPAREN LKEY empty RKEY .)
+    $end            reduce using rule 27 (COUPLER -> ID LPAREN RPAREN LKEY empty RKEY .)
+
+
+state 130
+
+    (28) COUPLER -> ID LPAREN RPAREN LKEY SENTENCES_FUNTION RKEY .
+
+    TYPE_INT        reduce using rule 28 (COUPLER -> ID LPAREN RPAREN LKEY SENTENCES_FUNTION RKEY .)
+    TYPE_DOUBLE     reduce using rule 28 (COUPLER -> ID LPAREN RPAREN LKEY SENTENCES_FUNTION RKEY .)
+    TYPE_STRING     reduce using rule 28 (COUPLER -> ID LPAREN RPAREN LKEY SENTENCES_FUNTION RKEY .)
+    TYPE_CHAR       reduce using rule 28 (COUPLER -> ID LPAREN RPAREN LKEY SENTENCES_FUNTION RKEY .)
+    TYPE_BOOL       reduce using rule 28 (COUPLER -> ID LPAREN RPAREN LKEY SENTENCES_FUNTION RKEY .)
+    METHOD_VOID     reduce using rule 28 (COUPLER -> ID LPAREN RPAREN LKEY SENTENCES_FUNTION RKEY .)
+    ID              reduce using rule 28 (COUPLER -> ID LPAREN RPAREN LKEY SENTENCES_FUNTION RKEY .)
+    $end            reduce using rule 28 (COUPLER -> ID LPAREN RPAREN LKEY SENTENCES_FUNTION RKEY .)
+
+
+state 131
+
+    (31) SENTENCES_FUNTION -> SENTENCES_FUNTION SENTENCE_FUNTION .
+
+    RKEY            reduce using rule 31 (SENTENCES_FUNTION -> SENTENCES_FUNTION SENTENCE_FUNTION .)
+    METHOD_RETURN   reduce using rule 31 (SENTENCES_FUNTION -> SENTENCES_FUNTION SENTENCE_FUNTION .)
+    TYPE_INT        reduce using rule 31 (SENTENCES_FUNTION -> SENTENCES_FUNTION SENTENCE_FUNTION .)
+    TYPE_DOUBLE     reduce using rule 31 (SENTENCES_FUNTION -> SENTENCES_FUNTION SENTENCE_FUNTION .)
+    TYPE_STRING     reduce using rule 31 (SENTENCES_FUNTION -> SENTENCES_FUNTION SENTENCE_FUNTION .)
+    TYPE_CHAR       reduce using rule 31 (SENTENCES_FUNTION -> SENTENCES_FUNTION SENTENCE_FUNTION .)
+    TYPE_BOOL       reduce using rule 31 (SENTENCES_FUNTION -> SENTENCES_FUNTION SENTENCE_FUNTION .)
+    ID              reduce using rule 31 (SENTENCES_FUNTION -> SENTENCES_FUNTION SENTENCE_FUNTION .)
+
+
+state 132
+
+    (35) SENTENCE_FUNTION -> METHOD_RETURN TYPE_DATO . DOT_AN_DCOMMA
+
+    DOT_AN_DCOMMA   shift and go to state 147
+
+
+state 133
+
+    (36) SENTENCE_FUNTION -> METHOD_RETURN ID . DOT_AN_DCOMMA
+
+    DOT_AN_DCOMMA   shift and go to state 148
+
+
+state 134
+
+    (78) TYPE_DATO -> INT .
+
+    DOT_AN_DCOMMA   reduce using rule 78 (TYPE_DATO -> INT .)
+    IQUALS          reduce using rule 78 (TYPE_DATO -> INT .)
+    DIFFERENT       reduce using rule 78 (TYPE_DATO -> INT .)
+    IQUAL_GREATER   reduce using rule 78 (TYPE_DATO -> INT .)
+    IQUAL_LESS      reduce using rule 78 (TYPE_DATO -> INT .)
+    AND             reduce using rule 78 (TYPE_DATO -> INT .)
+    OR              reduce using rule 78 (TYPE_DATO -> INT .)
+    NOT             reduce using rule 78 (TYPE_DATO -> INT .)
+    GREATER         reduce using rule 78 (TYPE_DATO -> INT .)
+    LESS            reduce using rule 78 (TYPE_DATO -> INT .)
+    RPAREN          reduce using rule 78 (TYPE_DATO -> INT .)
+    ID              reduce using rule 78 (TYPE_DATO -> INT .)
+    INT             reduce using rule 78 (TYPE_DATO -> INT .)
+    FLOAT           reduce using rule 78 (TYPE_DATO -> INT .)
+    STRING          reduce using rule 78 (TYPE_DATO -> INT .)
+    CHAR            reduce using rule 78 (TYPE_DATO -> INT .)
+    DATA_BOOL       reduce using rule 78 (TYPE_DATO -> INT .)
+
+
+state 135
+
+    (79) TYPE_DATO -> FLOAT .
+
+    DOT_AN_DCOMMA   reduce using rule 79 (TYPE_DATO -> FLOAT .)
+    IQUALS          reduce using rule 79 (TYPE_DATO -> FLOAT .)
+    DIFFERENT       reduce using rule 79 (TYPE_DATO -> FLOAT .)
+    IQUAL_GREATER   reduce using rule 79 (TYPE_DATO -> FLOAT .)
+    IQUAL_LESS      reduce using rule 79 (TYPE_DATO -> FLOAT .)
+    AND             reduce using rule 79 (TYPE_DATO -> FLOAT .)
+    OR              reduce using rule 79 (TYPE_DATO -> FLOAT .)
+    NOT             reduce using rule 79 (TYPE_DATO -> FLOAT .)
+    GREATER         reduce using rule 79 (TYPE_DATO -> FLOAT .)
+    LESS            reduce using rule 79 (TYPE_DATO -> FLOAT .)
+    RPAREN          reduce using rule 79 (TYPE_DATO -> FLOAT .)
+    ID              reduce using rule 79 (TYPE_DATO -> FLOAT .)
+    INT             reduce using rule 79 (TYPE_DATO -> FLOAT .)
+    FLOAT           reduce using rule 79 (TYPE_DATO -> FLOAT .)
+    STRING          reduce using rule 79 (TYPE_DATO -> FLOAT .)
+    CHAR            reduce using rule 79 (TYPE_DATO -> FLOAT .)
+    DATA_BOOL       reduce using rule 79 (TYPE_DATO -> FLOAT .)
+
+
+state 136
+
+    (80) TYPE_DATO -> STRING .
+
+    DOT_AN_DCOMMA   reduce using rule 80 (TYPE_DATO -> STRING .)
+    IQUALS          reduce using rule 80 (TYPE_DATO -> STRING .)
+    DIFFERENT       reduce using rule 80 (TYPE_DATO -> STRING .)
+    IQUAL_GREATER   reduce using rule 80 (TYPE_DATO -> STRING .)
+    IQUAL_LESS      reduce using rule 80 (TYPE_DATO -> STRING .)
+    AND             reduce using rule 80 (TYPE_DATO -> STRING .)
+    OR              reduce using rule 80 (TYPE_DATO -> STRING .)
+    NOT             reduce using rule 80 (TYPE_DATO -> STRING .)
+    GREATER         reduce using rule 80 (TYPE_DATO -> STRING .)
+    LESS            reduce using rule 80 (TYPE_DATO -> STRING .)
+    RPAREN          reduce using rule 80 (TYPE_DATO -> STRING .)
+    ID              reduce using rule 80 (TYPE_DATO -> STRING .)
+    INT             reduce using rule 80 (TYPE_DATO -> STRING .)
+    FLOAT           reduce using rule 80 (TYPE_DATO -> STRING .)
+    STRING          reduce using rule 80 (TYPE_DATO -> STRING .)
+    CHAR            reduce using rule 80 (TYPE_DATO -> STRING .)
+    DATA_BOOL       reduce using rule 80 (TYPE_DATO -> STRING .)
+
+
+state 137
+
+    (81) TYPE_DATO -> CHAR .
+
+    DOT_AN_DCOMMA   reduce using rule 81 (TYPE_DATO -> CHAR .)
+    IQUALS          reduce using rule 81 (TYPE_DATO -> CHAR .)
+    DIFFERENT       reduce using rule 81 (TYPE_DATO -> CHAR .)
+    IQUAL_GREATER   reduce using rule 81 (TYPE_DATO -> CHAR .)
+    IQUAL_LESS      reduce using rule 81 (TYPE_DATO -> CHAR .)
+    AND             reduce using rule 81 (TYPE_DATO -> CHAR .)
+    OR              reduce using rule 81 (TYPE_DATO -> CHAR .)
+    NOT             reduce using rule 81 (TYPE_DATO -> CHAR .)
+    GREATER         reduce using rule 81 (TYPE_DATO -> CHAR .)
+    LESS            reduce using rule 81 (TYPE_DATO -> CHAR .)
+    RPAREN          reduce using rule 81 (TYPE_DATO -> CHAR .)
+    ID              reduce using rule 81 (TYPE_DATO -> CHAR .)
+    INT             reduce using rule 81 (TYPE_DATO -> CHAR .)
+    FLOAT           reduce using rule 81 (TYPE_DATO -> CHAR .)
+    STRING          reduce using rule 81 (TYPE_DATO -> CHAR .)
+    CHAR            reduce using rule 81 (TYPE_DATO -> CHAR .)
+    DATA_BOOL       reduce using rule 81 (TYPE_DATO -> CHAR .)
+
+
+state 138
+
+    (82) TYPE_DATO -> DATA_BOOL .
+
+    DOT_AN_DCOMMA   reduce using rule 82 (TYPE_DATO -> DATA_BOOL .)
+    IQUALS          reduce using rule 82 (TYPE_DATO -> DATA_BOOL .)
+    DIFFERENT       reduce using rule 82 (TYPE_DATO -> DATA_BOOL .)
+    IQUAL_GREATER   reduce using rule 82 (TYPE_DATO -> DATA_BOOL .)
+    IQUAL_LESS      reduce using rule 82 (TYPE_DATO -> DATA_BOOL .)
+    AND             reduce using rule 82 (TYPE_DATO -> DATA_BOOL .)
+    OR              reduce using rule 82 (TYPE_DATO -> DATA_BOOL .)
+    NOT             reduce using rule 82 (TYPE_DATO -> DATA_BOOL .)
+    GREATER         reduce using rule 82 (TYPE_DATO -> DATA_BOOL .)
+    LESS            reduce using rule 82 (TYPE_DATO -> DATA_BOOL .)
+    RPAREN          reduce using rule 82 (TYPE_DATO -> DATA_BOOL .)
+    ID              reduce using rule 82 (TYPE_DATO -> DATA_BOOL .)
+    INT             reduce using rule 82 (TYPE_DATO -> DATA_BOOL .)
+    FLOAT           reduce using rule 82 (TYPE_DATO -> DATA_BOOL .)
+    STRING          reduce using rule 82 (TYPE_DATO -> DATA_BOOL .)
+    CHAR            reduce using rule 82 (TYPE_DATO -> DATA_BOOL .)
+    DATA_BOOL       reduce using rule 82 (TYPE_DATO -> DATA_BOOL .)
+
+
+state 139
+
+    (29) COUPLER -> ID LPAREN L_PARAMS RPAREN LKEY empty . RKEY
+
+    RKEY            shift and go to state 149
+
+
+state 140
+
+    (30) COUPLER -> ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_FUNTION . RKEY
+    (31) SENTENCES_FUNTION -> SENTENCES_FUNTION . SENTENCE_FUNTION
+    (33) SENTENCE_FUNTION -> . DECLARATIONS
+    (34) SENTENCE_FUNTION -> . ASSIGNMENTS
+    (35) SENTENCE_FUNTION -> . METHOD_RETURN TYPE_DATO DOT_AN_DCOMMA
+    (36) SENTENCE_FUNTION -> . METHOD_RETURN ID DOT_AN_DCOMMA
+    (57) DECLARATIONS -> . DECLARATIONS DECLARATION
+    (58) DECLARATIONS -> . DECLARATION
+    (64) ASSIGNMENTS -> . ASSIGNMENTS ASSIGNMENT
+    (65) ASSIGNMENTS -> . ASSIGNMENT
+    (59) DECLARATION -> . TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
+    (60) DECLARATION -> . TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
+    (61) DECLARATION -> . TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
+    (62) DECLARATION -> . TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
+    (63) DECLARATION -> . TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+    (66) ASSIGNMENT -> . ID IQUAL INT DOT_AN_DCOMMA
+    (67) ASSIGNMENT -> . ID IQUAL FLOAT DOT_AN_DCOMMA
+    (68) ASSIGNMENT -> . ID IQUAL STRING DOT_AN_DCOMMA
+    (69) ASSIGNMENT -> . ID IQUAL CHAR DOT_AN_DCOMMA
+    (70) ASSIGNMENT -> . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+
+    RKEY            shift and go to state 150
+    METHOD_RETURN   shift and go to state 119
+    TYPE_INT        shift and go to state 31
+    TYPE_DOUBLE     shift and go to state 32
+    TYPE_STRING     shift and go to state 33
+    TYPE_CHAR       shift and go to state 34
+    TYPE_BOOL       shift and go to state 35
+    ID              shift and go to state 12
+
+    SENTENCE_FUNTION               shift and go to state 131
+    DECLARATIONS                   shift and go to state 117
+    ASSIGNMENTS                    shift and go to state 118
+    DECLARATION                    shift and go to state 20
+    ASSIGNMENT                     shift and go to state 21
+
+state 141
+
+    (39) SENTENCE_IF -> CONDITIONAL_IF LPAREN OPTIONS . RPAREN LKEY SENTENCES RKEY
+    (40) OPTIONS -> OPTIONS . OPTION
+    (42) OPTION -> . OPTION IQUALS OPTION
+    (43) OPTION -> . OPTION DIFFERENT OPTION
+    (44) OPTION -> . OPTION IQUAL_GREATER OPTION
+    (45) OPTION -> . OPTION IQUAL_LESS OPTION
+    (46) OPTION -> . OPTION AND OPTION
+    (47) OPTION -> . OPTION OR OPTION
+    (48) OPTION -> . OPTION NOT OPTION
+    (49) OPTION -> . OPTION GREATER OPTION
+    (50) OPTION -> . OPTION LESS OPTION
+    (51) OPTION -> . ID
+    (52) OPTION -> . TYPE_DATO
+    (78) TYPE_DATO -> . INT
+    (79) TYPE_DATO -> . FLOAT
+    (80) TYPE_DATO -> . STRING
+    (81) TYPE_DATO -> . CHAR
+    (82) TYPE_DATO -> . DATA_BOOL
+
+    RPAREN          shift and go to state 151
+    ID              shift and go to state 143
+    INT             shift and go to state 134
+    FLOAT           shift and go to state 135
+    STRING          shift and go to state 136
+    CHAR            shift and go to state 137
+    DATA_BOOL       shift and go to state 138
+
+    OPTION                         shift and go to state 152
+    TYPE_DATO                      shift and go to state 144
+
+state 142
+
+    (41) OPTIONS -> OPTION .
+    (42) OPTION -> OPTION . IQUALS OPTION
+    (43) OPTION -> OPTION . DIFFERENT OPTION
+    (44) OPTION -> OPTION . IQUAL_GREATER OPTION
+    (45) OPTION -> OPTION . IQUAL_LESS OPTION
+    (46) OPTION -> OPTION . AND OPTION
+    (47) OPTION -> OPTION . OR OPTION
+    (48) OPTION -> OPTION . NOT OPTION
+    (49) OPTION -> OPTION . GREATER OPTION
+    (50) OPTION -> OPTION . LESS OPTION
+
+    RPAREN          reduce using rule 41 (OPTIONS -> OPTION .)
+    ID              reduce using rule 41 (OPTIONS -> OPTION .)
+    INT             reduce using rule 41 (OPTIONS -> OPTION .)
+    FLOAT           reduce using rule 41 (OPTIONS -> OPTION .)
+    STRING          reduce using rule 41 (OPTIONS -> OPTION .)
+    CHAR            reduce using rule 41 (OPTIONS -> OPTION .)
+    DATA_BOOL       reduce using rule 41 (OPTIONS -> OPTION .)
+    IQUALS          shift and go to state 153
+    DIFFERENT       shift and go to state 154
+    IQUAL_GREATER   shift and go to state 155
+    IQUAL_LESS      shift and go to state 156
+    AND             shift and go to state 157
+    OR              shift and go to state 158
+    NOT             shift and go to state 159
+    GREATER         shift and go to state 160
+    LESS            shift and go to state 161
+
+
+state 143
+
+    (51) OPTION -> ID .
+
+    IQUALS          reduce using rule 51 (OPTION -> ID .)
+    DIFFERENT       reduce using rule 51 (OPTION -> ID .)
+    IQUAL_GREATER   reduce using rule 51 (OPTION -> ID .)
+    IQUAL_LESS      reduce using rule 51 (OPTION -> ID .)
+    AND             reduce using rule 51 (OPTION -> ID .)
+    OR              reduce using rule 51 (OPTION -> ID .)
+    NOT             reduce using rule 51 (OPTION -> ID .)
+    GREATER         reduce using rule 51 (OPTION -> ID .)
+    LESS            reduce using rule 51 (OPTION -> ID .)
+    RPAREN          reduce using rule 51 (OPTION -> ID .)
+    ID              reduce using rule 51 (OPTION -> ID .)
+    INT             reduce using rule 51 (OPTION -> ID .)
+    FLOAT           reduce using rule 51 (OPTION -> ID .)
+    STRING          reduce using rule 51 (OPTION -> ID .)
+    CHAR            reduce using rule 51 (OPTION -> ID .)
+    DATA_BOOL       reduce using rule 51 (OPTION -> ID .)
+
+
+state 144
+
+    (52) OPTION -> TYPE_DATO .
+
+    IQUALS          reduce using rule 52 (OPTION -> TYPE_DATO .)
+    DIFFERENT       reduce using rule 52 (OPTION -> TYPE_DATO .)
+    IQUAL_GREATER   reduce using rule 52 (OPTION -> TYPE_DATO .)
+    IQUAL_LESS      reduce using rule 52 (OPTION -> TYPE_DATO .)
+    AND             reduce using rule 52 (OPTION -> TYPE_DATO .)
+    OR              reduce using rule 52 (OPTION -> TYPE_DATO .)
+    NOT             reduce using rule 52 (OPTION -> TYPE_DATO .)
+    GREATER         reduce using rule 52 (OPTION -> TYPE_DATO .)
+    LESS            reduce using rule 52 (OPTION -> TYPE_DATO .)
+    RPAREN          reduce using rule 52 (OPTION -> TYPE_DATO .)
+    ID              reduce using rule 52 (OPTION -> TYPE_DATO .)
+    INT             reduce using rule 52 (OPTION -> TYPE_DATO .)
+    FLOAT           reduce using rule 52 (OPTION -> TYPE_DATO .)
+    STRING          reduce using rule 52 (OPTION -> TYPE_DATO .)
+    CHAR            reduce using rule 52 (OPTION -> TYPE_DATO .)
+    DATA_BOOL       reduce using rule 52 (OPTION -> TYPE_DATO .)
+
+
+state 145
+
+    (12) METHOD -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY empty RKEY .
+
+    METHOD_VOID     reduce using rule 12 (METHOD -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY empty RKEY .)
+    TYPE_INT        reduce using rule 12 (METHOD -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY empty RKEY .)
+    TYPE_DOUBLE     reduce using rule 12 (METHOD -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY empty RKEY .)
+    TYPE_STRING     reduce using rule 12 (METHOD -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY empty RKEY .)
+    TYPE_CHAR       reduce using rule 12 (METHOD -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY empty RKEY .)
+    TYPE_BOOL       reduce using rule 12 (METHOD -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY empty RKEY .)
+    ID              reduce using rule 12 (METHOD -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY empty RKEY .)
+    $end            reduce using rule 12 (METHOD -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY empty RKEY .)
+
+
+state 146
+
+    (13) METHOD -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_METHOD RKEY .
+
+    METHOD_VOID     reduce using rule 13 (METHOD -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_METHOD RKEY .)
+    TYPE_INT        reduce using rule 13 (METHOD -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_METHOD RKEY .)
+    TYPE_DOUBLE     reduce using rule 13 (METHOD -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_METHOD RKEY .)
+    TYPE_STRING     reduce using rule 13 (METHOD -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_METHOD RKEY .)
+    TYPE_CHAR       reduce using rule 13 (METHOD -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_METHOD RKEY .)
+    TYPE_BOOL       reduce using rule 13 (METHOD -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_METHOD RKEY .)
+    ID              reduce using rule 13 (METHOD -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_METHOD RKEY .)
+    $end            reduce using rule 13 (METHOD -> METHOD_VOID ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_METHOD RKEY .)
+
+
+state 147
+
+    (35) SENTENCE_FUNTION -> METHOD_RETURN TYPE_DATO DOT_AN_DCOMMA .
+
+    RKEY            reduce using rule 35 (SENTENCE_FUNTION -> METHOD_RETURN TYPE_DATO DOT_AN_DCOMMA .)
+    METHOD_RETURN   reduce using rule 35 (SENTENCE_FUNTION -> METHOD_RETURN TYPE_DATO DOT_AN_DCOMMA .)
+    TYPE_INT        reduce using rule 35 (SENTENCE_FUNTION -> METHOD_RETURN TYPE_DATO DOT_AN_DCOMMA .)
+    TYPE_DOUBLE     reduce using rule 35 (SENTENCE_FUNTION -> METHOD_RETURN TYPE_DATO DOT_AN_DCOMMA .)
+    TYPE_STRING     reduce using rule 35 (SENTENCE_FUNTION -> METHOD_RETURN TYPE_DATO DOT_AN_DCOMMA .)
+    TYPE_CHAR       reduce using rule 35 (SENTENCE_FUNTION -> METHOD_RETURN TYPE_DATO DOT_AN_DCOMMA .)
+    TYPE_BOOL       reduce using rule 35 (SENTENCE_FUNTION -> METHOD_RETURN TYPE_DATO DOT_AN_DCOMMA .)
+    ID              reduce using rule 35 (SENTENCE_FUNTION -> METHOD_RETURN TYPE_DATO DOT_AN_DCOMMA .)
+
+
+state 148
+
+    (36) SENTENCE_FUNTION -> METHOD_RETURN ID DOT_AN_DCOMMA .
+
+    RKEY            reduce using rule 36 (SENTENCE_FUNTION -> METHOD_RETURN ID DOT_AN_DCOMMA .)
+    METHOD_RETURN   reduce using rule 36 (SENTENCE_FUNTION -> METHOD_RETURN ID DOT_AN_DCOMMA .)
+    TYPE_INT        reduce using rule 36 (SENTENCE_FUNTION -> METHOD_RETURN ID DOT_AN_DCOMMA .)
+    TYPE_DOUBLE     reduce using rule 36 (SENTENCE_FUNTION -> METHOD_RETURN ID DOT_AN_DCOMMA .)
+    TYPE_STRING     reduce using rule 36 (SENTENCE_FUNTION -> METHOD_RETURN ID DOT_AN_DCOMMA .)
+    TYPE_CHAR       reduce using rule 36 (SENTENCE_FUNTION -> METHOD_RETURN ID DOT_AN_DCOMMA .)
+    TYPE_BOOL       reduce using rule 36 (SENTENCE_FUNTION -> METHOD_RETURN ID DOT_AN_DCOMMA .)
+    ID              reduce using rule 36 (SENTENCE_FUNTION -> METHOD_RETURN ID DOT_AN_DCOMMA .)
+
+
+state 149
+
+    (29) COUPLER -> ID LPAREN L_PARAMS RPAREN LKEY empty RKEY .
+
+    TYPE_INT        reduce using rule 29 (COUPLER -> ID LPAREN L_PARAMS RPAREN LKEY empty RKEY .)
+    TYPE_DOUBLE     reduce using rule 29 (COUPLER -> ID LPAREN L_PARAMS RPAREN LKEY empty RKEY .)
+    TYPE_STRING     reduce using rule 29 (COUPLER -> ID LPAREN L_PARAMS RPAREN LKEY empty RKEY .)
+    TYPE_CHAR       reduce using rule 29 (COUPLER -> ID LPAREN L_PARAMS RPAREN LKEY empty RKEY .)
+    TYPE_BOOL       reduce using rule 29 (COUPLER -> ID LPAREN L_PARAMS RPAREN LKEY empty RKEY .)
+    METHOD_VOID     reduce using rule 29 (COUPLER -> ID LPAREN L_PARAMS RPAREN LKEY empty RKEY .)
+    ID              reduce using rule 29 (COUPLER -> ID LPAREN L_PARAMS RPAREN LKEY empty RKEY .)
+    $end            reduce using rule 29 (COUPLER -> ID LPAREN L_PARAMS RPAREN LKEY empty RKEY .)
+
+
+state 150
+
+    (30) COUPLER -> ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_FUNTION RKEY .
+
+    TYPE_INT        reduce using rule 30 (COUPLER -> ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_FUNTION RKEY .)
+    TYPE_DOUBLE     reduce using rule 30 (COUPLER -> ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_FUNTION RKEY .)
+    TYPE_STRING     reduce using rule 30 (COUPLER -> ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_FUNTION RKEY .)
+    TYPE_CHAR       reduce using rule 30 (COUPLER -> ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_FUNTION RKEY .)
+    TYPE_BOOL       reduce using rule 30 (COUPLER -> ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_FUNTION RKEY .)
+    METHOD_VOID     reduce using rule 30 (COUPLER -> ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_FUNTION RKEY .)
+    ID              reduce using rule 30 (COUPLER -> ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_FUNTION RKEY .)
+    $end            reduce using rule 30 (COUPLER -> ID LPAREN L_PARAMS RPAREN LKEY SENTENCES_FUNTION RKEY .)
+
+
+state 151
+
+    (39) SENTENCE_IF -> CONDITIONAL_IF LPAREN OPTIONS RPAREN . LKEY SENTENCES RKEY
+
+    LKEY            shift and go to state 162
+
+
+state 152
+
+    (40) OPTIONS -> OPTIONS OPTION .
+    (42) OPTION -> OPTION . IQUALS OPTION
+    (43) OPTION -> OPTION . DIFFERENT OPTION
+    (44) OPTION -> OPTION . IQUAL_GREATER OPTION
+    (45) OPTION -> OPTION . IQUAL_LESS OPTION
+    (46) OPTION -> OPTION . AND OPTION
+    (47) OPTION -> OPTION . OR OPTION
+    (48) OPTION -> OPTION . NOT OPTION
+    (49) OPTION -> OPTION . GREATER OPTION
+    (50) OPTION -> OPTION . LESS OPTION
+
+    RPAREN          reduce using rule 40 (OPTIONS -> OPTIONS OPTION .)
+    ID              reduce using rule 40 (OPTIONS -> OPTIONS OPTION .)
+    INT             reduce using rule 40 (OPTIONS -> OPTIONS OPTION .)
+    FLOAT           reduce using rule 40 (OPTIONS -> OPTIONS OPTION .)
+    STRING          reduce using rule 40 (OPTIONS -> OPTIONS OPTION .)
+    CHAR            reduce using rule 40 (OPTIONS -> OPTIONS OPTION .)
+    DATA_BOOL       reduce using rule 40 (OPTIONS -> OPTIONS OPTION .)
+    IQUALS          shift and go to state 153
+    DIFFERENT       shift and go to state 154
+    IQUAL_GREATER   shift and go to state 155
+    IQUAL_LESS      shift and go to state 156
+    AND             shift and go to state 157
+    OR              shift and go to state 158
+    NOT             shift and go to state 159
+    GREATER         shift and go to state 160
+    LESS            shift and go to state 161
+
+
+state 153
+
+    (42) OPTION -> OPTION IQUALS . OPTION
+    (42) OPTION -> . OPTION IQUALS OPTION
+    (43) OPTION -> . OPTION DIFFERENT OPTION
+    (44) OPTION -> . OPTION IQUAL_GREATER OPTION
+    (45) OPTION -> . OPTION IQUAL_LESS OPTION
+    (46) OPTION -> . OPTION AND OPTION
+    (47) OPTION -> . OPTION OR OPTION
+    (48) OPTION -> . OPTION NOT OPTION
+    (49) OPTION -> . OPTION GREATER OPTION
+    (50) OPTION -> . OPTION LESS OPTION
+    (51) OPTION -> . ID
+    (52) OPTION -> . TYPE_DATO
+    (78) TYPE_DATO -> . INT
+    (79) TYPE_DATO -> . FLOAT
+    (80) TYPE_DATO -> . STRING
+    (81) TYPE_DATO -> . CHAR
+    (82) TYPE_DATO -> . DATA_BOOL
+
+    ID              shift and go to state 143
+    INT             shift and go to state 134
+    FLOAT           shift and go to state 135
+    STRING          shift and go to state 136
+    CHAR            shift and go to state 137
+    DATA_BOOL       shift and go to state 138
+
+    OPTION                         shift and go to state 163
+    TYPE_DATO                      shift and go to state 144
+
+state 154
+
+    (43) OPTION -> OPTION DIFFERENT . OPTION
+    (42) OPTION -> . OPTION IQUALS OPTION
+    (43) OPTION -> . OPTION DIFFERENT OPTION
+    (44) OPTION -> . OPTION IQUAL_GREATER OPTION
+    (45) OPTION -> . OPTION IQUAL_LESS OPTION
+    (46) OPTION -> . OPTION AND OPTION
+    (47) OPTION -> . OPTION OR OPTION
+    (48) OPTION -> . OPTION NOT OPTION
+    (49) OPTION -> . OPTION GREATER OPTION
+    (50) OPTION -> . OPTION LESS OPTION
+    (51) OPTION -> . ID
+    (52) OPTION -> . TYPE_DATO
+    (78) TYPE_DATO -> . INT
+    (79) TYPE_DATO -> . FLOAT
+    (80) TYPE_DATO -> . STRING
+    (81) TYPE_DATO -> . CHAR
+    (82) TYPE_DATO -> . DATA_BOOL
+
+    ID              shift and go to state 143
+    INT             shift and go to state 134
+    FLOAT           shift and go to state 135
+    STRING          shift and go to state 136
+    CHAR            shift and go to state 137
+    DATA_BOOL       shift and go to state 138
+
+    OPTION                         shift and go to state 164
+    TYPE_DATO                      shift and go to state 144
+
+state 155
+
+    (44) OPTION -> OPTION IQUAL_GREATER . OPTION
+    (42) OPTION -> . OPTION IQUALS OPTION
+    (43) OPTION -> . OPTION DIFFERENT OPTION
+    (44) OPTION -> . OPTION IQUAL_GREATER OPTION
+    (45) OPTION -> . OPTION IQUAL_LESS OPTION
+    (46) OPTION -> . OPTION AND OPTION
+    (47) OPTION -> . OPTION OR OPTION
+    (48) OPTION -> . OPTION NOT OPTION
+    (49) OPTION -> . OPTION GREATER OPTION
+    (50) OPTION -> . OPTION LESS OPTION
+    (51) OPTION -> . ID
+    (52) OPTION -> . TYPE_DATO
+    (78) TYPE_DATO -> . INT
+    (79) TYPE_DATO -> . FLOAT
+    (80) TYPE_DATO -> . STRING
+    (81) TYPE_DATO -> . CHAR
+    (82) TYPE_DATO -> . DATA_BOOL
+
+    ID              shift and go to state 143
+    INT             shift and go to state 134
+    FLOAT           shift and go to state 135
+    STRING          shift and go to state 136
+    CHAR            shift and go to state 137
+    DATA_BOOL       shift and go to state 138
+
+    OPTION                         shift and go to state 165
+    TYPE_DATO                      shift and go to state 144
+
+state 156
+
+    (45) OPTION -> OPTION IQUAL_LESS . OPTION
+    (42) OPTION -> . OPTION IQUALS OPTION
+    (43) OPTION -> . OPTION DIFFERENT OPTION
+    (44) OPTION -> . OPTION IQUAL_GREATER OPTION
+    (45) OPTION -> . OPTION IQUAL_LESS OPTION
+    (46) OPTION -> . OPTION AND OPTION
+    (47) OPTION -> . OPTION OR OPTION
+    (48) OPTION -> . OPTION NOT OPTION
+    (49) OPTION -> . OPTION GREATER OPTION
+    (50) OPTION -> . OPTION LESS OPTION
+    (51) OPTION -> . ID
+    (52) OPTION -> . TYPE_DATO
+    (78) TYPE_DATO -> . INT
+    (79) TYPE_DATO -> . FLOAT
+    (80) TYPE_DATO -> . STRING
+    (81) TYPE_DATO -> . CHAR
+    (82) TYPE_DATO -> . DATA_BOOL
+
+    ID              shift and go to state 143
+    INT             shift and go to state 134
+    FLOAT           shift and go to state 135
+    STRING          shift and go to state 136
+    CHAR            shift and go to state 137
+    DATA_BOOL       shift and go to state 138
+
+    OPTION                         shift and go to state 166
+    TYPE_DATO                      shift and go to state 144
+
+state 157
+
+    (46) OPTION -> OPTION AND . OPTION
+    (42) OPTION -> . OPTION IQUALS OPTION
+    (43) OPTION -> . OPTION DIFFERENT OPTION
+    (44) OPTION -> . OPTION IQUAL_GREATER OPTION
+    (45) OPTION -> . OPTION IQUAL_LESS OPTION
+    (46) OPTION -> . OPTION AND OPTION
+    (47) OPTION -> . OPTION OR OPTION
+    (48) OPTION -> . OPTION NOT OPTION
+    (49) OPTION -> . OPTION GREATER OPTION
+    (50) OPTION -> . OPTION LESS OPTION
+    (51) OPTION -> . ID
+    (52) OPTION -> . TYPE_DATO
+    (78) TYPE_DATO -> . INT
+    (79) TYPE_DATO -> . FLOAT
+    (80) TYPE_DATO -> . STRING
+    (81) TYPE_DATO -> . CHAR
+    (82) TYPE_DATO -> . DATA_BOOL
+
+    ID              shift and go to state 143
+    INT             shift and go to state 134
+    FLOAT           shift and go to state 135
+    STRING          shift and go to state 136
+    CHAR            shift and go to state 137
+    DATA_BOOL       shift and go to state 138
+
+    OPTION                         shift and go to state 167
+    TYPE_DATO                      shift and go to state 144
+
+state 158
+
+    (47) OPTION -> OPTION OR . OPTION
+    (42) OPTION -> . OPTION IQUALS OPTION
+    (43) OPTION -> . OPTION DIFFERENT OPTION
+    (44) OPTION -> . OPTION IQUAL_GREATER OPTION
+    (45) OPTION -> . OPTION IQUAL_LESS OPTION
+    (46) OPTION -> . OPTION AND OPTION
+    (47) OPTION -> . OPTION OR OPTION
+    (48) OPTION -> . OPTION NOT OPTION
+    (49) OPTION -> . OPTION GREATER OPTION
+    (50) OPTION -> . OPTION LESS OPTION
+    (51) OPTION -> . ID
+    (52) OPTION -> . TYPE_DATO
+    (78) TYPE_DATO -> . INT
+    (79) TYPE_DATO -> . FLOAT
+    (80) TYPE_DATO -> . STRING
+    (81) TYPE_DATO -> . CHAR
+    (82) TYPE_DATO -> . DATA_BOOL
+
+    ID              shift and go to state 143
+    INT             shift and go to state 134
+    FLOAT           shift and go to state 135
+    STRING          shift and go to state 136
+    CHAR            shift and go to state 137
+    DATA_BOOL       shift and go to state 138
+
+    OPTION                         shift and go to state 168
+    TYPE_DATO                      shift and go to state 144
+
+state 159
+
+    (48) OPTION -> OPTION NOT . OPTION
+    (42) OPTION -> . OPTION IQUALS OPTION
+    (43) OPTION -> . OPTION DIFFERENT OPTION
+    (44) OPTION -> . OPTION IQUAL_GREATER OPTION
+    (45) OPTION -> . OPTION IQUAL_LESS OPTION
+    (46) OPTION -> . OPTION AND OPTION
+    (47) OPTION -> . OPTION OR OPTION
+    (48) OPTION -> . OPTION NOT OPTION
+    (49) OPTION -> . OPTION GREATER OPTION
+    (50) OPTION -> . OPTION LESS OPTION
+    (51) OPTION -> . ID
+    (52) OPTION -> . TYPE_DATO
+    (78) TYPE_DATO -> . INT
+    (79) TYPE_DATO -> . FLOAT
+    (80) TYPE_DATO -> . STRING
+    (81) TYPE_DATO -> . CHAR
+    (82) TYPE_DATO -> . DATA_BOOL
+
+    ID              shift and go to state 143
+    INT             shift and go to state 134
+    FLOAT           shift and go to state 135
+    STRING          shift and go to state 136
+    CHAR            shift and go to state 137
+    DATA_BOOL       shift and go to state 138
+
+    OPTION                         shift and go to state 169
+    TYPE_DATO                      shift and go to state 144
+
+state 160
+
+    (49) OPTION -> OPTION GREATER . OPTION
+    (42) OPTION -> . OPTION IQUALS OPTION
+    (43) OPTION -> . OPTION DIFFERENT OPTION
+    (44) OPTION -> . OPTION IQUAL_GREATER OPTION
+    (45) OPTION -> . OPTION IQUAL_LESS OPTION
+    (46) OPTION -> . OPTION AND OPTION
+    (47) OPTION -> . OPTION OR OPTION
+    (48) OPTION -> . OPTION NOT OPTION
+    (49) OPTION -> . OPTION GREATER OPTION
+    (50) OPTION -> . OPTION LESS OPTION
+    (51) OPTION -> . ID
+    (52) OPTION -> . TYPE_DATO
+    (78) TYPE_DATO -> . INT
+    (79) TYPE_DATO -> . FLOAT
+    (80) TYPE_DATO -> . STRING
+    (81) TYPE_DATO -> . CHAR
+    (82) TYPE_DATO -> . DATA_BOOL
+
+    ID              shift and go to state 143
+    INT             shift and go to state 134
+    FLOAT           shift and go to state 135
+    STRING          shift and go to state 136
+    CHAR            shift and go to state 137
+    DATA_BOOL       shift and go to state 138
+
+    OPTION                         shift and go to state 170
+    TYPE_DATO                      shift and go to state 144
+
+state 161
+
+    (50) OPTION -> OPTION LESS . OPTION
+    (42) OPTION -> . OPTION IQUALS OPTION
+    (43) OPTION -> . OPTION DIFFERENT OPTION
+    (44) OPTION -> . OPTION IQUAL_GREATER OPTION
+    (45) OPTION -> . OPTION IQUAL_LESS OPTION
+    (46) OPTION -> . OPTION AND OPTION
+    (47) OPTION -> . OPTION OR OPTION
+    (48) OPTION -> . OPTION NOT OPTION
+    (49) OPTION -> . OPTION GREATER OPTION
+    (50) OPTION -> . OPTION LESS OPTION
+    (51) OPTION -> . ID
+    (52) OPTION -> . TYPE_DATO
+    (78) TYPE_DATO -> . INT
+    (79) TYPE_DATO -> . FLOAT
+    (80) TYPE_DATO -> . STRING
+    (81) TYPE_DATO -> . CHAR
+    (82) TYPE_DATO -> . DATA_BOOL
+
+    ID              shift and go to state 143
+    INT             shift and go to state 134
+    FLOAT           shift and go to state 135
+    STRING          shift and go to state 136
+    CHAR            shift and go to state 137
+    DATA_BOOL       shift and go to state 138
+
+    OPTION                         shift and go to state 171
+    TYPE_DATO                      shift and go to state 144
+
+state 162
+
+    (39) SENTENCE_IF -> CONDITIONAL_IF LPAREN OPTIONS RPAREN LKEY . SENTENCES RKEY
+    (53) SENTENCES -> . SENTENCES SENTENCE
+    (54) SENTENCES -> . SENTENCE
+    (55) SENTENCE -> . DECLARATIONS
+    (56) SENTENCE -> . ASSIGNMENTS
+    (57) DECLARATIONS -> . DECLARATIONS DECLARATION
+    (58) DECLARATIONS -> . DECLARATION
+    (64) ASSIGNMENTS -> . ASSIGNMENTS ASSIGNMENT
+    (65) ASSIGNMENTS -> . ASSIGNMENT
+    (59) DECLARATION -> . TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
+    (60) DECLARATION -> . TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
+    (61) DECLARATION -> . TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
+    (62) DECLARATION -> . TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
+    (63) DECLARATION -> . TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+    (66) ASSIGNMENT -> . ID IQUAL INT DOT_AN_DCOMMA
+    (67) ASSIGNMENT -> . ID IQUAL FLOAT DOT_AN_DCOMMA
+    (68) ASSIGNMENT -> . ID IQUAL STRING DOT_AN_DCOMMA
+    (69) ASSIGNMENT -> . ID IQUAL CHAR DOT_AN_DCOMMA
+    (70) ASSIGNMENT -> . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+
+    TYPE_INT        shift and go to state 31
+    TYPE_DOUBLE     shift and go to state 32
+    TYPE_STRING     shift and go to state 33
+    TYPE_CHAR       shift and go to state 34
+    TYPE_BOOL       shift and go to state 35
+    ID              shift and go to state 12
+
+    SENTENCES                      shift and go to state 172
+    SENTENCE                       shift and go to state 10
+    DECLARATIONS                   shift and go to state 18
+    ASSIGNMENTS                    shift and go to state 19
+    DECLARATION                    shift and go to state 20
+    ASSIGNMENT                     shift and go to state 21
+
+state 163
+
+    (42) OPTION -> OPTION IQUALS OPTION .
+    (42) OPTION -> OPTION . IQUALS OPTION
+    (43) OPTION -> OPTION . DIFFERENT OPTION
+    (44) OPTION -> OPTION . IQUAL_GREATER OPTION
+    (45) OPTION -> OPTION . IQUAL_LESS OPTION
+    (46) OPTION -> OPTION . AND OPTION
+    (47) OPTION -> OPTION . OR OPTION
+    (48) OPTION -> OPTION . NOT OPTION
+    (49) OPTION -> OPTION . GREATER OPTION
+    (50) OPTION -> OPTION . LESS OPTION
+
+  ! shift/reduce conflict for IQUALS resolved as shift
+  ! shift/reduce conflict for DIFFERENT resolved as shift
+  ! shift/reduce conflict for IQUAL_GREATER resolved as shift
+  ! shift/reduce conflict for IQUAL_LESS resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for NOT resolved as shift
+  ! shift/reduce conflict for GREATER resolved as shift
+  ! shift/reduce conflict for LESS resolved as shift
+    RPAREN          reduce using rule 42 (OPTION -> OPTION IQUALS OPTION .)
+    ID              reduce using rule 42 (OPTION -> OPTION IQUALS OPTION .)
+    INT             reduce using rule 42 (OPTION -> OPTION IQUALS OPTION .)
+    FLOAT           reduce using rule 42 (OPTION -> OPTION IQUALS OPTION .)
+    STRING          reduce using rule 42 (OPTION -> OPTION IQUALS OPTION .)
+    CHAR            reduce using rule 42 (OPTION -> OPTION IQUALS OPTION .)
+    DATA_BOOL       reduce using rule 42 (OPTION -> OPTION IQUALS OPTION .)
+    IQUALS          shift and go to state 153
+    DIFFERENT       shift and go to state 154
+    IQUAL_GREATER   shift and go to state 155
+    IQUAL_LESS      shift and go to state 156
+    AND             shift and go to state 157
+    OR              shift and go to state 158
+    NOT             shift and go to state 159
+    GREATER         shift and go to state 160
+    LESS            shift and go to state 161
+
+  ! IQUALS          [ reduce using rule 42 (OPTION -> OPTION IQUALS OPTION .) ]
+  ! DIFFERENT       [ reduce using rule 42 (OPTION -> OPTION IQUALS OPTION .) ]
+  ! IQUAL_GREATER   [ reduce using rule 42 (OPTION -> OPTION IQUALS OPTION .) ]
+  ! IQUAL_LESS      [ reduce using rule 42 (OPTION -> OPTION IQUALS OPTION .) ]
+  ! AND             [ reduce using rule 42 (OPTION -> OPTION IQUALS OPTION .) ]
+  ! OR              [ reduce using rule 42 (OPTION -> OPTION IQUALS OPTION .) ]
+  ! NOT             [ reduce using rule 42 (OPTION -> OPTION IQUALS OPTION .) ]
+  ! GREATER         [ reduce using rule 42 (OPTION -> OPTION IQUALS OPTION .) ]
+  ! LESS            [ reduce using rule 42 (OPTION -> OPTION IQUALS OPTION .) ]
+
+
+state 164
+
+    (43) OPTION -> OPTION DIFFERENT OPTION .
+    (42) OPTION -> OPTION . IQUALS OPTION
+    (43) OPTION -> OPTION . DIFFERENT OPTION
+    (44) OPTION -> OPTION . IQUAL_GREATER OPTION
+    (45) OPTION -> OPTION . IQUAL_LESS OPTION
+    (46) OPTION -> OPTION . AND OPTION
+    (47) OPTION -> OPTION . OR OPTION
+    (48) OPTION -> OPTION . NOT OPTION
+    (49) OPTION -> OPTION . GREATER OPTION
+    (50) OPTION -> OPTION . LESS OPTION
+
+  ! shift/reduce conflict for IQUALS resolved as shift
+  ! shift/reduce conflict for DIFFERENT resolved as shift
+  ! shift/reduce conflict for IQUAL_GREATER resolved as shift
+  ! shift/reduce conflict for IQUAL_LESS resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for NOT resolved as shift
+  ! shift/reduce conflict for GREATER resolved as shift
+  ! shift/reduce conflict for LESS resolved as shift
+    RPAREN          reduce using rule 43 (OPTION -> OPTION DIFFERENT OPTION .)
+    ID              reduce using rule 43 (OPTION -> OPTION DIFFERENT OPTION .)
+    INT             reduce using rule 43 (OPTION -> OPTION DIFFERENT OPTION .)
+    FLOAT           reduce using rule 43 (OPTION -> OPTION DIFFERENT OPTION .)
+    STRING          reduce using rule 43 (OPTION -> OPTION DIFFERENT OPTION .)
+    CHAR            reduce using rule 43 (OPTION -> OPTION DIFFERENT OPTION .)
+    DATA_BOOL       reduce using rule 43 (OPTION -> OPTION DIFFERENT OPTION .)
+    IQUALS          shift and go to state 153
+    DIFFERENT       shift and go to state 154
+    IQUAL_GREATER   shift and go to state 155
+    IQUAL_LESS      shift and go to state 156
+    AND             shift and go to state 157
+    OR              shift and go to state 158
+    NOT             shift and go to state 159
+    GREATER         shift and go to state 160
+    LESS            shift and go to state 161
+
+  ! IQUALS          [ reduce using rule 43 (OPTION -> OPTION DIFFERENT OPTION .) ]
+  ! DIFFERENT       [ reduce using rule 43 (OPTION -> OPTION DIFFERENT OPTION .) ]
+  ! IQUAL_GREATER   [ reduce using rule 43 (OPTION -> OPTION DIFFERENT OPTION .) ]
+  ! IQUAL_LESS      [ reduce using rule 43 (OPTION -> OPTION DIFFERENT OPTION .) ]
+  ! AND             [ reduce using rule 43 (OPTION -> OPTION DIFFERENT OPTION .) ]
+  ! OR              [ reduce using rule 43 (OPTION -> OPTION DIFFERENT OPTION .) ]
+  ! NOT             [ reduce using rule 43 (OPTION -> OPTION DIFFERENT OPTION .) ]
+  ! GREATER         [ reduce using rule 43 (OPTION -> OPTION DIFFERENT OPTION .) ]
+  ! LESS            [ reduce using rule 43 (OPTION -> OPTION DIFFERENT OPTION .) ]
+
+
+state 165
+
+    (44) OPTION -> OPTION IQUAL_GREATER OPTION .
+    (42) OPTION -> OPTION . IQUALS OPTION
+    (43) OPTION -> OPTION . DIFFERENT OPTION
+    (44) OPTION -> OPTION . IQUAL_GREATER OPTION
+    (45) OPTION -> OPTION . IQUAL_LESS OPTION
+    (46) OPTION -> OPTION . AND OPTION
+    (47) OPTION -> OPTION . OR OPTION
+    (48) OPTION -> OPTION . NOT OPTION
+    (49) OPTION -> OPTION . GREATER OPTION
+    (50) OPTION -> OPTION . LESS OPTION
+
+  ! shift/reduce conflict for IQUALS resolved as shift
+  ! shift/reduce conflict for DIFFERENT resolved as shift
+  ! shift/reduce conflict for IQUAL_GREATER resolved as shift
+  ! shift/reduce conflict for IQUAL_LESS resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for NOT resolved as shift
+  ! shift/reduce conflict for GREATER resolved as shift
+  ! shift/reduce conflict for LESS resolved as shift
+    RPAREN          reduce using rule 44 (OPTION -> OPTION IQUAL_GREATER OPTION .)
+    ID              reduce using rule 44 (OPTION -> OPTION IQUAL_GREATER OPTION .)
+    INT             reduce using rule 44 (OPTION -> OPTION IQUAL_GREATER OPTION .)
+    FLOAT           reduce using rule 44 (OPTION -> OPTION IQUAL_GREATER OPTION .)
+    STRING          reduce using rule 44 (OPTION -> OPTION IQUAL_GREATER OPTION .)
+    CHAR            reduce using rule 44 (OPTION -> OPTION IQUAL_GREATER OPTION .)
+    DATA_BOOL       reduce using rule 44 (OPTION -> OPTION IQUAL_GREATER OPTION .)
+    IQUALS          shift and go to state 153
+    DIFFERENT       shift and go to state 154
+    IQUAL_GREATER   shift and go to state 155
+    IQUAL_LESS      shift and go to state 156
+    AND             shift and go to state 157
+    OR              shift and go to state 158
+    NOT             shift and go to state 159
+    GREATER         shift and go to state 160
+    LESS            shift and go to state 161
+
+  ! IQUALS          [ reduce using rule 44 (OPTION -> OPTION IQUAL_GREATER OPTION .) ]
+  ! DIFFERENT       [ reduce using rule 44 (OPTION -> OPTION IQUAL_GREATER OPTION .) ]
+  ! IQUAL_GREATER   [ reduce using rule 44 (OPTION -> OPTION IQUAL_GREATER OPTION .) ]
+  ! IQUAL_LESS      [ reduce using rule 44 (OPTION -> OPTION IQUAL_GREATER OPTION .) ]
+  ! AND             [ reduce using rule 44 (OPTION -> OPTION IQUAL_GREATER OPTION .) ]
+  ! OR              [ reduce using rule 44 (OPTION -> OPTION IQUAL_GREATER OPTION .) ]
+  ! NOT             [ reduce using rule 44 (OPTION -> OPTION IQUAL_GREATER OPTION .) ]
+  ! GREATER         [ reduce using rule 44 (OPTION -> OPTION IQUAL_GREATER OPTION .) ]
+  ! LESS            [ reduce using rule 44 (OPTION -> OPTION IQUAL_GREATER OPTION .) ]
+
+
+state 166
+
+    (45) OPTION -> OPTION IQUAL_LESS OPTION .
+    (42) OPTION -> OPTION . IQUALS OPTION
+    (43) OPTION -> OPTION . DIFFERENT OPTION
+    (44) OPTION -> OPTION . IQUAL_GREATER OPTION
+    (45) OPTION -> OPTION . IQUAL_LESS OPTION
+    (46) OPTION -> OPTION . AND OPTION
+    (47) OPTION -> OPTION . OR OPTION
+    (48) OPTION -> OPTION . NOT OPTION
+    (49) OPTION -> OPTION . GREATER OPTION
+    (50) OPTION -> OPTION . LESS OPTION
+
+  ! shift/reduce conflict for IQUALS resolved as shift
+  ! shift/reduce conflict for DIFFERENT resolved as shift
+  ! shift/reduce conflict for IQUAL_GREATER resolved as shift
+  ! shift/reduce conflict for IQUAL_LESS resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for NOT resolved as shift
+  ! shift/reduce conflict for GREATER resolved as shift
+  ! shift/reduce conflict for LESS resolved as shift
+    RPAREN          reduce using rule 45 (OPTION -> OPTION IQUAL_LESS OPTION .)
+    ID              reduce using rule 45 (OPTION -> OPTION IQUAL_LESS OPTION .)
+    INT             reduce using rule 45 (OPTION -> OPTION IQUAL_LESS OPTION .)
+    FLOAT           reduce using rule 45 (OPTION -> OPTION IQUAL_LESS OPTION .)
+    STRING          reduce using rule 45 (OPTION -> OPTION IQUAL_LESS OPTION .)
+    CHAR            reduce using rule 45 (OPTION -> OPTION IQUAL_LESS OPTION .)
+    DATA_BOOL       reduce using rule 45 (OPTION -> OPTION IQUAL_LESS OPTION .)
+    IQUALS          shift and go to state 153
+    DIFFERENT       shift and go to state 154
+    IQUAL_GREATER   shift and go to state 155
+    IQUAL_LESS      shift and go to state 156
+    AND             shift and go to state 157
+    OR              shift and go to state 158
+    NOT             shift and go to state 159
+    GREATER         shift and go to state 160
+    LESS            shift and go to state 161
+
+  ! IQUALS          [ reduce using rule 45 (OPTION -> OPTION IQUAL_LESS OPTION .) ]
+  ! DIFFERENT       [ reduce using rule 45 (OPTION -> OPTION IQUAL_LESS OPTION .) ]
+  ! IQUAL_GREATER   [ reduce using rule 45 (OPTION -> OPTION IQUAL_LESS OPTION .) ]
+  ! IQUAL_LESS      [ reduce using rule 45 (OPTION -> OPTION IQUAL_LESS OPTION .) ]
+  ! AND             [ reduce using rule 45 (OPTION -> OPTION IQUAL_LESS OPTION .) ]
+  ! OR              [ reduce using rule 45 (OPTION -> OPTION IQUAL_LESS OPTION .) ]
+  ! NOT             [ reduce using rule 45 (OPTION -> OPTION IQUAL_LESS OPTION .) ]
+  ! GREATER         [ reduce using rule 45 (OPTION -> OPTION IQUAL_LESS OPTION .) ]
+  ! LESS            [ reduce using rule 45 (OPTION -> OPTION IQUAL_LESS OPTION .) ]
+
+
+state 167
+
+    (46) OPTION -> OPTION AND OPTION .
+    (42) OPTION -> OPTION . IQUALS OPTION
+    (43) OPTION -> OPTION . DIFFERENT OPTION
+    (44) OPTION -> OPTION . IQUAL_GREATER OPTION
+    (45) OPTION -> OPTION . IQUAL_LESS OPTION
+    (46) OPTION -> OPTION . AND OPTION
+    (47) OPTION -> OPTION . OR OPTION
+    (48) OPTION -> OPTION . NOT OPTION
+    (49) OPTION -> OPTION . GREATER OPTION
+    (50) OPTION -> OPTION . LESS OPTION
+
+  ! shift/reduce conflict for IQUALS resolved as shift
+  ! shift/reduce conflict for DIFFERENT resolved as shift
+  ! shift/reduce conflict for IQUAL_GREATER resolved as shift
+  ! shift/reduce conflict for IQUAL_LESS resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for NOT resolved as shift
+  ! shift/reduce conflict for GREATER resolved as shift
+  ! shift/reduce conflict for LESS resolved as shift
+    RPAREN          reduce using rule 46 (OPTION -> OPTION AND OPTION .)
+    ID              reduce using rule 46 (OPTION -> OPTION AND OPTION .)
+    INT             reduce using rule 46 (OPTION -> OPTION AND OPTION .)
+    FLOAT           reduce using rule 46 (OPTION -> OPTION AND OPTION .)
+    STRING          reduce using rule 46 (OPTION -> OPTION AND OPTION .)
+    CHAR            reduce using rule 46 (OPTION -> OPTION AND OPTION .)
+    DATA_BOOL       reduce using rule 46 (OPTION -> OPTION AND OPTION .)
+    IQUALS          shift and go to state 153
+    DIFFERENT       shift and go to state 154
+    IQUAL_GREATER   shift and go to state 155
+    IQUAL_LESS      shift and go to state 156
+    AND             shift and go to state 157
+    OR              shift and go to state 158
+    NOT             shift and go to state 159
+    GREATER         shift and go to state 160
+    LESS            shift and go to state 161
+
+  ! IQUALS          [ reduce using rule 46 (OPTION -> OPTION AND OPTION .) ]
+  ! DIFFERENT       [ reduce using rule 46 (OPTION -> OPTION AND OPTION .) ]
+  ! IQUAL_GREATER   [ reduce using rule 46 (OPTION -> OPTION AND OPTION .) ]
+  ! IQUAL_LESS      [ reduce using rule 46 (OPTION -> OPTION AND OPTION .) ]
+  ! AND             [ reduce using rule 46 (OPTION -> OPTION AND OPTION .) ]
+  ! OR              [ reduce using rule 46 (OPTION -> OPTION AND OPTION .) ]
+  ! NOT             [ reduce using rule 46 (OPTION -> OPTION AND OPTION .) ]
+  ! GREATER         [ reduce using rule 46 (OPTION -> OPTION AND OPTION .) ]
+  ! LESS            [ reduce using rule 46 (OPTION -> OPTION AND OPTION .) ]
+
+
+state 168
+
+    (47) OPTION -> OPTION OR OPTION .
+    (42) OPTION -> OPTION . IQUALS OPTION
+    (43) OPTION -> OPTION . DIFFERENT OPTION
+    (44) OPTION -> OPTION . IQUAL_GREATER OPTION
+    (45) OPTION -> OPTION . IQUAL_LESS OPTION
+    (46) OPTION -> OPTION . AND OPTION
+    (47) OPTION -> OPTION . OR OPTION
+    (48) OPTION -> OPTION . NOT OPTION
+    (49) OPTION -> OPTION . GREATER OPTION
+    (50) OPTION -> OPTION . LESS OPTION
+
+  ! shift/reduce conflict for IQUALS resolved as shift
+  ! shift/reduce conflict for DIFFERENT resolved as shift
+  ! shift/reduce conflict for IQUAL_GREATER resolved as shift
+  ! shift/reduce conflict for IQUAL_LESS resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for NOT resolved as shift
+  ! shift/reduce conflict for GREATER resolved as shift
+  ! shift/reduce conflict for LESS resolved as shift
+    RPAREN          reduce using rule 47 (OPTION -> OPTION OR OPTION .)
+    ID              reduce using rule 47 (OPTION -> OPTION OR OPTION .)
+    INT             reduce using rule 47 (OPTION -> OPTION OR OPTION .)
+    FLOAT           reduce using rule 47 (OPTION -> OPTION OR OPTION .)
+    STRING          reduce using rule 47 (OPTION -> OPTION OR OPTION .)
+    CHAR            reduce using rule 47 (OPTION -> OPTION OR OPTION .)
+    DATA_BOOL       reduce using rule 47 (OPTION -> OPTION OR OPTION .)
+    IQUALS          shift and go to state 153
+    DIFFERENT       shift and go to state 154
+    IQUAL_GREATER   shift and go to state 155
+    IQUAL_LESS      shift and go to state 156
+    AND             shift and go to state 157
+    OR              shift and go to state 158
+    NOT             shift and go to state 159
+    GREATER         shift and go to state 160
+    LESS            shift and go to state 161
+
+  ! IQUALS          [ reduce using rule 47 (OPTION -> OPTION OR OPTION .) ]
+  ! DIFFERENT       [ reduce using rule 47 (OPTION -> OPTION OR OPTION .) ]
+  ! IQUAL_GREATER   [ reduce using rule 47 (OPTION -> OPTION OR OPTION .) ]
+  ! IQUAL_LESS      [ reduce using rule 47 (OPTION -> OPTION OR OPTION .) ]
+  ! AND             [ reduce using rule 47 (OPTION -> OPTION OR OPTION .) ]
+  ! OR              [ reduce using rule 47 (OPTION -> OPTION OR OPTION .) ]
+  ! NOT             [ reduce using rule 47 (OPTION -> OPTION OR OPTION .) ]
+  ! GREATER         [ reduce using rule 47 (OPTION -> OPTION OR OPTION .) ]
+  ! LESS            [ reduce using rule 47 (OPTION -> OPTION OR OPTION .) ]
+
+
+state 169
+
+    (48) OPTION -> OPTION NOT OPTION .
+    (42) OPTION -> OPTION . IQUALS OPTION
+    (43) OPTION -> OPTION . DIFFERENT OPTION
+    (44) OPTION -> OPTION . IQUAL_GREATER OPTION
+    (45) OPTION -> OPTION . IQUAL_LESS OPTION
+    (46) OPTION -> OPTION . AND OPTION
+    (47) OPTION -> OPTION . OR OPTION
+    (48) OPTION -> OPTION . NOT OPTION
+    (49) OPTION -> OPTION . GREATER OPTION
+    (50) OPTION -> OPTION . LESS OPTION
+
+  ! shift/reduce conflict for IQUALS resolved as shift
+  ! shift/reduce conflict for DIFFERENT resolved as shift
+  ! shift/reduce conflict for IQUAL_GREATER resolved as shift
+  ! shift/reduce conflict for IQUAL_LESS resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for NOT resolved as shift
+  ! shift/reduce conflict for GREATER resolved as shift
+  ! shift/reduce conflict for LESS resolved as shift
+    RPAREN          reduce using rule 48 (OPTION -> OPTION NOT OPTION .)
+    ID              reduce using rule 48 (OPTION -> OPTION NOT OPTION .)
+    INT             reduce using rule 48 (OPTION -> OPTION NOT OPTION .)
+    FLOAT           reduce using rule 48 (OPTION -> OPTION NOT OPTION .)
+    STRING          reduce using rule 48 (OPTION -> OPTION NOT OPTION .)
+    CHAR            reduce using rule 48 (OPTION -> OPTION NOT OPTION .)
+    DATA_BOOL       reduce using rule 48 (OPTION -> OPTION NOT OPTION .)
+    IQUALS          shift and go to state 153
+    DIFFERENT       shift and go to state 154
+    IQUAL_GREATER   shift and go to state 155
+    IQUAL_LESS      shift and go to state 156
+    AND             shift and go to state 157
+    OR              shift and go to state 158
+    NOT             shift and go to state 159
+    GREATER         shift and go to state 160
+    LESS            shift and go to state 161
+
+  ! IQUALS          [ reduce using rule 48 (OPTION -> OPTION NOT OPTION .) ]
+  ! DIFFERENT       [ reduce using rule 48 (OPTION -> OPTION NOT OPTION .) ]
+  ! IQUAL_GREATER   [ reduce using rule 48 (OPTION -> OPTION NOT OPTION .) ]
+  ! IQUAL_LESS      [ reduce using rule 48 (OPTION -> OPTION NOT OPTION .) ]
+  ! AND             [ reduce using rule 48 (OPTION -> OPTION NOT OPTION .) ]
+  ! OR              [ reduce using rule 48 (OPTION -> OPTION NOT OPTION .) ]
+  ! NOT             [ reduce using rule 48 (OPTION -> OPTION NOT OPTION .) ]
+  ! GREATER         [ reduce using rule 48 (OPTION -> OPTION NOT OPTION .) ]
+  ! LESS            [ reduce using rule 48 (OPTION -> OPTION NOT OPTION .) ]
+
+
+state 170
+
+    (49) OPTION -> OPTION GREATER OPTION .
+    (42) OPTION -> OPTION . IQUALS OPTION
+    (43) OPTION -> OPTION . DIFFERENT OPTION
+    (44) OPTION -> OPTION . IQUAL_GREATER OPTION
+    (45) OPTION -> OPTION . IQUAL_LESS OPTION
+    (46) OPTION -> OPTION . AND OPTION
+    (47) OPTION -> OPTION . OR OPTION
+    (48) OPTION -> OPTION . NOT OPTION
+    (49) OPTION -> OPTION . GREATER OPTION
+    (50) OPTION -> OPTION . LESS OPTION
+
+  ! shift/reduce conflict for IQUALS resolved as shift
+  ! shift/reduce conflict for DIFFERENT resolved as shift
+  ! shift/reduce conflict for IQUAL_GREATER resolved as shift
+  ! shift/reduce conflict for IQUAL_LESS resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for NOT resolved as shift
+  ! shift/reduce conflict for GREATER resolved as shift
+  ! shift/reduce conflict for LESS resolved as shift
+    RPAREN          reduce using rule 49 (OPTION -> OPTION GREATER OPTION .)
+    ID              reduce using rule 49 (OPTION -> OPTION GREATER OPTION .)
+    INT             reduce using rule 49 (OPTION -> OPTION GREATER OPTION .)
+    FLOAT           reduce using rule 49 (OPTION -> OPTION GREATER OPTION .)
+    STRING          reduce using rule 49 (OPTION -> OPTION GREATER OPTION .)
+    CHAR            reduce using rule 49 (OPTION -> OPTION GREATER OPTION .)
+    DATA_BOOL       reduce using rule 49 (OPTION -> OPTION GREATER OPTION .)
+    IQUALS          shift and go to state 153
+    DIFFERENT       shift and go to state 154
+    IQUAL_GREATER   shift and go to state 155
+    IQUAL_LESS      shift and go to state 156
+    AND             shift and go to state 157
+    OR              shift and go to state 158
+    NOT             shift and go to state 159
+    GREATER         shift and go to state 160
+    LESS            shift and go to state 161
+
+  ! IQUALS          [ reduce using rule 49 (OPTION -> OPTION GREATER OPTION .) ]
+  ! DIFFERENT       [ reduce using rule 49 (OPTION -> OPTION GREATER OPTION .) ]
+  ! IQUAL_GREATER   [ reduce using rule 49 (OPTION -> OPTION GREATER OPTION .) ]
+  ! IQUAL_LESS      [ reduce using rule 49 (OPTION -> OPTION GREATER OPTION .) ]
+  ! AND             [ reduce using rule 49 (OPTION -> OPTION GREATER OPTION .) ]
+  ! OR              [ reduce using rule 49 (OPTION -> OPTION GREATER OPTION .) ]
+  ! NOT             [ reduce using rule 49 (OPTION -> OPTION GREATER OPTION .) ]
+  ! GREATER         [ reduce using rule 49 (OPTION -> OPTION GREATER OPTION .) ]
+  ! LESS            [ reduce using rule 49 (OPTION -> OPTION GREATER OPTION .) ]
+
+
+state 171
+
+    (50) OPTION -> OPTION LESS OPTION .
+    (42) OPTION -> OPTION . IQUALS OPTION
+    (43) OPTION -> OPTION . DIFFERENT OPTION
+    (44) OPTION -> OPTION . IQUAL_GREATER OPTION
+    (45) OPTION -> OPTION . IQUAL_LESS OPTION
+    (46) OPTION -> OPTION . AND OPTION
+    (47) OPTION -> OPTION . OR OPTION
+    (48) OPTION -> OPTION . NOT OPTION
+    (49) OPTION -> OPTION . GREATER OPTION
+    (50) OPTION -> OPTION . LESS OPTION
+
+  ! shift/reduce conflict for IQUALS resolved as shift
+  ! shift/reduce conflict for DIFFERENT resolved as shift
+  ! shift/reduce conflict for IQUAL_GREATER resolved as shift
+  ! shift/reduce conflict for IQUAL_LESS resolved as shift
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for NOT resolved as shift
+  ! shift/reduce conflict for GREATER resolved as shift
+  ! shift/reduce conflict for LESS resolved as shift
+    RPAREN          reduce using rule 50 (OPTION -> OPTION LESS OPTION .)
+    ID              reduce using rule 50 (OPTION -> OPTION LESS OPTION .)
+    INT             reduce using rule 50 (OPTION -> OPTION LESS OPTION .)
+    FLOAT           reduce using rule 50 (OPTION -> OPTION LESS OPTION .)
+    STRING          reduce using rule 50 (OPTION -> OPTION LESS OPTION .)
+    CHAR            reduce using rule 50 (OPTION -> OPTION LESS OPTION .)
+    DATA_BOOL       reduce using rule 50 (OPTION -> OPTION LESS OPTION .)
+    IQUALS          shift and go to state 153
+    DIFFERENT       shift and go to state 154
+    IQUAL_GREATER   shift and go to state 155
+    IQUAL_LESS      shift and go to state 156
+    AND             shift and go to state 157
+    OR              shift and go to state 158
+    NOT             shift and go to state 159
+    GREATER         shift and go to state 160
+    LESS            shift and go to state 161
+
+  ! IQUALS          [ reduce using rule 50 (OPTION -> OPTION LESS OPTION .) ]
+  ! DIFFERENT       [ reduce using rule 50 (OPTION -> OPTION LESS OPTION .) ]
+  ! IQUAL_GREATER   [ reduce using rule 50 (OPTION -> OPTION LESS OPTION .) ]
+  ! IQUAL_LESS      [ reduce using rule 50 (OPTION -> OPTION LESS OPTION .) ]
+  ! AND             [ reduce using rule 50 (OPTION -> OPTION LESS OPTION .) ]
+  ! OR              [ reduce using rule 50 (OPTION -> OPTION LESS OPTION .) ]
+  ! NOT             [ reduce using rule 50 (OPTION -> OPTION LESS OPTION .) ]
+  ! GREATER         [ reduce using rule 50 (OPTION -> OPTION LESS OPTION .) ]
+  ! LESS            [ reduce using rule 50 (OPTION -> OPTION LESS OPTION .) ]
+
+
+state 172
+
+    (39) SENTENCE_IF -> CONDITIONAL_IF LPAREN OPTIONS RPAREN LKEY SENTENCES . RKEY
+    (53) SENTENCES -> SENTENCES . SENTENCE
+    (55) SENTENCE -> . DECLARATIONS
+    (56) SENTENCE -> . ASSIGNMENTS
+    (57) DECLARATIONS -> . DECLARATIONS DECLARATION
+    (58) DECLARATIONS -> . DECLARATION
+    (64) ASSIGNMENTS -> . ASSIGNMENTS ASSIGNMENT
+    (65) ASSIGNMENTS -> . ASSIGNMENT
+    (59) DECLARATION -> . TYPE_INT ID IQUAL INT DOT_AN_DCOMMA
+    (60) DECLARATION -> . TYPE_DOUBLE ID IQUAL FLOAT DOT_AN_DCOMMA
+    (61) DECLARATION -> . TYPE_STRING ID IQUAL STRING DOT_AN_DCOMMA
+    (62) DECLARATION -> . TYPE_CHAR ID IQUAL CHAR DOT_AN_DCOMMA
+    (63) DECLARATION -> . TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+    (66) ASSIGNMENT -> . ID IQUAL INT DOT_AN_DCOMMA
+    (67) ASSIGNMENT -> . ID IQUAL FLOAT DOT_AN_DCOMMA
+    (68) ASSIGNMENT -> . ID IQUAL STRING DOT_AN_DCOMMA
+    (69) ASSIGNMENT -> . ID IQUAL CHAR DOT_AN_DCOMMA
+    (70) ASSIGNMENT -> . ID IQUAL DATA_BOOL DOT_AN_DCOMMA
+
+    RKEY            shift and go to state 173
+    TYPE_INT        shift and go to state 31
+    TYPE_DOUBLE     shift and go to state 32
+    TYPE_STRING     shift and go to state 33
+    TYPE_CHAR       shift and go to state 34
+    TYPE_BOOL       shift and go to state 35
+    ID              shift and go to state 12
+
+    SENTENCE                       shift and go to state 30
+    DECLARATIONS                   shift and go to state 18
+    ASSIGNMENTS                    shift and go to state 19
+    DECLARATION                    shift and go to state 20
+    ASSIGNMENT                     shift and go to state 21
+
+state 173
+
+    (39) SENTENCE_IF -> CONDITIONAL_IF LPAREN OPTIONS RPAREN LKEY SENTENCES RKEY .
+
+    CONDITIONAL_IF  reduce using rule 39 (SENTENCE_IF -> CONDITIONAL_IF LPAREN OPTIONS RPAREN LKEY SENTENCES RKEY .)
+    RKEY            reduce using rule 39 (SENTENCE_IF -> CONDITIONAL_IF LPAREN OPTIONS RPAREN LKEY SENTENCES RKEY .)
+    METHOD_RETURN   reduce using rule 39 (SENTENCE_IF -> CONDITIONAL_IF LPAREN OPTIONS RPAREN LKEY SENTENCES RKEY .)
+    TYPE_INT        reduce using rule 39 (SENTENCE_IF -> CONDITIONAL_IF LPAREN OPTIONS RPAREN LKEY SENTENCES RKEY .)
+    TYPE_DOUBLE     reduce using rule 39 (SENTENCE_IF -> CONDITIONAL_IF LPAREN OPTIONS RPAREN LKEY SENTENCES RKEY .)
+    TYPE_STRING     reduce using rule 39 (SENTENCE_IF -> CONDITIONAL_IF LPAREN OPTIONS RPAREN LKEY SENTENCES RKEY .)
+    TYPE_CHAR       reduce using rule 39 (SENTENCE_IF -> CONDITIONAL_IF LPAREN OPTIONS RPAREN LKEY SENTENCES RKEY .)
+    TYPE_BOOL       reduce using rule 39 (SENTENCE_IF -> CONDITIONAL_IF LPAREN OPTIONS RPAREN LKEY SENTENCES RKEY .)
+    ID              reduce using rule 39 (SENTENCE_IF -> CONDITIONAL_IF LPAREN OPTIONS RPAREN LKEY SENTENCES RKEY .)
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
+WARNING: shift/reduce conflict for METHOD_VOID in state 0 resolved as shift
+WARNING: shift/reduce conflict for TYPE_INT in state 0 resolved as shift
+WARNING: shift/reduce conflict for TYPE_DOUBLE in state 0 resolved as shift
+WARNING: shift/reduce conflict for TYPE_STRING in state 0 resolved as shift
+WARNING: shift/reduce conflict for TYPE_CHAR in state 0 resolved as shift
+WARNING: shift/reduce conflict for TYPE_BOOL in state 0 resolved as shift
+WARNING: shift/reduce conflict for ID in state 0 resolved as shift
+WARNING: shift/reduce conflict for METHOD_VOID in state 5 resolved as shift
 WARNING: shift/reduce conflict for TYPE_INT in state 6 resolved as shift
 WARNING: shift/reduce conflict for TYPE_DOUBLE in state 6 resolved as shift
 WARNING: shift/reduce conflict for TYPE_STRING in state 6 resolved as shift
 WARNING: shift/reduce conflict for TYPE_CHAR in state 6 resolved as shift
 WARNING: shift/reduce conflict for TYPE_BOOL in state 6 resolved as shift
-WARNING: shift/reduce conflict for ID in state 6 resolved as shift
-WARNING: shift/reduce conflict for TYPE_INT in state 8 resolved as shift
-WARNING: shift/reduce conflict for TYPE_DOUBLE in state 8 resolved as shift
-WARNING: shift/reduce conflict for TYPE_STRING in state 8 resolved as shift
-WARNING: shift/reduce conflict for TYPE_CHAR in state 8 resolved as shift
-WARNING: shift/reduce conflict for TYPE_BOOL in state 8 resolved as shift
-WARNING: shift/reduce conflict for ID in state 9 resolved as shift
+WARNING: shift/reduce conflict for TYPE_INT in state 7 resolved as shift
+WARNING: shift/reduce conflict for TYPE_DOUBLE in state 7 resolved as shift
+WARNING: shift/reduce conflict for TYPE_STRING in state 7 resolved as shift
+WARNING: shift/reduce conflict for TYPE_CHAR in state 7 resolved as shift
+WARNING: shift/reduce conflict for TYPE_BOOL in state 7 resolved as shift
+WARNING: shift/reduce conflict for ID in state 7 resolved as shift
+WARNING: shift/reduce conflict for TYPE_INT in state 18 resolved as shift
+WARNING: shift/reduce conflict for TYPE_DOUBLE in state 18 resolved as shift
+WARNING: shift/reduce conflict for TYPE_STRING in state 18 resolved as shift
+WARNING: shift/reduce conflict for TYPE_CHAR in state 18 resolved as shift
+WARNING: shift/reduce conflict for TYPE_BOOL in state 18 resolved as shift
+WARNING: shift/reduce conflict for ID in state 19 resolved as shift
+WARNING: shift/reduce conflict for TYPE_INT in state 106 resolved as shift
+WARNING: shift/reduce conflict for TYPE_DOUBLE in state 106 resolved as shift
+WARNING: shift/reduce conflict for TYPE_STRING in state 106 resolved as shift
+WARNING: shift/reduce conflict for TYPE_CHAR in state 106 resolved as shift
+WARNING: shift/reduce conflict for TYPE_BOOL in state 106 resolved as shift
+WARNING: shift/reduce conflict for ID in state 107 resolved as shift
+WARNING: shift/reduce conflict for CONDITIONAL_IF in state 108 resolved as shift
+WARNING: shift/reduce conflict for TYPE_INT in state 117 resolved as shift
+WARNING: shift/reduce conflict for TYPE_DOUBLE in state 117 resolved as shift
+WARNING: shift/reduce conflict for TYPE_STRING in state 117 resolved as shift
+WARNING: shift/reduce conflict for TYPE_CHAR in state 117 resolved as shift
+WARNING: shift/reduce conflict for TYPE_BOOL in state 117 resolved as shift
+WARNING: shift/reduce conflict for ID in state 118 resolved as shift
+WARNING: shift/reduce conflict for IQUALS in state 163 resolved as shift
+WARNING: shift/reduce conflict for DIFFERENT in state 163 resolved as shift
+WARNING: shift/reduce conflict for IQUAL_GREATER in state 163 resolved as shift
+WARNING: shift/reduce conflict for IQUAL_LESS in state 163 resolved as shift
+WARNING: shift/reduce conflict for AND in state 163 resolved as shift
+WARNING: shift/reduce conflict for OR in state 163 resolved as shift
+WARNING: shift/reduce conflict for NOT in state 163 resolved as shift
+WARNING: shift/reduce conflict for GREATER in state 163 resolved as shift
+WARNING: shift/reduce conflict for LESS in state 163 resolved as shift
+WARNING: shift/reduce conflict for IQUALS in state 164 resolved as shift
+WARNING: shift/reduce conflict for DIFFERENT in state 164 resolved as shift
+WARNING: shift/reduce conflict for IQUAL_GREATER in state 164 resolved as shift
+WARNING: shift/reduce conflict for IQUAL_LESS in state 164 resolved as shift
+WARNING: shift/reduce conflict for AND in state 164 resolved as shift
+WARNING: shift/reduce conflict for OR in state 164 resolved as shift
+WARNING: shift/reduce conflict for NOT in state 164 resolved as shift
+WARNING: shift/reduce conflict for GREATER in state 164 resolved as shift
+WARNING: shift/reduce conflict for LESS in state 164 resolved as shift
+WARNING: shift/reduce conflict for IQUALS in state 165 resolved as shift
+WARNING: shift/reduce conflict for DIFFERENT in state 165 resolved as shift
+WARNING: shift/reduce conflict for IQUAL_GREATER in state 165 resolved as shift
+WARNING: shift/reduce conflict for IQUAL_LESS in state 165 resolved as shift
+WARNING: shift/reduce conflict for AND in state 165 resolved as shift
+WARNING: shift/reduce conflict for OR in state 165 resolved as shift
+WARNING: shift/reduce conflict for NOT in state 165 resolved as shift
+WARNING: shift/reduce conflict for GREATER in state 165 resolved as shift
+WARNING: shift/reduce conflict for LESS in state 165 resolved as shift
+WARNING: shift/reduce conflict for IQUALS in state 166 resolved as shift
+WARNING: shift/reduce conflict for DIFFERENT in state 166 resolved as shift
+WARNING: shift/reduce conflict for IQUAL_GREATER in state 166 resolved as shift
+WARNING: shift/reduce conflict for IQUAL_LESS in state 166 resolved as shift
+WARNING: shift/reduce conflict for AND in state 166 resolved as shift
+WARNING: shift/reduce conflict for OR in state 166 resolved as shift
+WARNING: shift/reduce conflict for NOT in state 166 resolved as shift
+WARNING: shift/reduce conflict for GREATER in state 166 resolved as shift
+WARNING: shift/reduce conflict for LESS in state 166 resolved as shift
+WARNING: shift/reduce conflict for IQUALS in state 167 resolved as shift
+WARNING: shift/reduce conflict for DIFFERENT in state 167 resolved as shift
+WARNING: shift/reduce conflict for IQUAL_GREATER in state 167 resolved as shift
+WARNING: shift/reduce conflict for IQUAL_LESS in state 167 resolved as shift
+WARNING: shift/reduce conflict for AND in state 167 resolved as shift
+WARNING: shift/reduce conflict for OR in state 167 resolved as shift
+WARNING: shift/reduce conflict for NOT in state 167 resolved as shift
+WARNING: shift/reduce conflict for GREATER in state 167 resolved as shift
+WARNING: shift/reduce conflict for LESS in state 167 resolved as shift
+WARNING: shift/reduce conflict for IQUALS in state 168 resolved as shift
+WARNING: shift/reduce conflict for DIFFERENT in state 168 resolved as shift
+WARNING: shift/reduce conflict for IQUAL_GREATER in state 168 resolved as shift
+WARNING: shift/reduce conflict for IQUAL_LESS in state 168 resolved as shift
+WARNING: shift/reduce conflict for AND in state 168 resolved as shift
+WARNING: shift/reduce conflict for OR in state 168 resolved as shift
+WARNING: shift/reduce conflict for NOT in state 168 resolved as shift
+WARNING: shift/reduce conflict for GREATER in state 168 resolved as shift
+WARNING: shift/reduce conflict for LESS in state 168 resolved as shift
+WARNING: shift/reduce conflict for IQUALS in state 169 resolved as shift
+WARNING: shift/reduce conflict for DIFFERENT in state 169 resolved as shift
+WARNING: shift/reduce conflict for IQUAL_GREATER in state 169 resolved as shift
+WARNING: shift/reduce conflict for IQUAL_LESS in state 169 resolved as shift
+WARNING: shift/reduce conflict for AND in state 169 resolved as shift
+WARNING: shift/reduce conflict for OR in state 169 resolved as shift
+WARNING: shift/reduce conflict for NOT in state 169 resolved as shift
+WARNING: shift/reduce conflict for GREATER in state 169 resolved as shift
+WARNING: shift/reduce conflict for LESS in state 169 resolved as shift
+WARNING: shift/reduce conflict for IQUALS in state 170 resolved as shift
+WARNING: shift/reduce conflict for DIFFERENT in state 170 resolved as shift
+WARNING: shift/reduce conflict for IQUAL_GREATER in state 170 resolved as shift
+WARNING: shift/reduce conflict for IQUAL_LESS in state 170 resolved as shift
+WARNING: shift/reduce conflict for AND in state 170 resolved as shift
+WARNING: shift/reduce conflict for OR in state 170 resolved as shift
+WARNING: shift/reduce conflict for NOT in state 170 resolved as shift
+WARNING: shift/reduce conflict for GREATER in state 170 resolved as shift
+WARNING: shift/reduce conflict for LESS in state 170 resolved as shift
+WARNING: shift/reduce conflict for IQUALS in state 171 resolved as shift
+WARNING: shift/reduce conflict for DIFFERENT in state 171 resolved as shift
+WARNING: shift/reduce conflict for IQUAL_GREATER in state 171 resolved as shift
+WARNING: shift/reduce conflict for IQUAL_LESS in state 171 resolved as shift
+WARNING: shift/reduce conflict for AND in state 171 resolved as shift
+WARNING: shift/reduce conflict for OR in state 171 resolved as shift
+WARNING: shift/reduce conflict for NOT in state 171 resolved as shift
+WARNING: shift/reduce conflict for GREATER in state 171 resolved as shift
+WARNING: shift/reduce conflict for LESS in state 171 resolved as shift

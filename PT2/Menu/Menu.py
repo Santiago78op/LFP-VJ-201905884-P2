@@ -54,6 +54,7 @@ Selecciona una opción:\n
                         # Build the parser and try it out
                         parser.build()  # Build the parser
                         parser.test(archivo,lex.lexer)  # Test it parser
+                        parser.ast() # Generator AST
                         self.elementos = lex.dict_elementos
                         
                         

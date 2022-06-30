@@ -1,0 +1,11 @@
+digraph "round-table" {
+ 	node[shape=box fontname="Arial" fillcolor="white" style=filled ]
+ 	A [label="DECLARATION"]
+ 	B [label="string"]
+ 	C [label="saludo"]
+ 	D [label="primitivo<STRING> 
+ hola"]
+ 	A -> B
+ 	A -> C
+ 	A -> D
+}

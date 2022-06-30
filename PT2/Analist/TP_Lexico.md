@@ -51,12 +51,14 @@
 // método
 void miFuncion ( PARAMETROS, )* {
     sentencia*
+    return;
 
 }
 
 
 int miFuncionDos ( PARAMETROS, )* {
     sentencia*
+    return 8;
 }
 ```
 
