@@ -1,4 +1,2 @@
 
-void funcion(int num){
-    
-}
+num = 5;

@@ -53,9 +53,8 @@ Selecciona una opción:\n
                         lex.test(archivo)  # Test it Lexer
                         # Build the parser and try it out
                         parser.build()  # Build the parser
-                        parser.test(lex.dict_elementos, archivo,
+                        data = parser.test(lex.dict_elementos, archivo,
                                     lex.lexer)  # Test it parser
-                        #parser.ast() # Generator AST
                         self.elementos = lex.dict_elementos
                         
                         
@@ -73,7 +72,7 @@ Selecciona una opción:\n
                         if self.elementos['errores'] != '':
                             html.createHTMLError(
                                 name_html, self.elementos['errores'])
-
+                        html.reporteAST(name_html,data)
                     else:
                         print(Fore.LIGHTYELLOW_EX,
                               'Necesitas Cargar Archivo antes')

@@ -1,5 +1,5 @@
 from os import startfile
-
+import os
 
 class HTML():
 
@@ -187,3 +187,11 @@ class HTML():
         index = 'PT2\\HTML\\tabla_tokens\\css-table-16\\{}-errores.html'.format(
             name_html)
         startfile(index)
+
+
+    def reporteAST(self,nombre,dato):
+        dot = "PT2/HTML/AST/AST_{}_dot.txt".format(nombre)
+        with open(dot, 'w') as f:
+            f.write(dato)
+        result = "PT2/HTML/AST/AST_{}_.pdf".format(nombre)
+        os.system("dot -Tpdf " + dot + " -o " + result)

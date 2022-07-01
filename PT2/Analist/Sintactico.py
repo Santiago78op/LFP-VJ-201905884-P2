@@ -1,5 +1,6 @@
 from Analist.Lexico import *
 from Analist.Error import Error
+from Analist.Ast import AST
 import ply.yacc as yacc
 import json
 import sys
@@ -10,13 +11,8 @@ class Parser(object):
 
     # CONSTRUCTOR
     def __init__(self):
-        self.contP = 0
-        self.contH = 0
-        self.listFather = list()
-        self.listSon = list()
-        self.father = ''
-        self.son = ''
-        self.tree = 'digraph "round-table" {\n \tnode[shape=box fontname="Arial" fillcolor="white" style=filled ]'
+        self.id_n = 1
+        self.tree = 'digraph T{\n \tnode[shape=box fontname="Arial" fillcolor="white" style=filled ]'
 
     # Syntactic column finder
     def getColumn(self,input, p):
@@ -42,9 +38,6 @@ class Parser(object):
         '''
         INITIAL : L_INST 
         '''
-        # self.arbol += '\n \tA [label="INITIAL"]'
-        # self.arbol += '\n \tB [label="L_INST"]'
-        # self.arbol += '\n \tA -> B'
         p[0] = p[1]
 
     def p_L_INST(self, p):
@@ -353,9 +346,15 @@ class Parser(object):
                     | ASSIGNMENT
         '''
         if len(p) == 3:
+            self.tree += '\n \t{} -> {}'.format(self.id_n, self.id_n+1)
+            self.Ast = AST('ASSIGNMENTS', '')
+            self.Ast.hijos.append(AST('ASSIGNMENTS ASSIGNMENT', ''))
+            self.ast(self.Ast)
             p[0] = p[1]
             p[0].append(p[2])
         else:
+            self.Ast = AST('ASSIGNMENTS', '')
+            self.Ast.hijos.append(AST('ASSIGNMENT', ''))
             p[0] = [p[1]]
 
     def p_ASSIGNMENT(self, p):
@@ -367,8 +366,15 @@ class Parser(object):
                    | ID IQUAL DATA_BOOL DOT_AN_DCOMMA
                    | ID IQUAL EXPRESSIONS DOT_AN_DCOMMA
         '''   
-        p[0] = {'ID': p[1],
-                'Dato': {'Dato Tipo': p.slice[3].type, 'valor': p[3]}}
+        if len(p) == 5:
+            self.Ast = AST('ASSIGNMENT', '')
+            self.Ast.hijos.append(AST(p[1], 'ID'))
+            self.Ast.hijos.append(AST(p[3], p.slice[3].type))
+            self.ast(self.Ast)
+            p[0] = {'ID': p[1],
+                    'Dato': {'Dato Tipo': p.slice[3].type, 'valor': p[3]}}
+
+        
 
     def p_L_PARAMS(self, p):
         '''
@@ -475,13 +481,22 @@ class Parser(object):
         self.lexer = lexer
         self.data = data
         result = self.parser.parse(data, self.lexer)
-        print(json.dumps(result, indent=4, sort_keys=False))
-
-    def ast(self):
-        self.tree += '\n}'
+        self.ast(self.Ast)
         print(self.tree)
-        # dot = "PT2/HTML/AST/AST_{}_dot.txt".format('prueba')
-        # with open(dot, 'w') as f:
-        #     f.write(self.arbol)
-        # result = "PT2/HTML/AST/AST_{}_.pdf".format('prueba')
-        # os.system("dot -Tpdf " + dot + " -o " + result)
+        print(json.dumps(result, indent=4, sort_keys=False))
+        return self.tree
+
+    def ast(self,nodo):
+        if nodo.id == 0:
+            nodo.id = self.id_n
+            self.id_n += 1
+        
+        self.tree += '\n \t{}[label="{}"]'.format(nodo.id, nodo.valor)
+        for hijo in nodo.hijos:
+            self.tree += '\n \t{} -> {}'.format(nodo.id, self.id_n)
+            self.ast(hijo)
+        
+        self.tree += '\n}'
+        
+        
+        
