@@ -1,2 +1,5 @@
-
-string saludo = "hola";
+int num = 0;
+string hola = "df";
+string adios = "dfsdf";
+char ch = 's';
+double num1 = 7.5;

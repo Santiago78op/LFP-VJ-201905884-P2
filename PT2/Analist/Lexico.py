@@ -131,17 +131,17 @@ class Lexico(object):
                 lexema_len += 1
         line_start = input.rfind('\n', 0, token.lexpos) + 1
         return (token.lexpos - line_start) + lexema_len
-
+    
+    # FLOAT
+    def t_FLOAT(self, t):
+        r'\d+\.\d+'
+        t.value = float(t.value)
+        return t
+    
     # INT
     def t_INT(self, t):
         r'\d+'
         t.value = int(t.value)
-        return t
-
-    # FLOAT
-    def t_FLOAT(self, t):
-        r'(\d+)?\.\d+'
-        t.value = float(t.value)
         return t
 
     # DATA_BOOL

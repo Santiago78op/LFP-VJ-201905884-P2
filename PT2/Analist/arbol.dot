@@ -1,0 +1,56 @@
+digraph "round-table" {
+    node[shape=box fontname="Arial" fillcolor="white" style=filled ]
+
+    // 
+    // string nombre = "Robin";
+    // saludo = "hola";
+    
+    A [label="INITIAL"]
+    B [label="L_INST"]
+    A -> B
+
+    C [label="L_INST INTS"]
+    D [label="INTS"]
+    F [label="empty"]
+
+    B -> C
+    B -> D
+    B -> F
+
+    G [label="SENTENCES"]
+
+    D -> G
+
+    H [label="SENTENCES SENTENCE"]
+    I [label="SENTENCE"]
+
+    G -> H
+    G -> I
+
+    J [label="DECLARATIONS"]
+
+    I -> J
+
+    K [label="DECLARATIONS DECLARATION"]
+
+
+    J -> K
+
+
+    O [label="DECLARATION"]
+
+    J -> O
+
+    P [label="TYPE_STRING \n STRING"]
+    Q [label="ID \n nombre"]
+    R [label="STRING \n Robin"]
+
+    O -> P
+    O -> Q
+    O -> R
+
+
+
+}
+//O,R,Q,P,K,Z
+//A,C,D,E,F,G,H,I,J,L,M,N,S,T,U,V,W,X,Y
