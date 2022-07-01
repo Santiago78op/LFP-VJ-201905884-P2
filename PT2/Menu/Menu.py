@@ -53,8 +53,9 @@ Selecciona una opción:\n
                         lex.test(archivo)  # Test it Lexer
                         # Build the parser and try it out
                         parser.build()  # Build the parser
-                        parser.test(archivo,lex.lexer)  # Test it parser
-                        parser.ast() # Generator AST
+                        parser.test(lex.dict_elementos, archivo,
+                                    lex.lexer)  # Test it parser
+                        #parser.ast() # Generator AST
                         self.elementos = lex.dict_elementos
                         
                         

@@ -50,7 +50,7 @@ class Lexico(object):
         'ID',
 
         # Operators (+,-,*,/,%,|,&,~,^,<<,>>, ||, &&, !, <, <=, >, >=, ==, !=)
-        'PLUS',  'AND', 'OR', 'NOT', 'MINUS', 'TIMES', 'DIVIDE', 'REST', 'GREATER', 'LESS', 'IQUAL_GREATER', 'IQUAL_LESS', 'IQUALS', 'DIFFERENT', 'COLON',
+        'PLUS',  'AND', 'OR', 'NOT', 'MINUS', 'TIMES', 'DIVIDE', 'REST', 'GREATER', 'LESS', 'IQUAL_GREATER', 'IQUAL_LESS', 'IQUALS', 'DIFFERENT',
 
         # Assignment (=, *=, /=, %=, +=, -=, <<=, >>=, &=, ^=, |=)
         'IQUAL',
@@ -90,7 +90,6 @@ class Lexico(object):
     t_RKEY = r'\}'
     t_DOT_AN_DCOMMA = r';'
     t_COMMA = r','
-    t_COLON = r':'
 
     # Identifiers
     t_TYPE_INT = r'int'

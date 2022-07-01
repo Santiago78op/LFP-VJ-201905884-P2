@@ -1,4 +1,5 @@
 from Analist.Lexico import *
+from Analist.Error import Error
 import ply.yacc as yacc
 import json
 import sys
@@ -11,14 +12,20 @@ class Parser(object):
     def __init__(self):
         self.contP = 0
         self.contH = 0
-        self.cont = 0
-        self.valor = ''
-        self.arbol = 'digraph "round-table" {\n \tnode[shape=box fontname="Arial" fillcolor="white" style=filled ]'
+        self.listFather = list()
+        self.listSon = list()
+        self.father = ''
+        self.son = ''
+        self.tree = 'digraph "round-table" {\n \tnode[shape=box fontname="Arial" fillcolor="white" style=filled ]'
 
     # Syntactic column finder
-    def getColumn(self, t):
-        line_start = self.data.rfind('\n', 0, t.lexpos) + 1
-        return (t.lexpos-line_start)+1
+    def getColumn(self,input, p):
+        lexema_len = 1
+        tamano = f'{p.value}'
+        for num in tamano:
+            lexema_len += 1
+        line_start = input.rfind('\n', 0, p.lexpos) + 1
+        return(p.lexpos - line_start) + lexema_len
 
     tokens = Lexico.tokens
 
@@ -198,8 +205,6 @@ class Parser(object):
                   | SENTENCE
         '''
         if len(p) == 3:
-            self.arbol += '\n \tH [label="SENTENCES SENTENCE"]'
-            self.arbol += '\n \tG -> H'
             p[0] = p[1]
             p[0].append(p[2])
         else:
@@ -318,31 +323,6 @@ class Parser(object):
         else:
             p[0] = {"Izquierda": p[1], "Operators": p[2], "Derecha": p[3]}
 
-    def p_EXPRESSIONS(self,p):
-        '''
-        EXPRESSIONS : EXPRESSIONS E
-                    | E
-        '''
-        if len(p)==3:
-            p[0] = p[1]
-            p[0].append(p[2])
-        else:
-            p[0] = [p[1]]
-    
-    def p_E(self,p):
-        '''
-        E : E PLUS E
-            | E MINUS E
-            | E TIMES E
-            | E DIVIDE E
-            | E REST E
-            | ID
-            | TYPE_DATO
-        '''
-        if len(p)==2:
-            p[0] = {"valor": p[1]}
-        else:
-            p[0] = {"operacion": p[2], "izquierda": p[1], "derecha": p[3]}
     
     def p_DECLARATIONS(self, p):
         '''
@@ -350,24 +330,9 @@ class Parser(object):
                      | DECLARATION
         '''
         if len(p) == 3:
-            if self.cont == 0:
-                self.arbol += '\n \tZ [label="DECLARATIONS"]'.format(
-                    self.contP)
-                self.arbol += '\n \tK [label="DECLARATIONS DECLARATION"]'.format(
-                    self.contP)
-                self.arbol += '\n \tZ -> K'
-                self.arbol += '\n \tZ -> {}'.format(self.valor)
-                self.cont += 1
-            self.arbol += '\n \tO_{} [label="DECLARATION"]'.format(self.contP)
-            self.arbol += '\n \tK -> O_{}'.format(self.contP)
-            self.contP +=1
-            # * Analisis de yacc
             p[0] = p[1]
             p[0].append(p[2])
         else:
-            self.valor += 'O_{}'.format(self.contP)
-            self.arbol += '\n \tO_{} [label="DECLARATION"]'.format(self.contP)
-            self.contP +=1
             p[0] = [p[1]]
 
     def p_DECLARATION(self, p):
@@ -379,23 +344,6 @@ class Parser(object):
                     | TYPE_BOOL ID IQUAL DATA_BOOL DOT_AN_DCOMMA
         '''
         # * Analisis de yacc
-        self.arbol += '\n \tP_{} [label="{}"]'.format(self.contH,p[1])
-        self.arbol += '\n \tO_{} -> P_{}'.format(self.contP, self.contH)
-        self.contH += 1
-        self.arbol += '\n \tQ_{} [label="ID {} {}"]'.format(
-            self.contH, '\n', p[2])
-        self.arbol += '\n \tO_{} -> Q_{}'.format(self.contP, self.contH)
-        self.contH += 1
-        if p.slice[4].type == "STRING":
-            new_string = p[4].replace('"', '')
-            self.arbol += '\n \tR_{} [label="{} {} {}"]'.format(self.contH,
-                p.slice[4].type, '\n', new_string)
-            self.arbol += '\n \tO_{} -> R_{}'.format(self.contP, self.contH)
-            self.contH += 1
-        else:
-            self.arbol += '\n \tR_{} [label="{} {} {}"]'.format(self.contH,
-                p.slice[4].type, '\n', p[4])
-            self.arbol += '\n \tO_{} -> R_{}'.format(self.contP, self.contH)
         p[0] = {'TYPE': p[1], 'ID': p[2],
                 'DATO': {'Tipo': p.slice[4].type, 'valor': p[4]}}
 
@@ -418,25 +366,7 @@ class Parser(object):
                    | ID IQUAL CHAR DOT_AN_DCOMMA
                    | ID IQUAL DATA_BOOL DOT_AN_DCOMMA
                    | ID IQUAL EXPRESSIONS DOT_AN_DCOMMA
-        '''
-        self.arbol += '\n \tY_{} [label="ID {} {}"]'.format(
-            self.contH, '\n', p[1])
-        self.arbol += '\n \tX_{} -> Y_{}'.format(self.contP, self.contH)
-        self.contH += 1
-        self.arbol += '\n \tW_{} [label="ID {} {}"]'.format(
-            self.contH, '\n', p[2])
-        self.arbol += '\n \tX_{} -> W_{}'.format(self.contP, self.contH)
-        self.contH += 1
-        if p.slice[4].type == "STRING":
-            new_string = p[4].replace('"', '')
-            self.arbol += '\n \tV_{} [label="{} {} {}"]'.format(self.contH,
-                p.slice[4].type, '\n', new_string)
-            self.arbol += '\n \tX_{} -> V_{}'.format(self.contP, self.contH)
-            self.contH += 1
-        else:
-            self.arbol += '\n \tV_{} [label="{} {} {}"]'.format(self.contH,
-                p.slice[4].type, '\n', p[4])
-            self.arbol += '\n \tX_{} -> V_{}'.format(self.contP, self.contH)
+        '''   
         p[0] = {'ID': p[1],
                 'Dato': {'Dato Tipo': p.slice[3].type, 'valor': p[3]}}
 
@@ -470,8 +400,7 @@ class Parser(object):
         '''
         if len(p) == 4:
             p[0] = p[1]
-            cosnt = p[2] + p[3]
-            p[0].append(cosnt)
+            p[0].append(p[3])
         else:
             p[0] = [p[1]]
 
@@ -482,6 +411,32 @@ class Parser(object):
         '''
         p[0] = {"tipo dato": p[1]}
 
+    def p_EXPRESSIONS(self, p):
+        '''
+        EXPRESSIONS : EXPRESSIONS E
+                    | E
+        '''
+        if len(p) == 3:
+            p[0] = p[1]
+            p[0].append(p[2])
+        else:
+            p[0] = [p[1]]
+
+    def p_E(self, p):
+        '''
+        E : E PLUS E
+            | E MINUS E
+            | E TIMES E
+            | E DIVIDE E
+            | E REST E
+            | ID
+            | TYPE_DATO
+        '''
+        if len(p) == 2:
+            p[0] = {"valor": p[1]}
+        else:
+            p[0] = {"operacion": p[2], "izquierda": p[1], "derecha": p[3]}
+            
     def p_TYPE_DATO(self, p):
         '''
         TYPE_DATO : INT 
@@ -494,17 +449,20 @@ class Parser(object):
 
     def p_empty(self, p):
         'empty :'
-        self.arbol += '\n \tF [label="empty"]'
-        self.arbol += '\n \tB -> F'
         p[0] = {'empty': 'Sin Codigo'}
 
     # Error rule for syntax errors
     def p_error(self, p):
-        print(p)
+        col = self.getColumn(self.data, p)
+        tipo = 'Sintáctico'
         if p:
-            print(f"Sintaxis no válida cerca de '{p.value}' ({p.type})")
+            descripcion =f"Sintaxis no válida cerca de '{p.value}' ({p.type})"
+            _error = Error(p.lineno, col, tipo, descripcion)
+            self.elementos['errores'].append(_error)
         else:
-            print("Ninguna instrucción válida")
+            descripcion = f"Ninguna instrucción válida"
+            _error = Error(p.lineno, col, tipo, descripcion)
+            self.elementos['errores'].append(_error)
 
     # Build the parser
     def build(self, **kwargs):
@@ -512,15 +470,16 @@ class Parser(object):
         self.parser = yacc.yacc(module=self, **kwargs, start='INITIAL')
 
     # Test it output
-    def test(self, data, lexer):
+    def test(self, dict_elementos, data, lexer):
+        self.elementos = dict_elementos
         self.lexer = lexer
         self.data = data
         result = self.parser.parse(data, self.lexer)
         print(json.dumps(result, indent=4, sort_keys=False))
 
     def ast(self):
-        self.arbol += '\n}'
-        print(self.arbol)
+        self.tree += '\n}'
+        print(self.tree)
         # dot = "PT2/HTML/AST/AST_{}_dot.txt".format('prueba')
         # with open(dot, 'w') as f:
         #     f.write(self.arbol)

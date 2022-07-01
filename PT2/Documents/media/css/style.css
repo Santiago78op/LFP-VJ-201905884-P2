@@ -1,0 +1,16 @@
+h1,h2{
+    text-align: center;
+}
+
+#imagenes{
+    align-items: center;
+}
+
+#datos{
+    text-align: left;
+}
+
+#introduccion{
+    text-align: center;
+    font-size: 15px;
+}
